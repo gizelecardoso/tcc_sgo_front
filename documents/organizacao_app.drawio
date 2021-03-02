@@ -1,0 +1,253 @@
+<mxfile host="65bd71144e" modified="2021-03-01T19:22:22.506Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.53.2 Chrome/87.0.4280.141 Electron/11.2.1 Safari/537.36" etag="uIL7qQ8hE5vkdhQHBpJd" version="14.2.4" type="embed">
+    <diagram id="uK-4cWOUnEbERWLj9T2r" name="Page-1">
+        <mxGraphModel dx="8715" dy="6167" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="2" target="6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="&lt;font style=&quot;font-size: 50px&quot;&gt;TCC_FRONT&lt;br&gt;REACT-NATIVE&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-3490" y="650" width="560" height="305" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="3" target="7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.6;entryY=-0.05;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="3" target="24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;font style=&quot;font-size: 24px&quot;&gt;Components&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-206" y="470" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="6" target="63" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="6" target="44" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="123" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=1;fontSize=11;" parent="1" source="6" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-1140" y="985"/>
+                            <mxPoint x="-1140" y="500"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="&lt;font style=&quot;font-size: 30px&quot;&gt;SRC&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6a00ff;strokeColor=#3700CC;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-1590" y="880" width="230" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="7" target="40" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="&lt;font style=&quot;font-size: 20px&quot;&gt;Login&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="785" y="660" width="200" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="index.js&lt;br&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;export {default as Login} from &quot;./Login&quot;&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="703" y="830" width="290" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="14" target="74" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="&lt;font style=&quot;font-size: 30px&quot;&gt;PRINCIPAL - App.js&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6a00ff;strokeColor=#3700CC;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-2270" y="-110" width="320" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="102" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="22" target="79" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="&lt;b&gt;estilo.js&lt;br&gt;&lt;br&gt;import {StyleSheet, Dimensions} from &quot;react-native&quot;&lt;br&gt;&lt;br&gt;const largura = Dimensions.get(&quot;screen&quot;).width;&lt;br&gt;const estilo = StyleSheet.create({&lt;br&gt;container: {&lt;br&gt;flexGrow:2,&lt;br&gt;justifyContent:&quot;center&quot;,&lt;br&gt;alignContent:&quot;center&quot;&lt;br&gt;width: largura * 0.8&lt;br&gt;})&lt;br&gt;&lt;br&gt;export default estilo;&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="393" width="330" height="212.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="24" target="35" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="&lt;font style=&quot;font-size: 20px&quot;&gt;Funcionários&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-428" y="765" width="213" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="index.js&lt;b&gt;&lt;br&gt;&lt;br&gt;export {default as Funcionario} from &quot;./Funcionario&quot;&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-486.5" y="935" width="330" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="26" target="35" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="&lt;b&gt;estilo.js&lt;br&gt;&lt;br&gt;const estilo = StyleSheet.create({&lt;br&gt;imagem: {&lt;br&gt;width: largura,&lt;br&gt;height: largura&lt;br&gt;})&lt;br&gt;&lt;br&gt;export default estilo&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-906.5" y="1135" width="290" height="145" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="35" target="25" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="&lt;b&gt;FUncionario.js&lt;br&gt;&lt;br&gt;import estilo from &quot;estilo.js&quot;&lt;br&gt;&lt;br&gt;const Login = (props) =&amp;gt; {&lt;br&gt;&lt;br&gt;return (&amp;lt;Text&amp;gt;{props.emailUsuario}&amp;lt;/Text&amp;gt;&lt;br&gt;&lt;br&gt;}&lt;br&gt;&lt;br&gt;export default Login&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-906.5" y="845" width="290" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="40" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="Login.js&lt;br&gt;&lt;b&gt;&lt;br&gt;import estilo from &quot;estilo.js&quot;&lt;br&gt;&lt;br&gt;const Login = (props) =&amp;gt; {&lt;br&gt;&lt;br&gt;return (&amp;lt;Text&amp;gt;{props.emailUsuario}&amp;lt;/Text&amp;gt;&lt;br&gt;&lt;br&gt;}&lt;br&gt;&lt;br&gt;export default Login&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="1135" y="835" width="290" height="165" as="geometry"/>
+                </mxCell>
+                <mxCell id="69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="44" target="54" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="44" target="85" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="&lt;font style=&quot;font-size: 24px&quot;&gt;api&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="620" y="-1870" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="54" value="&lt;b&gt;feed.js&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;const lerOfficials = async(callback) =&amp;gt; {&lt;br&gt;&lt;br&gt;const officialHTTP = await fetch(&quot;http://localhost:3000/officials&quot;);&lt;br&gt;const officialJson = officialHTTP.json();&lt;br&gt;callback(officialJson);&lt;br&gt;&lt;/b&gt;&lt;b&gt;}&lt;br&gt;&lt;br&gt;export default lerOfficial;&lt;br&gt;&lt;/b&gt;" style="html=1;strokeColor=#A50040;fontColor=#ffffff;fillColor=#FFCCE6;" parent="1" vertex="1">
+                    <mxGeometry x="1130" y="-1885" width="400" height="239" as="geometry"/>
+                </mxCell>
+                <mxCell id="55" value="&lt;b&gt;CHAMADA A API&lt;br&gt;&lt;br&gt;PELO STATE - USANDO HOOKS&lt;br&gt;&lt;br&gt;const [name, setName] = useState([]);&lt;br&gt;&lt;br&gt;&lt;br&gt;//método de ciclo de vida do componentes&lt;br&gt;//assim que o componente estiver pronto para &lt;br&gt;ser mostrado esse método vai executa-lo - componentDidMount()&lt;br&gt;&lt;br&gt;//porém com os hooks não existe ciclo de vida, &lt;br&gt;então o React criou uma forma de usar um &lt;br&gt;hook que altera o state quando o componente &lt;br&gt;estiver pronto para ser renderizado:&lt;br&gt;&lt;br&gt;//só retorna uma funcao&lt;br&gt;//usar o async - retorno espera uma Promise&lt;br&gt;&lt;br&gt;useEffect( ()=&amp;gt;{&lt;br&gt;&lt;/b&gt;&lt;b&gt;const lerOfficials = async() =&amp;gt; {&lt;br&gt;&lt;br&gt;const officialHTTP = await fetch(&quot;http://localhost:3000/officials&quot;);&lt;br&gt;const officialJson = officialHTTP.json();&lt;br&gt;setName(officialJson);&lt;br&gt;&lt;/b&gt;&lt;b&gt;}&lt;br&gt;&lt;br&gt;lerOfficial();&lt;br&gt;}, [] )&lt;br&gt;&lt;/b&gt;" style="html=1;" parent="1" vertex="1">
+                    <mxGeometry x="204" y="1370" width="420" height="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="63" target="67" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="81" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="63" target="78" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="120" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=1;fontSize=11;" parent="1" source="63" target="119" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="121" value="Text" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" parent="120" vertex="1" connectable="0">
+                    <mxGeometry x="-0.7175" y="8" relative="1" as="geometry">
+                        <mxPoint x="-1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="63" value="&lt;font style=&quot;font-size: 24px&quot;&gt;Views&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-166" y="-900" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="66" target="14" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="66" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="66" value="&lt;b&gt;....&lt;br&gt;Feed.navigationOptions = ({ navigation }) =&amp;gt; {&lt;br&gt;const opcoes = {&lt;br&gt;title = navigation.getParam(&quot;nome&quot;)&lt;br&gt;}&lt;br&gt;return opcoes;&lt;br&gt;}&lt;br&gt;&lt;br&gt;export default Feed&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-316.5" y="-340" width="420" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="67" target="66" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="67" value="&lt;font style=&quot;font-size: 20px&quot;&gt;Welcome&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-213" y="-584" width="213" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="74" value="&lt;b&gt;import Feed from ./src/Views/Feed/Feed&lt;br&gt;&lt;/b&gt;&lt;b&gt;import {createStackNavigator } from &quot;&lt;/b&gt;&lt;b&gt;react-navigation-stack&quot;&lt;br&gt;&lt;/b&gt;&lt;b&gt;import {createAppContainer } from &quot;&lt;/b&gt;&lt;b&gt;react-navigation&quot;&lt;br&gt;&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;br&gt;const navigator = createStackNavigator({&lt;br&gt;Login :{ screen: Login}&lt;br&gt;Feed :{screen: Feed}&lt;br&gt;})&lt;br&gt;&lt;br&gt;const AppContainer = createAppContainer(navigator)&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;const App = () =&amp;gt;&amp;nbsp; {&lt;br&gt;return (&lt;br&gt;&amp;lt;AppContainer /&amp;gt;&lt;br&gt;)&lt;br&gt;}&lt;br&gt;&lt;/b&gt;" style="html=1;strokeColor=#3700CC;fontColor=#ffffff;fillColor=#E5CCFF;" parent="1" vertex="1">
+                    <mxGeometry x="-2310" y="72.5" width="400" height="270" as="geometry"/>
+                </mxCell>
+                <mxCell id="83" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="78" target="79" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="78" value="&lt;font style=&quot;font-size: 20px&quot;&gt;Login&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="1150.25" y="-580" width="213" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="116" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fillColor=#a20025;strokeColor=#6F0000;strokeWidth=20;" parent="1" source="79" target="122" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="280" y="-260"/>
+                            <mxPoint x="280" y="-40"/>
+                            <mxPoint x="-886" y="-40"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="117" value="NAVIGATION" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=20;" parent="116" vertex="1" connectable="0">
+                    <mxGeometry x="-0.1824" y="10" relative="1" as="geometry">
+                        <mxPoint x="113.23" y="-40.05" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="124" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="79" target="104">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="125" value="efetuarLogin(usuairo, senha)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="124">
+                    <mxGeometry x="-0.3539" y="-1" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="79" value="&lt;b&gt;imports .......&lt;br&gt;&lt;br&gt;const Login = ({ navigation }) =&amp;gt; {&lt;br&gt;&lt;br&gt;const [usuario, setUsuario] = useState(&quot;&quot;);&lt;/b&gt;&lt;b&gt;&lt;br&gt;const [senha, setSenha] = useState(&quot;&quot;);&lt;br&gt;const[mensagemErro, set&lt;/b&gt;&lt;b&gt;mensagemErro] = useState(&quot;&quot;);&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;&lt;br&gt;const tentarLogar = async (){&lt;br&gt;try{&lt;br&gt;const token = await efetuarLogin(usuario, senha);&lt;br&gt;AsyncStorage.setItem(&quot;instalura_token&quot;, token);&lt;br&gt;&lt;br&gt;//ir para a tela de Feed&lt;br&gt;navigation.replace(&quot;Feed&quot;, { nome: usuario });&lt;br&gt;&lt;br&gt;}catch(erro){&lt;br&gt;setMensagemErro(erro.mensagem);&lt;br&gt;}&lt;br&gt;}&lt;br&gt;&lt;br&gt;return (&lt;br&gt;&lt;br&gt;&amp;lt;Fragment&amp;gt;&lt;br&gt;&lt;br&gt;&amp;lt;View&amp;nbsp;&lt;/b&gt;&lt;b&gt;&amp;nbsp;style={estilo.container}&amp;gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;&lt;br&gt;&amp;lt;TextInput style={estilo.inputs}&lt;br&gt;placeholder=&quot;Usuario&quot;&lt;br&gt;onChangeText={texto =&amp;gt; setUsuario(texto)}&lt;br&gt;/&amp;gt;&lt;br&gt;&amp;lt;TextInput&amp;nbsp;&lt;/b&gt;&lt;b&gt;style={estilo.inputs}&lt;/b&gt;&lt;b&gt;&lt;br&gt;placeholder=&quot;Senha&quot;&lt;br&gt;secureTextEntry={true}&lt;br&gt;&lt;/b&gt;&lt;b&gt;onChangeText={texto =&amp;gt; setSenha(texto)}&lt;br&gt;&lt;/b&gt;&lt;b&gt;/&amp;gt;&lt;br&gt;&amp;lt;Text&amp;gt;{mensagemErro}&amp;lt;/Text&amp;gt;&lt;br&gt;&amp;lt;/View&amp;gt;&lt;br&gt;&lt;br&gt;&amp;lt;Button title=&quot;Entrar&quot; onPress={tentarLogar}/&amp;gt;&lt;br&gt;&lt;br&gt;&amp;lt;/Fragment&amp;gt;&lt;br&gt;)}&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="1005" y="-430" width="503.5" height="680" as="geometry"/>
+                </mxCell>
+                <mxCell id="106" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="85" target="104" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="85" value="&lt;b&gt;login.js;&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="1920" y="-1110" width="190" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="97" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="90" target="94" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="90" value="&lt;font style=&quot;font-size: 30px&quot;&gt;API&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-1320" y="-2820" width="240" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="98" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="94" target="95" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="99" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="94" target="96" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="94" value="&lt;span style=&quot;font-size: 30px&quot;&gt;View&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-870" y="-2815" width="180" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="95" value="&lt;span style=&quot;font-size: 30px&quot;&gt;Component&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6a00ff;strokeColor=#3700CC;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-460" y="-2820" width="344" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="96" value="&lt;span style=&quot;font-size: 30px&quot;&gt;App&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-905" y="-2490" width="250" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="105" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="104" target="79" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="126" value="token - mensagem de OK ou ERRO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="105">
+                    <mxGeometry x="0.4183" y="-1" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="104" value="&lt;b&gt;const efetuarLogin = async (usuario, senha) =&amp;gt; {&lt;br&gt;let url = &quot;10.0.2.2&quot;;&lt;br&gt;if(Platform.OS == &quot;ios&quot;){&lt;br&gt;url = &quot;localhost&quot;;&lt;br&gt;}&lt;br&gt;const cabecalhoHTTP = {&lt;br&gt;method:&quot;POST&quot;,&lt;br&gt;body:JSON.stringfy({&lt;br&gt;userName: usuario,&lt;br&gt;password: senha&lt;br&gt;}),&lt;br&gt;headers: {&lt;br&gt;content-type: &quot;application/json&quot;&lt;br&gt;}&lt;br&gt;}&lt;br&gt;const reponse = await fetch(`http://${url}:3000/users/login`, cabecalhoHTTP);&lt;br&gt;if(resposta.ok){&lt;br&gt;//token JWT&lt;br&gt;return resposta.headers.get(&quot;x-access-token&quot;)&lt;br&gt;}else{&lt;br&gt;throw new Error(&quot;Não foi possível logar&quot;);&lt;br&gt;}&lt;br&gt;&lt;br&gt;}&lt;br&gt;&lt;br&gt;export default efetuarLogin;&lt;br&gt;&lt;/b&gt;" style="html=1;strokeColor=#A50040;fontColor=#ffffff;fillColor=#FFCCE6;" parent="1" vertex="1">
+                    <mxGeometry x="1790" y="-950" width="450" height="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="&lt;b&gt;TOKEN JWT&lt;br&gt;Precisamos enviar sempre nas requisições de acesso a API&lt;br&gt;&lt;br&gt;Onde guardar na app React esse Token de Acesso?&lt;br&gt;&lt;br&gt;plugin&lt;br&gt;AsyncStorage&lt;br&gt;&lt;br&gt;chave e valor&lt;br&gt;npm install @react-native-community/async-storage&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;AsyncStorage.setItem(&quot;instalura_token&quot;, token);&lt;br&gt;&lt;/b&gt;&lt;b&gt;AsyncStorage.getItem(&quot;instalura_token&quot;);&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="2068" y="-140" width="390" height="212.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="112" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="108" target="111" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="113" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="108" target="110" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="114" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="108" target="109" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" value="&lt;b&gt;lib&amp;nbsp;&lt;br&gt;REACT NAVIGATION&lt;br&gt;&lt;br&gt;npm install react-navigation&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="347.5" y="-640" width="230" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="109" value="&lt;b&gt;lib&amp;nbsp;&lt;br&gt;REACT-NATIVE-&lt;br&gt;GESTURE-HANDLER&lt;br&gt;reconhece gestos&lt;br&gt;&lt;br&gt;expo install react-native-gesture-handler&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="70" y="-480" width="240" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="110" value="&lt;b&gt;lib&amp;nbsp;&lt;br&gt;REACT-NATIVE-&lt;br&gt;RENIMATED&lt;br&gt;&lt;br&gt;transição entre telas animadas&lt;br&gt;&lt;br&gt;expo install react-native-renimated&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="355" y="-480" width="215" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="111" value="&lt;b&gt;lib&amp;nbsp;&lt;br&gt;REACT-NATIVE-&lt;br&gt;SCREENS&lt;br&gt;&lt;br&gt;engloba as telas para transição&lt;br&gt;&lt;br&gt;expo install react-native-screens@^1.0.0-alpha.23&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="625" y="-480" width="295" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="115" value="&lt;b&gt;react-navigation-stack&lt;br&gt;&lt;br&gt;empilhar as telas&lt;br&gt;&lt;br&gt;npm install ...&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-1870" y="100" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="118" value="passando o nome do usuario" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=20;" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="29.99601845300458" y="-19.999170642031004" as="geometry">
+                        <mxPoint x="2" y="4" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="119" value="&lt;font style=&quot;font-size: 20px&quot;&gt;Officials&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-1240" y="-580" width="213" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="122" value="&lt;b&gt;imports .......&lt;br&gt;&lt;br&gt;const Official = ({ navigation }) =&amp;gt; {&lt;br&gt;&lt;br&gt;const [officialName, setO&lt;/b&gt;&lt;b&gt;fficialName&lt;/b&gt;&lt;b&gt;] = useState(&quot;&quot;);&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;const [rule, setR&lt;/b&gt;&lt;b&gt;ule&lt;/b&gt;&lt;b&gt;] = useState(&quot;&quot;);&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;const [company, setC&lt;/b&gt;&lt;b&gt;ompany&lt;/b&gt;&lt;b&gt;] = useState(&quot;&quot;);&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;const [clerk, setC&lt;/b&gt;&lt;b&gt;lerk&lt;/b&gt;&lt;b&gt;] = useState(&quot;&quot;);&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;const [activity, setA&lt;/b&gt;&lt;b&gt;ctivity&lt;/b&gt;&lt;b&gt;] = useState(&quot;&quot;);&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;const[mensagemErro, set&lt;/b&gt;&lt;b&gt;mensagemErro] = useState(&quot;&quot;);&lt;/b&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;&lt;br&gt;const tentarCadastrar = async (){&lt;br&gt;try{&lt;br&gt;&lt;/b&gt;&lt;b&gt;const token = AsyncStorage.getItem(&quot;instalura_token&quot;);&lt;/b&gt;&lt;b&gt;&lt;br&gt;await efetuarCadastro(number, officialName, token);&lt;br&gt;&lt;br&gt;navigation.push(&quot;BemVindo&quot;);&lt;br&gt;&lt;br&gt;}catch(erro){&lt;br&gt;setMensagemErro(erro.mensagem);&lt;br&gt;}&lt;br&gt;}&lt;br&gt;&lt;br&gt;return (&lt;br&gt;&lt;br&gt;&amp;lt;Fragment&amp;gt;&lt;br&gt;&lt;br&gt;&amp;lt;View&amp;nbsp;&lt;/b&gt;&lt;b&gt;&amp;nbsp;style={estilo.container}&amp;gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;&lt;br&gt;&amp;lt;TextInput style={estilo.inputs}&lt;br&gt;placeholder=&quot;Nome do Funcionario&quot;&lt;br&gt;onChangeText={texto =&amp;gt;&amp;nbsp;&lt;/b&gt;&lt;b&gt;setO&lt;/b&gt;&lt;b&gt;fficialName&lt;/b&gt;&lt;b&gt;(texto)}&lt;br&gt;/&amp;gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;&lt;br&gt;//flatlist dentro um Picker (lista com um seletor)&lt;br&gt;rule - select (retorna lista de funcoes)&lt;br&gt;clerk - select (retorna lista de encarregados)&lt;br&gt;dependendo da escolha do encarregado&lt;br&gt;retorna a company&lt;br&gt;activity - select (retorna a lista de atividades)&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;/&amp;gt;&lt;br&gt;&amp;lt;Text&amp;gt;{mensagemErro}&amp;lt;/Text&amp;gt;&lt;br&gt;&amp;lt;/View&amp;gt;&lt;br&gt;&lt;br&gt;&amp;lt;Button title=&quot;Entrar&quot; onPress={tentarCadastrar}/&amp;gt;&lt;br&gt;&lt;br&gt;&amp;lt;/Fragment&amp;gt;&lt;br&gt;)}&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-1390" y="-450" width="503.5" height="730" as="geometry"/>
+                </mxCell>
+                <mxCell id="127" value="&lt;b&gt;official.js;&lt;br&gt;&lt;/b&gt;" style="html=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;" vertex="1" parent="1">
+                    <mxGeometry x="-845" y="-1580" width="190" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="128" value="&lt;b&gt;const efetuarLogin = async (usuario, senha) =&amp;gt; {&lt;br&gt;let url = &quot;10.0.2.2&quot;;&lt;br&gt;if(Platform.OS == &quot;ios&quot;){&lt;br&gt;url = &quot;localhost&quot;;&lt;br&gt;}&lt;br&gt;const cabecalhoHTTP = {&lt;br&gt;method:&quot;POST&quot;,&lt;br&gt;body:JSON.stringfy({&lt;br&gt;userName: usuario,&lt;br&gt;password: senha&lt;br&gt;}),&lt;br&gt;headers: {&lt;br&gt;content-type: &quot;application/json&quot;&lt;br&gt;}&lt;br&gt;}&lt;br&gt;const reponse = await fetch(`http://${url}:3000/users/login`, cabecalhoHTTP);&lt;br&gt;if(resposta.ok){&lt;br&gt;//token JWT&lt;br&gt;return resposta.headers.get(&quot;x-access-token&quot;)&lt;br&gt;}else{&lt;br&gt;throw new Error(&quot;Não foi possível logar&quot;);&lt;br&gt;}&lt;br&gt;&lt;br&gt;}&lt;br&gt;&lt;br&gt;export default efetuarLogin;&lt;br&gt;&lt;/b&gt;" style="html=1;strokeColor=#A50040;fontColor=#ffffff;fillColor=#FFCCE6;" vertex="1" parent="1">
+                    <mxGeometry x="-980" y="-1360" width="450" height="370" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
