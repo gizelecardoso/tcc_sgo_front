@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet } from "react-native";
 const largura = Dimensions.get("screen").width;
 const estilo = StyleSheet.create({
     container: {
+        marginTop:20,
         flexGrow:2,
         justifyContent:"space-around",
         alignItems:"center",

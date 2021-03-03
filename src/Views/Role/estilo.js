@@ -1,15 +1,20 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 const largura = Dimensions.get("screen").width;
+const altura = Dimensions.get("screen").height;
+
 const estilo = StyleSheet.create({
     container: {
+        marginTop:20,
         flexGrow:2,
         justifyContent:"space-between",
         alignItems:"center",
-        width:largura
+        width:largura,
+        alignItems:"center"
     },
     header: {
         flexDirection: 'row',
+        marginTop:20,
         alignItems:"center"
     },
     title: {
@@ -55,6 +60,44 @@ const estilo = StyleSheet.create({
         textAlign:"center",
         alignItems:"center",
         height:40
+    },
+    roles_container: {
+        flexGrow:2,
+        alignItems:"center",
+        margin: 20
+    },
+    search:{
+        width:largura*0.75,
+        flexDirection: 'row',
+        borderColor:'black',
+        borderWidth:1,
+        height: 30,
+        fontSize: 15,
+        borderRadius:10,
+        alignSelf:'center'
+
+    },
+    search_input:{
+        width:largura*0.5,
+        marginLeft:10
+    },
+    adicionar:{
+        width:largura*0.2,
+        width:20,
+        marginLeft:5
+
+    },
+    lista_items:{
+        backgroundColor:"lightgray",
+        borderColor:'black',
+        borderWidth:1,
+        width:largura*0.8,
+        marginTop:10,
+        height:altura*0.6
+    },
+    linha_lista:{
+        flexDirection: 'row',
+        alignItems:'center'
     }
 });
 

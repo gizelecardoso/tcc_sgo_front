@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Alert, StyleSheet, Text, TextInput, View, TouchableOpacity, Image, ImageBackground, AsyncStorage, FlatList } from 'react-native';
-import Role from './src/Views/Role/Role'
+import Roles from './src/Views/Role/Roles'
 
 const App = () => {
   return(
-    <Role />
+    <Roles />
   );
 }
 

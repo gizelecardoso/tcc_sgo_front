@@ -1,10 +1,22 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import estilo from "./estilo.js"
+import createRole from "../../api/Role/role_api"
 
 const Role = () => {
-    const onPress = () =>{
-        console.log("Clicou")
+    const [roleCode, setRoleCode] = useState('');
+    const [roleName, setRoleName] = useState('');
+    const [roleDescription, setRoleDescription] = useState('');
+
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const tryCreateRole = async() =>{
+        try{
+
+            await createRole(roleCode, roleName, roleDescription);
+        } catch(erro) {
+            setErrorMessage(erro.mensagem);
+        }
     }
     return(
         <Fragment>
@@ -18,6 +30,7 @@ const Role = () => {
                     <TextInput
                         style={estilo.input_text} 
                         placeholder="Digite o número da Função"
+                        onChangeText={texto => setRoleCode(texto)}
                     />
                 </View>
                 <View style={estilo.input_container} >
@@ -25,6 +38,7 @@ const Role = () => {
                     <TextInput
                         style={estilo.input_text} 
                         placeholder="Digite o nome da Função"
+                        onChangeText={texto => setRoleName(texto)}
                     />
                   </View>
                 <View style={estilo.input_container} >
@@ -34,9 +48,11 @@ const Role = () => {
                         numberOfLines = {4}
                         style={estilo.input_area} 
                         placeholder="Digite a descrição da Função"
+                        onChangeText={texto => setRoleDescription(texto)}
                     />
+                    <Text>{errorMessage}</Text>
                 </View>
-                <TouchableOpacity onPress={onPress}>
+                <TouchableOpacity onPress={tryCreateRole}>
                     <Text style={estilo.submit}>Inserir Função</Text>
                 </TouchableOpacity>
                
