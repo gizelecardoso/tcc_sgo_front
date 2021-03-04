@@ -1,7 +1,7 @@
-const createRole = async (roleCode, roleName, roleDescription) => {
+const createRole = async (roleCode, roleName, roleDescription, id) => {
 
-    const response = await fetch(`http://localhost:3000/roles`, {
-        method: 'POST',
+    const response = await fetch(`http://localhost:3000/roles/${id}`, {
+        method: 'PUT',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ const createRole = async (roleCode, roleName, roleDescription) => {
     if(response.ok){
         //token JWT
     }else{
-        throw new Error("Não foi possível cadastrar a Função");
+        throw new Error("Não foi possível atualizar a Função");
     }
     
 }

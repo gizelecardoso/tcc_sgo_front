@@ -1,10 +1,9 @@
-import React, { Component, Fragment } from 'react';
-import { Alert, StyleSheet, Text, TextInput, View, TouchableOpacity, Image, ImageBackground, AsyncStorage, FlatList } from 'react-native';
-import Roles from './src/Views/Role/Roles'
+import React from 'react';
+import UpdateRole from './src/Views/Role/UpdateRole'
 
 const App = () => {
   return(
-    <Roles />
+    <UpdateRole />
   );
 }
 

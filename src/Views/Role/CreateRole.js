@@ -2,8 +2,9 @@ import React, { Fragment, useState } from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import estilo from "./estilo.js"
 import createRole from "../../api/Role/role_api"
+import { Cabecalho } from "../../Components/Cabecalho";
 
-const Role = () => {
+const CreateRole = () => {
     const [roleCode, setRoleCode] = useState('');
     const [roleName, setRoleName] = useState('');
     const [roleDescription, setRoleDescription] = useState('');
@@ -12,7 +13,6 @@ const Role = () => {
 
     const tryCreateRole = async() =>{
         try{
-
             await createRole(roleCode, roleName, roleDescription);
         } catch(erro) {
             setErrorMessage(erro.mensagem);
@@ -21,10 +21,7 @@ const Role = () => {
     return(
         <Fragment>
             <View style={estilo.container}>
-                <View style={estilo.header}>
-                    <Text style={estilo.title}>Olá, </Text>
-                    <Text style={estilo.subTitle}>Gabriel</Text>
-                </View>
+                <Cabecalho title={'Cadastrar Funções'}/>
                 <View style={estilo.input_container} >
                     <Text style={{fontSize:15, fontWeight:"bold"}}>Código Função</Text>
                     <TextInput
@@ -63,4 +60,4 @@ const Role = () => {
 
 }
 
-export default Role;
+export default CreateRole;
