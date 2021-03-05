@@ -7,7 +7,7 @@ import { Cabecalho } from "../../Components/Cabecalho";
 import { Listagem } from "../../Components/Listagem";
 import { Pesquisar } from "../../Components/Pesquisar";
 
-const Roles = () => {
+const Roles = ({navigation}) => {
     const [roles, setRoles] = useState([]);
 
     useEffect(() => { 

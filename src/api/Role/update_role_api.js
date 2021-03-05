@@ -1,4 +1,4 @@
-const createRole = async (roleCode, roleName, roleDescription, id) => {
+const updateRole = async (roleCode, roleName, roleDescription, id) => {
 
     const response = await fetch(`http://localhost:3000/roles/${id}`, {
         method: 'PUT',

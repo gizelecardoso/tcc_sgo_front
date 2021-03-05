@@ -1,5 +1,5 @@
 
-const returnRoles = async () => {
+const returnRoles = async (callback) => {
     
     const response = await fetch("http://localhost:3000/roles");
     const responseJson = await response.json();
