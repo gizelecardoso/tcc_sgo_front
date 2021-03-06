@@ -5,10 +5,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import UpdateRole from "../../Views/Role/UpdateRole.js";
 
-const Listagem = (props) => {
-    const tentar = (item) => {
-        navigation.push("UpdateRole", {item: item})
-    }
+const Listagem = (props, {navigation}) => {
+    // const tentar = (item) => {
+    //     navigation.navigate("UpdateRole");
+    // }
 
     return (
         <FlatList
@@ -22,7 +22,7 @@ const Listagem = (props) => {
                         
                         <Text style={estilo.input_text}>{item.role_name}</Text>
                         
-                        <TouchableOpacity onPress={() => {tentar(item)}}>
+                        <TouchableOpacity onPress={() => navigation.navigate("UpdateRole")}>
                             <FontAwesome name="edit" size={24} color="black" />
                         </TouchableOpacity>
                         

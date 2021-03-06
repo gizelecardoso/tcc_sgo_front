@@ -4,9 +4,9 @@ import estilo from "./estilo.js"
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Entypo } from '@expo/vector-icons'; 
 
-const Login = () => {
+const Login = ({ navigation }) => {
     const onPress = () =>{
-        console.log("Clicou")
+        navigation.navigate("Roles")
     }
     return(
         <Fragment>

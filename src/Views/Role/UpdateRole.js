@@ -1,19 +1,21 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
-import estilo from "./estilo.js"
-import returnRole from "../../api/Role/find_role_by_id"
+import estilo from "./estilo.js";
+import returnRole from "../../api/Role/find_role_by_id";
+import updateRole from "../../api/Role/update_role_api";
 import { Cabecalho } from "../../Components/Cabecalho";
 
 const UpdateRole = (props) => {
-    const [roleCode, setRoleCode] = useState('');
-    const [roleName, setRoleName] = useState('');
-    const [roleDescription, setRoleDescription] = useState('');
+    const [roleCode, setRoleCode] = useState(props.route.params.role_code);
+    const [roleName, setRoleName] = useState(props.route.params.role_name);
+    const [roleDescription, setRoleDescription] = useState(props.route.params.role_description);
 
     const [errorMessage, setErrorMessage] = useState('');
 
     const tryUpdateRole = async() =>{
         try{
-            await updateRole(roleCode, roleName, roleDescription, props.id);
+            await updateRole(roleCode, roleName, roleDescription, props.route.params.id);
+            props.navigation.push("Roles");
         } catch(erro) {
             setErrorMessage(erro.mensagem);
         }
@@ -26,10 +28,10 @@ const UpdateRole = (props) => {
                 <View style={estilo.input_container} >
                     <Text style={{fontSize:15, fontWeight:"bold"}}>Código Função</Text>
                     <TextInput
-                        style={estilo.input_text} 
+                        onChangeText={text => setRoleCode(text)}
                         placeholder="Digite o número da Função"
-                        onChangeText={texto => setRoleCode(texto)}
-                        value={props.role_code}
+                        defaultValue={roleCode}
+                        style={estilo.input_text}
                     />
                 </View>
                 <View style={estilo.input_container} >
@@ -37,8 +39,8 @@ const UpdateRole = (props) => {
                     <TextInput
                         style={estilo.input_text} 
                         placeholder="Digite o nome da Função"
-                        onChangeText={texto => setRoleName(texto)}
-                        value={props.role_name}
+                        onChangeText={text => setRoleName(text)}
+                        defaultValue={roleName}
                     />
                   </View>
                 <View style={estilo.input_container} >
@@ -48,8 +50,8 @@ const UpdateRole = (props) => {
                         numberOfLines = {4}
                         style={estilo.input_area} 
                         placeholder="Digite a descrição da Função"
-                        onChangeText={texto => setRoleDescription(texto)}
-                        value={props.role_description}
+                        onChangeText={text => setRoleDescription(text)}
+                        defaultValue={roleDescription}
                     />
                     <Text>{errorMessage}</Text>
                 </View>

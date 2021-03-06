@@ -23,4 +23,4 @@ const updateRole = async (roleCode, roleName, roleDescription, id) => {
     
 }
     
-export default createRole;
+export default updateRole;
