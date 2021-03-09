@@ -1,6 +1,12 @@
-const deleteRole = async (id) => {
+import { Platform } from 'react-native';
 
-    const response = await fetch(`http://localhost:3000/roles/${id}`, {
+const deleteRole = async (id) => {
+    let url = "localhost";
+    if(Platform.OS == 'android'){
+        url = "10.0.2.2";
+    }
+    
+    const response = await fetch(`http://${url}:3000/roles/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-type': 'application/json'

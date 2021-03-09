@@ -1,6 +1,12 @@
-const createRole = async (roleCode, roleName, roleDescription) => {
+import { Platform } from "react-native";
 
-    const response = await fetch(`http://localhost:3000/roles`, {
+const createRole = async (roleCode, roleName, roleDescription) => {
+    let url = "localhost";
+    if(Platform.OS == 'android'){
+        url = "10.0.2.2";
+    }
+
+    const response = await fetch(`http://${url}:3000/roles`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
