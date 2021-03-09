@@ -6,7 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 
 const Login = ({ navigation }) => {
     const onPress = () =>{
-        navigation.navigate("Roles")
+        navigation.navigate("BemVindo")
     }
     return(
         <Fragment>
