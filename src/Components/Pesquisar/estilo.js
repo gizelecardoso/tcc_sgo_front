@@ -5,7 +5,7 @@ const altura = Dimensions.get("screen").height;
 
 const estilo = StyleSheet.create({
     search_input:{
-        width:largura*0.5,
+        width:largura*0.6,
         marginLeft:10
     }
 });

@@ -97,7 +97,8 @@ const estilo = StyleSheet.create({
     },
     linha_lista:{
         flexDirection: 'row',
-        alignItems:'center'
+        justifyContent:'space-between',
+        alignItems: 'center'
     }
 });
 

@@ -1,12 +1,12 @@
 import { Platform } from "react-native";
 
 const returnRoles = async (callback) => {
-    let url = "localhost";
+    let url = "localhost:3000";
     if(Platform.OS == 'android'){
-        url = "10.0.2.2";
+        url = "192.168.15.174:19000";
     }
     
-    const response = await fetch(`http://${url}:3000/roles`);
+    const response = await fetch(`http://${url}/roles`);
     const responseJson = await response.json();
     console.log(responseJson)
     callback(responseJson);

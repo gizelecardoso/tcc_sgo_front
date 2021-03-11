@@ -20,8 +20,8 @@ const Roles = ({ navigation }) => {
 
     return(
         <Fragment>
+            <Cabecalho title={'Funções'} navigation={navigation}/>
             <View style={estilo.roles_container}>
-                <Cabecalho title={'Funções'}/>
                 <View style={estilo.header}>
                     <View style={estilo.search}>
                         <Pesquisar />
@@ -37,28 +37,31 @@ const Roles = ({ navigation }) => {
                         renderItem={
                             ({ item }) => (
                                 <View style={estilo.linha_lista}>
-                                   <AntDesign name="checksquareo" size={24} color="black" />
-                                   
-                                   <Text style={estilo.input_text}>{item.role_name}</Text>
-                                    
-                                    <TouchableOpacity onPress={() => {
-                                        navigation.navigate("UpdateRole", item);
-                                        }
-                                    }>
-                                        <FontAwesome name="edit" size={24} color="black" />
-                                    </TouchableOpacity>
-                                    
-                                    <TouchableOpacity onPress={() =>{
-                                        try{
-                                            deleteRole(item.id);
-                                            navigation.push("Roles");
-                                        } catch(erro) {
-                                            setErrorMessage(erro.mensagem);
-                                        }
-                                    }}>
+                                    <View style={estilo.linha_lista}>
+                                        <AntDesign name="checksquareo" size={24} color="black" />
+                                        
+                                        <Text style={estilo.input_text}>{item.role_name}</Text>
+                                    </View>
+                                    <View style={estilo.linha_lista}>
+                                        <TouchableOpacity onPress={() => {
+                                            navigation.navigate("UpdateRole", item);
+                                            }
+                                        }>
+                                            <FontAwesome name="edit" size={24} color="black" />
+                                        </TouchableOpacity>
+                                        
+                                        <TouchableOpacity onPress={() =>{
+                                            try{
+                                                deleteRole(item.id);
+                                                navigation.push("Roles");
+                                            } catch(erro) {
+                                                setErrorMessage(erro.mensagem);
+                                            }
+                                        }}>
 
-                                        <FontAwesome name="trash" size={24} color="black" />
-                                    </TouchableOpacity>
+                                            <FontAwesome name="trash" size={24} color="black" />
+                                        </TouchableOpacity>
+                                    </View>
                                     
                                 </View>
                             )

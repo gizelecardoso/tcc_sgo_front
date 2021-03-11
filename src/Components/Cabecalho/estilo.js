@@ -6,7 +6,8 @@ const estilo = StyleSheet.create({
     header: {
         flexDirection: 'row',
         marginTop:20,
-        alignItems:"center"
+        alignItems:"center",
+        justifyContent: 'center'
     },
     title: {
        fontSize: 30
@@ -16,6 +17,10 @@ const estilo = StyleSheet.create({
         color: "green",
         width:largura*0.6,
         textAlign:"center"
+    },
+    menu: {
+        backgroundColor: 'gray',
+        alignItems:"center"
     }
 });
 
