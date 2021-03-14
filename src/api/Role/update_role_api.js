@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
 const updateRole = async (roleCode, roleName, roleDescription, id) => {
@@ -10,7 +11,8 @@ const updateRole = async (roleCode, roleName, roleDescription, id) => {
         method: 'PUT',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${await AsyncStorage.getItem("login_official_token")}`
         },
         body: JSON.stringify({
             role_code: roleCode,
@@ -19,10 +21,7 @@ const updateRole = async (roleCode, roleName, roleDescription, id) => {
         })
     });
 
-    console.log("entrou aqui");
-    console.log(response)
     if(response.ok){
-        //token JWT
     }else{
         throw new Error("Não foi possível atualizar a Função");
     }

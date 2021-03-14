@@ -1,16 +1,26 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
-const returnRoles = async (callback) => {
-    let url = "localhost:3000";
+const returnOfficials = async (callback) => {
+    let url = 'localhost';
     if(Platform.OS == 'android'){
-        url = "192.168.15.174:19000";
+        url = '10.0.2.2';
     }
     
-    const response = await fetch(`http://${url}/roles`);
-    const responseJson = await response.json();
-    console.log(responseJson)
-    callback(responseJson);
+    const response = await fetch(`http://${url}/officials`, {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${await AsyncStorage.getItem('login_official_token')}`
+        }
+    });
 
+    if(response.ok){
+        const responseJson = await response.json();
+        callback(responseJson);
+    }else{
+        throw new Error('Não foi possível retornar os Funcionários(as)');
+    }
 }
     
-export default returnRoles;
+export default returnOfficials;

@@ -1,26 +1,24 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
-const deleteRole = async (id) => {
-    let url = "localhost";
+const deleteOfficial = async (id) => {
+    let url = 'localhost';
     if(Platform.OS == 'android'){
-        url = "10.0.2.2";
+        url = '10.0.2.2';
     }
     
-    const response = await fetch(`http://${url}:3000/roles/${id}`, {
+    const response = await fetch(`http://${url}:3000/officials/${id}`, {
         method: 'DELETE',
         headers: {
-            'Content-type': 'application/json'
+            'Content-type': 'application/json',
+            Authorization: `bearer ${await AsyncStorage.getItem('login_official_token')}`
         },
     });
 
-    console.log("entrou aqui");
-    console.log(response)
     if(response.ok){
-        //token JWT
     }else{
-        throw new Error("Não foi possível deletar a Função");
+        throw new Error('Não foi possível deletar o Funcionário(a)');
     }
-    
 }
     
-export default deleteRole;
+export default deleteOfficial;

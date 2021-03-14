@@ -26,7 +26,7 @@ const Roles = ({ navigation }) => {
                     <View style={estilo.search}>
                         <Pesquisar />
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate("CreateRole")}>                
+                    <TouchableOpacity onPress={() => navigation.navigate("BemVindo")}>                
                         <AntDesign name="pluscircle" size={20} style={estilo.adicionar}/>
                     </TouchableOpacity>
                 </View>

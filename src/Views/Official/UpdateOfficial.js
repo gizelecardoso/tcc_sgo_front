@@ -5,17 +5,17 @@ import returnRole from "../../api/Role/find_role_by_id";
 import updateRole from "../../api/Role/update_role_api";
 import { Cabecalho } from "../../Components/Cabecalho";
 
-const UpdateRole = (props) => {
-    const [roleCode, setRoleCode] = useState(props.route.params.role_code);
-    const [roleName, setRoleName] = useState(props.route.params.role_name);
-    const [roleDescription, setRoleDescription] = useState(props.route.params.role_description);
-
+const UpdateOfficial = (props) => {
+    const [officialCode, setOfficialCode] = useState(props.official.params.official_code);
+    const [officialName, setOfficialName] = useState(props.official.params.official_name);
+    const [role, setRole] = useState(props.official.params.role_id);
+    const [roles, setRoles] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
 
     const tryUpdateRole = async() =>{
         try{
-            await updateRole(roleCode, roleName, roleDescription, props.route.params.id);
-            props.navigation.push("Roles");
+            await updateOfficial(officialCode, officialName, props.official.params.id);
+            props.navigation.push("Officials");
         } catch(erro) {
             setErrorMessage(erro.mensagem);
         }
@@ -24,46 +24,47 @@ const UpdateRole = (props) => {
     return(
         <Fragment>
             <View style={estilo.container}>
-                <Cabecalho title={'Cadastrar Funções'}/>
+                <Cabecalho title={'Atualizar Funcionários(as)'} navigation={props.navigation} page={'Officials'}/>
                 <View style={estilo.input_container} >
-                    <Text style={{fontSize:15, fontWeight:"bold"}}>Código Função</Text>
+                    <Text style={{fontSize:15, fontWeight:"bold"}}>Código Funcionário(a)</Text>
                     <TextInput
-                        onChangeText={text => setRoleCode(text)}
-                        placeholder="Digite o número da Função"
-                        defaultValue={roleCode}
+                        onChangeText={text => setOfficialCode(text)}
+                        placeholder="Digite o número do(a) Funcionário(a)"
+                        defaultValue={officialCode}
                         style={estilo.input_text}
                     />
                 </View>
                 <View style={estilo.input_container} >
-                    <Text style={{fontSize:15, fontWeight:"bold"}}>Código da Função</Text>
+                    <Text style={{fontSize:15, fontWeight:"bold"}}>Nome do Funcionário(a)</Text>
                     <TextInput
                         style={estilo.input_text} 
-                        placeholder="Digite o nome da Função"
-                        onChangeText={text => setRoleName(text)}
-                        defaultValue={roleName}
+                        placeholder="Digite o nome da Funcionário(a)"
+                        onChangeText={text => setOfficialName(text)}
+                        defaultValue={officialName}
                     />
-                  </View>
+                </View>
                 <View style={estilo.input_container} >
-                    <Text style={{fontSize:15, fontWeight:"bold"}}>Descrição da Função</Text>
-                    <TextInput
-                        multiline = {true}
-                        numberOfLines = {4}
-                        style={estilo.input_area} 
-                        placeholder="Digite a descrição da Função"
-                        onChangeText={text => setRoleDescription(text)}
-                        defaultValue={roleDescription}
-                    />
+                    <Text style={{ fontSize: 15, fontWeight: "bold" }}>Função do Funcionário(a)</Text>
+                    <Picker
+                        selectedValue={role.role_name} 
+                        style={estilo.input_text}
+                        onValueChange={(itemValue) => setRole(itemValue)}
+                        >
+                        {
+                            roles.map(role => {
+                                return <Picker.Item label={role.role_name} value={role.id} key={role.id}/>
+                            })
+                        }
+                    </Picker>
                     <Text>{errorMessage}</Text>
                 </View>
-                <TouchableOpacity onPress={tryUpdateRole}>
-                    <Text style={estilo.submit}>Inserir Função</Text>
+                <TouchableOpacity onPress={tryUpdateOfficial}>
+                    <Text style={estilo.submit}>Atualizar Funcionário(a)</Text>
                 </TouchableOpacity>
-               
             </View>
-            
         </Fragment>
     );
 
 }
 
-export default UpdateRole;
+export default UpdateOfficial;

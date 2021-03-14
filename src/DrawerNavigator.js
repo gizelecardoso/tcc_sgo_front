@@ -7,6 +7,7 @@ import Roles from './Views/Role/Roles';
 import UpdateRole from './Views/Role/UpdateRole';
 import CreateRole from './Views/Role/CreateRole';
 import RoutesRole from './Routes/RoutesRole';
+import RoutesOfficial from './Routes/RoutesOfficial';
 import Inicio from './Views/Inicio/Inicio';
 
 
@@ -20,6 +21,7 @@ export function DrawerNavigator({navigation, route}) {
         <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="BemVindo" component={BemVindo} />
         <Drawer.Screen name="Roles" component={RoutesRole} />
+        <Drawer.Screen name="Officials" component={RoutesOfficial} />
       </Drawer.Navigator>
     );
 }

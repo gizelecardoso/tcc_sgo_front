@@ -4,48 +4,23 @@ import estilo from "./estilo.js"
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Entypo } from '@expo/vector-icons'; 
 import { useState } from "react/cjs/react.development";
+import loginApi from "../../api/Login/login_api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
+    const [loginName, setLoginName] = useState("");
+    const [password, setPassword] = useState("");
+    const [mensagemErro, setMensagemErro] = useState("");
 
-    const [data, setData] = useState({
-        email: '',
-        password: '',
-        check_textInputChange: false,
-        secureTextEntry: true
-    })
 
-    const onPress = () =>{
-        navigation.navigate("BemVindo")
-    }
-
-    const textInputChange = (texto) => {
-        if(texto.length > 10) {
-            setData({
-                ...data,
-                email:texto,
-                check_textInputChange: true
-            });
-        }else {
-            setData({
-                ...data,
-                email:texto,
-                check_textInputChange: false
-            });
+    const tryValidateAccess = async() => {
+        try {
+            const token = await loginApi(loginName, password);
+            await AsyncStorage.setItem("login_official_token", token.token);
+            navigation.navigate("BemVindo", {name_official: token.official.official_name, login_name: token.official.login_name});
+        }catch(erro){
+            setMensagemErro(erro.message);
         }
-    }
-
-    const handlePasswordChange = (texto) => {
-        setData({
-            ...data,
-            password:texto
-        });
-    }
-
-    const updateSecureTextEntry = () => {
-        setData({
-            ...data,
-            secureTextEntry: !data.secureTextEntry
-        });
     }
 
     return(
@@ -61,11 +36,8 @@ const Login = ({ navigation }) => {
                         style={estilo.input_text} 
                         placeholder="Digite seu nome de usuário"
                         autoCapitalize="none"
-                        onChangeText={(texto) => textInputChange(texto)}
+                        onChangeText={(texto) => setLoginName(texto)}
                     />
-                    {data.check_textInputChange ?
-                        <Text styles={{color: 'green'}}>OK</Text>
-                    : null}
 
                 </View>
                 <View style={estilo.input_container} >
@@ -73,12 +45,13 @@ const Login = ({ navigation }) => {
                     <TextInput
                         style={estilo.input_text}
                         placeholder="Digite sua senha"
-                        secureTextEntry={data.secureTextEntry ? true : false}
+                        secureTextEntry={true}
                         autoCapitalize="none"
-                        onChangeText={(texto) => handlePasswordChange(texto)}
+                        onChangeText={(texto) => setPassword(texto)}
                     />
                 </View>
-                <TouchableOpacity onPress={onPress}>
+                <Text>{mensagemErro}</Text>
+                <TouchableOpacity onPress={tryValidateAccess}>
                     <Text style={estilo.submit}>Entrar</Text>
                 </TouchableOpacity>
                

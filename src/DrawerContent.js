@@ -47,6 +47,17 @@ export function DrawerContent(props) {
               label="Funções"
               onPress={() => {props.navigation.navigate('Roles')}}
             />
+            <DrawerItem 
+              icon={({color, size}) => (
+                <Icon 
+                  name="account-outline"
+                  color={color}
+                  size={size}
+                />
+              )}
+              label="Funcionarios(as)"
+              onPress={() => {props.navigation.navigate('Officials')}}
+            />
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>

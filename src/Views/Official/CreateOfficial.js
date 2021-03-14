@@ -5,6 +5,7 @@ import returnRoles from "../../api/Role/roles_api";
 import createOfficial from "../../api/Official/create_api";
 import { Cabecalho } from "../../Components/Cabecalho";
 import { Picker } from "@react-native-picker/picker";
+import { Ionicons } from '@expo/vector-icons';
 
 const CreateOfficial = ({ navigation }) => {
     const [officialCode, setOfficialCode] = useState('');
@@ -17,7 +18,7 @@ const CreateOfficial = ({ navigation }) => {
     const tryCreateOfficial = async () => {
         try{
             await createOfficial(officialCode, officialName, role);
-            console.log('deu certo')
+            navigation.push("Officials");
         } catch (erro) {
             setErrorMessage(erro.mensagem);
         }
@@ -29,7 +30,7 @@ const CreateOfficial = ({ navigation }) => {
 
     return (
         <Fragment>
-            <Cabecalho title={'Cadastrar Funcionários(as)'} navigation={navigation} />
+            <Cabecalho title={'Cadastrar Funcionários(as)'} navigation={navigation} page={'Officials'}/>
             <View style={estilo.container}>
                 <View style={estilo.input_container} >
                     <Text style={{ fontSize: 15, fontWeight: "bold" }}>Código Funcionário(a)</Text>
@@ -60,12 +61,10 @@ const CreateOfficial = ({ navigation }) => {
                         }
                     </Picker>
                     <Text>{errorMessage}</Text>
-                </View>
-
+                </View>                    
                 <TouchableOpacity onPress={tryCreateOfficial}>
-                    <Text style={estilo.submit}>Inserir Função</Text>
-                </TouchableOpacity>
-
+                    <Text style={estilo.submit}>Inserir Funcionário(a)</Text>
+                </TouchableOpacity>    
             </View>
 
         </Fragment>

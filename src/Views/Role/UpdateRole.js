@@ -23,8 +23,8 @@ const UpdateRole = (props) => {
 
     return(
         <Fragment>
+            <Cabecalho title={'Cadastrar Funções'} navigation={props.navigation} page={'Roles'}/>
             <View style={estilo.container}>
-                <Cabecalho title={'Cadastrar Funções'}/>
                 <View style={estilo.input_container} >
                     <Text style={{fontSize:15, fontWeight:"bold"}}>Código Função</Text>
                     <TextInput
@@ -35,7 +35,7 @@ const UpdateRole = (props) => {
                     />
                 </View>
                 <View style={estilo.input_container} >
-                    <Text style={{fontSize:15, fontWeight:"bold"}}>Código da Função</Text>
+                    <Text style={{fontSize:15, fontWeight:"bold"}}>Nome da Função</Text>
                     <TextInput
                         style={estilo.input_text} 
                         placeholder="Digite o nome da Função"
@@ -56,7 +56,7 @@ const UpdateRole = (props) => {
                     <Text>{errorMessage}</Text>
                 </View>
                 <TouchableOpacity onPress={tryUpdateRole}>
-                    <Text style={estilo.submit}>Inserir Função</Text>
+                    <Text style={estilo.submit}>Atualizar Função</Text>
                 </TouchableOpacity>
                
             </View>

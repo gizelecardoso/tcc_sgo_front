@@ -31,7 +31,9 @@ const estilo = StyleSheet.create({
     input_text: {
         textAlign:"center", 
         fontWeight: "bold",
-        fontSize:15
+        fontSize:15,
+        height: 35,
+        width:largura*0.8
     },
     submit:{
         width:largura*0.8,

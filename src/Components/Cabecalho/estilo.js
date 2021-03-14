@@ -6,7 +6,7 @@ const estilo = StyleSheet.create({
     header: {
         flexDirection: 'row',
         marginTop:20,
-        alignItems:"center",
+        //alignItems:"center",
         justifyContent: 'center'
     },
     title: {

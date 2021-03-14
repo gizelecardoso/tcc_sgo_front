@@ -4,7 +4,7 @@ import estilo from "./estilo.js"
 import createRole from "../../api/Role/role_api"
 import { Cabecalho } from "../../Components/Cabecalho";
 
-const CreateRole = () => {
+const CreateRole = ({ navigation }) => {
     const [roleCode, setRoleCode] = useState('');
     const [roleName, setRoleName] = useState('');
     const [roleDescription, setRoleDescription] = useState('');
@@ -14,14 +14,15 @@ const CreateRole = () => {
     const tryCreateRole = async() =>{
         try{
             await createRole(roleCode, roleName, roleDescription);
+            navigation.push("Roles");
         } catch(erro) {
             setErrorMessage(erro.mensagem);
         }
     }
     return(
         <Fragment>
+            <Cabecalho title={'Cadastrar Funções'} navigation={navigation} page={'Roles'}/>
             <View style={estilo.container}>
-                <Cabecalho title={'Cadastrar Funções'}/>
                 <View style={estilo.input_container} >
                     <Text style={{fontSize:15, fontWeight:"bold"}}>Código Função</Text>
                     <TextInput

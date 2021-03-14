@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
 const returnRoles = async (callback) => {
@@ -6,9 +7,14 @@ const returnRoles = async (callback) => {
         url = "192.168.15.174:19000";
     }
     
-    const response = await fetch(`http://${url}/roles`);
+    const response = await fetch(`http://${url}/roles`, {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${await AsyncStorage.getItem("login_official_token")}`
+        }
+    });
     const responseJson = await response.json();
-    console.log(responseJson)
     callback(responseJson);
 
 }

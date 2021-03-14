@@ -1,38 +1,38 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { View, FlatList, TouchableOpacity, Text } from "react-native";
-import estilo from "./estilo.js"
-import returnRoles from "../../api/Role/roles_api"
-import deleteRole from "../../api/Role/delete_role_api"
+import estilo from "./estilo.js";
+import returnOfficials from "../../api/Official/find_all_api";
+import deleteOfficial from "../../api/Official/delete_api";
 import { AntDesign } from '@expo/vector-icons';
 import { Cabecalho } from "../../Components/Cabecalho";
 import { Listagem } from "../../Components/Listagem";
 import { Pesquisar } from "../../Components/Pesquisar";
 import { FontAwesome } from '@expo/vector-icons'; 
 
-const Roles = ({ navigation }) => {
-    const [roles, setRoles] = useState([]);
+const Officials = ({ navigation }) => {
+    const [officials, setOfficials] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => { 
-        returnRoles(setRoles);
+        returnOfficials(setOfficials);
     }, []);
 
 
     return(
         <Fragment>
-            <Cabecalho title={'Funções'} navigation={navigation}/>
+            <Cabecalho title={'Funcionários(as)'} navigation={navigation} page={'BemVindo'}/>
             <View style={estilo.roles_container}>
                 <View style={estilo.header}>
                     <View style={estilo.search}>
                         <Pesquisar />
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate("CreateRole")}>                
+                    <TouchableOpacity onPress={() => navigation.navigate("CreateOfficial")}>                
                         <AntDesign name="pluscircle" size={20} style={estilo.adicionar}/>
                     </TouchableOpacity>
                 </View>
                 <View style={estilo.lista_items}>
                     <FlatList
-                        data={roles}
+                        data={officials}
                         keyExtractor={(item) => item.id.toString()}
                         renderItem={
                             ({ item }) => (
@@ -40,11 +40,11 @@ const Roles = ({ navigation }) => {
                                     <View style={estilo.linha_lista}>
                                         <AntDesign name="checksquareo" size={24} color="black" />
                                         
-                                        <Text style={estilo.input_text}>{item.role_name}</Text>
+                                        <Text style={estilo.input_text}>{item.official_name}</Text>
                                     </View>
                                     <View style={estilo.linha_lista}>
                                         <TouchableOpacity onPress={() => {
-                                            navigation.navigate("UpdateRole", item);
+                                            navigation.navigate("UpdateOfficial", item);
                                             }
                                         }>
                                             <FontAwesome name="edit" size={24} color="black" />
@@ -52,8 +52,8 @@ const Roles = ({ navigation }) => {
                                         
                                         <TouchableOpacity onPress={() =>{
                                             try{
-                                                deleteRole(item.id);
-                                                navigation.push("Roles");
+                                                deleteOfficial(item.id);
+                                                navigation.push("Officials");
                                             } catch(erro) {
                                                 setErrorMessage(erro.mensagem);
                                             }
@@ -75,4 +75,4 @@ const Roles = ({ navigation }) => {
 
 }
 
-export default Roles;
+export default Officials;
