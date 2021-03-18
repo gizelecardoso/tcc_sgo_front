@@ -3,11 +3,8 @@ import { Platform } from "react-native";
 
 const returnOfficials = async (callback) => {
     let url = 'localhost';
-    if(Platform.OS == 'android'){
-        url = '10.0.2.2';
-    }
     
-    const response = await fetch(`http://${url}/officials`, {
+    const response = await fetch(`http://${url}:3000/officials`, {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',

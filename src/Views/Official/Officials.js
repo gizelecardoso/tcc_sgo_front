@@ -26,8 +26,8 @@ const Officials = ({ navigation }) => {
                     <View style={estilo.search}>
                         <Pesquisar />
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate("CreateOfficial")}>                
-                        <AntDesign name="pluscircle" size={20} style={estilo.adicionar}/>
+                    <TouchableOpacity onPress={() => navigation.navigate('CreateOfficial')}>                
+                        <AntDesign name='pluscircle' size={20} style={estilo.adicionar}/>
                     </TouchableOpacity>
                 </View>
                 <View style={estilo.lista_items}>
@@ -38,28 +38,29 @@ const Officials = ({ navigation }) => {
                             ({ item }) => (
                                 <View style={estilo.linha_lista}>
                                     <View style={estilo.linha_lista}>
-                                        <AntDesign name="checksquareo" size={24} color="black" />
+                                        <AntDesign name='checksquareo' size={24} color='black' />
                                         
                                         <Text style={estilo.input_text}>{item.official_name}</Text>
                                     </View>
                                     <View style={estilo.linha_lista}>
                                         <TouchableOpacity onPress={() => {
-                                            navigation.navigate("UpdateOfficial", item);
+                                            console.log(item);
+                                            navigation.navigate('UpdateOfficial', item);
                                             }
                                         }>
-                                            <FontAwesome name="edit" size={24} color="black" />
+                                            <FontAwesome name='edit' size={24} color='black' />
                                         </TouchableOpacity>
                                         
                                         <TouchableOpacity onPress={() =>{
                                             try{
                                                 deleteOfficial(item.id);
-                                                navigation.push("Officials");
+                                                navigation.push('Officials');
                                             } catch(erro) {
                                                 setErrorMessage(erro.mensagem);
                                             }
                                         }}>
 
-                                            <FontAwesome name="trash" size={24} color="black" />
+                                            <FontAwesome name='trash' size={24} color='black' />
                                         </TouchableOpacity>
                                     </View>
                                     
