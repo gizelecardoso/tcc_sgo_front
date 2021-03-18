@@ -6,18 +6,18 @@ import { Cabecalho } from "../../Components/Cabecalho";
 import { Formik } from "formik";
 import fieldsValidationRole from './validation';
 
-const CreateRole = ({ navigation }) => {
+const CreateTesteFormik = ({ navigation }) => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const tryCreateRole = async(values) =>{
         try{
-            await createRole(values);
+            await createRole({...values});
             navigation.push('Roles');
         } catch(erro) {
             setErrorMessage(erro.mensagem);
         }
     }
-
+    
     return(
         <Fragment>
             <Cabecalho title={'Cadastrar Funções'} navigation={navigation} page={'Roles'}/>
@@ -88,4 +88,4 @@ const CreateRole = ({ navigation }) => {
 
 }
 
-export default CreateRole;
+export default CreateTesteFormik;

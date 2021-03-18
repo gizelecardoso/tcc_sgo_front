@@ -1,8 +1,22 @@
 //Work with all api calls
+let url = "localhost";
+if(Platform.OS == 'android'){
+    url = "10.0.2.2";
+}
 
-apiUrl = 'http://localhost:3000'
+apiUrl = `http://${url}:3000`
 
-const createOrUpdate = async (obj, id, method, roleCode, roleName, roleDescription) => {
+const ERROR_CREATE = "Não foi possível criar/alterar a Função";
+const ERROR_DELETE = "Não foi possível deletar a Função";
+const ERROR_FIND = "Não foi possível retornar a/as Função";
+
+const HEADER_REQ = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `bearer ${await AsyncStorage.getItem("login_official_token")}`
+}
+
+export const createOrUpdate = async (obj, id, method, roleCode, roleName, roleDescription) => {
     
     const param_method = {
         method: method,
@@ -20,14 +34,13 @@ const createOrUpdate = async (obj, id, method, roleCode, roleName, roleDescripti
     const response = await fetch(`${apiUrl}/${obj}/${id}`, param_method);
 
     if(response.ok){
-        //token JWT
     }else{
-        throw new Error("Não foi possível criar/alterar a Função");
+        throw new Error(ERROR_CREATE);
     }
 }
 
 
-const deleteObj = async (obj, id, method) => {
+export const deleteObj = async (obj, id, method) => {
 
     const param_method = {
         method: method,
@@ -40,14 +53,13 @@ const deleteObj = async (obj, id, method) => {
     const response = fetch(`${apiUrl}/${obj}/${id}`, param_method);
 
     if(response.ok){
-        //token JWT
     }else{
-        throw new Error("Não foi possível deletar a Função");
+        throw new Error(ERROR_DELETE);
     }
 }
 
 
-function findAllOrById (obj, id, callback) {
+export function findAllOrById (obj, id, callback) {
 
     const response = fetch(`${apiUrl}/${obj}/${id}`);
 
@@ -55,9 +67,8 @@ function findAllOrById (obj, id, callback) {
     callback(responseJson);
 
     if(response.ok){
-        //token JWT
     }else{
-        throw new Error("Não foi possível retornar a/as Função");
+        throw new Error(ERROR_FIND);
     }
 }
 
