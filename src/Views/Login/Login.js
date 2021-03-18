@@ -8,16 +8,17 @@ import loginApi from "../../api/Login/login_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
-    const [loginName, setLoginName] = useState("");
-    const [password, setPassword] = useState("");
-    const [mensagemErro, setMensagemErro] = useState("");
-
+    const [loginName, setLoginName] = useState('');
+    const [password, setPassword] = useState('');
+    const [mensagemErro, setMensagemErro] = useState('');
 
     const tryValidateAccess = async() => {
         try {
             const token = await loginApi(loginName, password);
-            await AsyncStorage.setItem("login_official_token", token.token);
-            navigation.navigate("BemVindo", {name_official: token.official.official_name, login_name: token.official.login_name});
+            await AsyncStorage.setItem('login_official_token', token.token);
+            setLoginName('');
+            setPassword('');
+            navigation.navigate('BemVindo', {name_official: token.official.official_name, login_name: token.official.login_name});
         }catch(erro){
             setMensagemErro(erro.message);
         }
@@ -31,26 +32,28 @@ const Login = ({ navigation }) => {
                     <Text style={estilo.subTitle}>Sistema de Gerenciamento de Obras</Text>
                 </View>
                 <View style={estilo.input_container} >
-                    <FontAwesome5 name="envelope" size={30} style={{marginRight:40}}/>
+                    <FontAwesome5 name='envelope' size={30} style={{marginRight:40}}/>
                     <TextInput
                         style={estilo.input_text} 
-                        placeholder="Digite seu nome de usuário"
-                        autoCapitalize="none"
+                        placeholder='Digite seu nome de usuário'
+                        autoCapitalize='none'
                         onChangeText={(texto) => setLoginName(texto)}
+                        value={loginName}
                     />
 
                 </View>
                 <View style={estilo.input_container} >
-                    <Entypo name="lock" size={30} style={{marginRight:40}}/>
+                    <Entypo name='lock' size={30} style={{marginRight:40}}/>
                     <TextInput
                         style={estilo.input_text}
-                        placeholder="Digite sua senha"
+                        placeholder='Digite sua senha'
                         secureTextEntry={true}
-                        autoCapitalize="none"
+                        autoCapitalize='none'
                         onChangeText={(texto) => setPassword(texto)}
+                        value={password}
                     />
                 </View>
-                <Text>{mensagemErro}</Text>
+                <Text style={{color: 'red'}}>{mensagemErro}</Text>
                 <TouchableOpacity onPress={tryValidateAccess}>
                     <Text style={estilo.submit}>Entrar</Text>
                 </TouchableOpacity>
