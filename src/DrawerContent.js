@@ -4,8 +4,21 @@ import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switc
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import estilo from './Components/DrawerContent/estilo';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function DrawerContent(props) {
+  const onSignOut = async() =>  {
+    try {
+      console.log(AsyncStorage.getItem("login_official_token"))
+      await AsyncStorage.removeItem("login_official_token");
+      console.log('Data removed')
+      console.log(AsyncStorage.getItem("login_official_token"))
+    }
+    catch(exception) {
+        console.log(exception)
+    }
+  }
+
   return (
     <View style={{flex:1}}>
       <DrawerContentScrollView {...props}>
@@ -71,7 +84,10 @@ export function DrawerContent(props) {
             />
           )}
           label="Sign Out"
-          onPress={() => {}}
+          onPress={() => onSignOut().then(() => props.navigation.navigate("Inicio"))}
+          //onLoad = () => {
+        // this.props.navigation.addListener('didFocus', () => console.log('x'))
+        // }
         />
       </Drawer.Section>
     </View>
