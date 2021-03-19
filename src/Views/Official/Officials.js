@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { View, FlatList, TouchableOpacity, Text } from "react-native";
 import estilo from "./estilo.js";
-import returnOfficials from "../../api/Official/find_all_api";
-import deleteOfficial from "../../api/Official/delete_api";
+import returnOfficials from "../../services/api/Official/find_all_api";
+import deleteOfficial from "../../services/api/Official/delete_api";
 import { AntDesign } from '@expo/vector-icons';
 import { Cabecalho } from "../../Components/Cabecalho";
 import { Listagem } from "../../Components/Listagem";

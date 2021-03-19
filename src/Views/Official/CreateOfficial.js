@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import estilo from "./estilo.js"
-import returnRoles from "../../api/Role/roles_api";
-import createOfficial from "../../api/Official/create_api";
+import returnRoles from "../../services/api/Role/roles_api";
+import createOfficial from "../../services/api/Official/create_api";
 import { Cabecalho } from "../../Components/Cabecalho";
 import { Picker } from "@react-native-picker/picker";
 

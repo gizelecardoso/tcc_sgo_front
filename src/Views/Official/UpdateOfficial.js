@@ -3,8 +3,8 @@ import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import estilo from "./estilo.js";
 import { Cabecalho } from "../../Components/Cabecalho";
 import { Picker } from "@react-native-picker/picker";
-import updateOfficial from "../../api/Official/update_api";
-import returnRoles from "../../api/Role/roles_api.js";
+import updateOfficial from "../../services/api/Official/update_api";
+import returnRoles from "../../services/api/Role/roles_api.js";
 
 const UpdateOfficial = (props) => {
     const [officialCode, setOfficialCode] = useState(props.route.params.official_code);
