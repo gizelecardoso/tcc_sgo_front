@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import estilo from "./estilo.js"
-import createRole from "../../api/Role/role_api"
+import createRole from "../../services/api/Role/role_api"
 import { Cabecalho } from "../../Components/Cabecalho";
 import { Formik } from "formik";
 import fieldsValidationRole from './validation';

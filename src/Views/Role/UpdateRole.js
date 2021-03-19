@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import estilo from "./estilo.js";
-import returnRole from "../../api/Role/find_role_by_id";
-import updateRole from "../../api/Role/update_role_api";
+import returnRole from "../../services/api/Role/find_role_by_id";
+import updateRole from "../../services/api/Role/update_role_api";
 import { Cabecalho } from "../../Components/Cabecalho";
 
 const UpdateRole = (props) => {
