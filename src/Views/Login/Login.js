@@ -4,7 +4,7 @@ import estilo from "./estilo.js"
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Entypo } from '@expo/vector-icons'; 
 import { useState } from "react/cjs/react.development";
-import loginApi from "../../api/Login/login_api";
+import loginApi from "../../services/api/Login/login_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
