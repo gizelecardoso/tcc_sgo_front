@@ -21,7 +21,6 @@ const loginApi = async (loginName, loginPassword) => {
     console.log("entrou aqui");
     console.log(response)
     if(response.ok){
-        //token JWT
         return response.json();
     }else{
       throw new Error("Usuário ou senha inválidos");
