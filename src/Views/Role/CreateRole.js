@@ -1,19 +1,20 @@
 import React, { Fragment, useState } from "react";
-import { TextInput, View, Text, TouchableOpacity } from "react-native";
-import estilo from "./estilo.js";
-import createRole from "../../services/api/Role/role_api";
-import roleApi from "../../services/api/Role/api_role"
-import { Cabecalho } from "../../Components/Cabecalho";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { Formik } from "formik";
-import fieldsValidationRole from './validation';
+import { Cabecalho } from "../../Components/Cabecalho";
+import InputValues from "../../Components/Input/InputValues.js";
+import create from "../../services/api/Role/role_api";
+import { constantes } from "./constantes.js";
+import fieldsValidation from './validation';
+import estilo from "./estilo.js";
 
-const CreateRole = ({ navigation }) => {
+const CreateRole = (props) => {
     const [errorMessage, setErrorMessage] = useState('');
 
-    const tryCreateRole = async(values) =>{
+    const tryCreate = async(values) =>{
         try{
-            await createRole(values);
-            navigation.push('Roles');
+            await create(values);
+            props.navigation.push(constantes.mainList);
         } catch(erro) {
             setErrorMessage(erro.mensagem);
         }
@@ -21,64 +22,50 @@ const CreateRole = ({ navigation }) => {
 
     return(
         <Fragment>
-            <Cabecalho title={'Cadastrar Funções'} navigation={navigation} page={'Roles'}/>
+            <Cabecalho title={constantes.titleCreate} navigation={props.navigation} page={constantes.mainList}/>
             <Formik
-                validationSchema={fieldsValidationRole} 
-                initialValues={{ roleCode: '', roleName: '', roleDescription: '' }}
+                validationSchema={fieldsValidation} 
+                initialValues={constantes.initialValues}
                 onSubmit={async (values, { resetForm }) => {
-                    await tryCreateRole(values)
+                    await tryCreate(values)
                     resetForm()
                   }}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
                     <View style={estilo.container}>
-                        <View style={estilo.input_container} >
-                            <Text style={{fontSize:15, fontWeight:'bold'}}>Código Função</Text>
-                            <TextInput
-                                name='roleCode'
-                                placeholder='Digite o número da Função'
-                                style={estilo.input_text} 
-                                onChangeText={handleChange('roleCode')}
-                                onBlur={handleBlur('roleCode')}
-                                value={values.roleCode}
-                            />
-                            {(errors.roleCode && touched.roleCode) &&
-                                <Text style={{ fontSize: 15, color: 'red', fontWeight:'bold', textAlign: 'center' }}>{errors.roleCode}</Text>
-                            }
-                        </View>
-                        <View style={estilo.input_container} >
-                            <Text style={{fontSize:15, fontWeight:'bold'}}>Código da Função</Text>
-                            <TextInput
-                                name='roleName'
-                                placeholder='Digite o nome da Função'
-                                style={estilo.input_text} 
-                                onChangeText={handleChange('roleName')}
-                                onBlur={handleBlur('roleName')}
-                                value={values.roleName}
-                            />
-                            {(errors.roleName && touched.roleName) &&
-                                <Text style={{ fontSize: 15, color: 'red', fontWeight:'bold', textAlign: 'center' }}>{errors.roleName}</Text>
-                            }
-                        </View>
-                        <View style={estilo.input_container} >
-                            <Text style={{fontSize:15, fontWeight:'bold'}}>Descrição da Função</Text>
-                            <TextInput
-                                name='roleDescription'
-                                multiline = {true}
-                                numberOfLines = {4}
-                                style={estilo.input_area} 
-                                placeholder='Digite a descrição da Função'
-                                onChangeText={handleChange('roleDescription')}
-                                onBlur={handleBlur('roleDescription')}
-                                value={values.roleDescription}
-                            />
-                             {(errors.roleDescription && touched.roleDescription) &&
-                                <Text style={{ fontSize: 15, color: 'red', fontWeight:'bold', textAlign: 'center' }}>{errors.roleDescription}</Text>
-                            }
-                        <Text style={{ fontSize: 15, color: 'red', fontWeight:'bold', textAlign: 'center' }}>{errorMessage}</Text>
-                        </View>
+                        <InputValues 
+                            title={constantes.code.title} 
+                            name={constantes.code.name} 
+                            placeholder={constantes.code.placeholder}
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            errors={errors[constantes.code.attribute]}
+                            touched={touched[constantes.code.attribute]}
+                            values={values[constantes.code.attribute]}
+                        />
+                        <InputValues 
+                            title={constantes.name.title} 
+                            name={constantes.name.name} 
+                            placeholder={constantes.name.placeholder}
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            errors={errors[constantes.name.attribute]}
+                            touched={touched[constantes.name.attribute]}
+                            values={values[constantes.name.attribute]}
+                        />
+                        <InputValues 
+                            title={constantes.description.title} 
+                            name={constantes.description.name} 
+                            placeholder={constantes.description.placeholder}
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            errors={errors[constantes.description.attribute]}
+                            touched={touched[constantes.description.attribute]}
+                            values={values[constantes.description.attribute]}
+                        />
+                        
                         <TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
-                            <Text style={estilo.submit}>Inserir Função</Text>
+                            <Text style={estilo.submit}>{constantes.buttom}</Text>
                         </TouchableOpacity>
                     </View>
                 )}

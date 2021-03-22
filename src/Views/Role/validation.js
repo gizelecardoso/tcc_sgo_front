@@ -1,16 +1,17 @@
 import * as yup from 'yup'
+import { constantes } from "./constantes.js";
 
-const fieldsValidationRole = yup.object().shape({
+const fieldsValidation = yup.object().shape({
   roleCode: yup
   .string()
   .min(5, ({ min }) => `Código precisa ter no mínimo ${min} caracteres`)
-  .required('O código da função não pode ser vazio'),
+  .required(constantes.code.error),
   roleName: yup
   .string()
-  .required('O nome da função não poder ser vazio'),
+  .required(constantes.name.error),
   roleDescription: yup
   .string()
-  .required('A descrição da função não poder ser vazia')
+  .required(constantes.description.error)
 })
 
-export default fieldsValidationRole;
+export default fieldsValidation;

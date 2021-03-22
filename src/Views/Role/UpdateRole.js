@@ -1,66 +1,82 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { TextInput, View, Text, TouchableOpacity } from "react-native";
-import estilo from "./estilo.js";
-import returnRole from "../../services/api/Role/find_role_by_id";
-import updateRole from "../../services/api/Role/update_role_api";
+import React, { Fragment, useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
+import InputValues from "../../Components/Input/InputValues.js";
+import update from "../../services/api/Role/update_role_api";
+import { constantes } from "./constantes.js";
+import fieldsValidation from './validation';
+import estilo from "./estilo.js";
 
 const UpdateRole = (props) => {
-    const [roleCode, setRoleCode] = useState(props.route.params.role_code);
-    const [roleName, setRoleName] = useState(props.route.params.role_name);
-    const [roleDescription, setRoleDescription] = useState(props.route.params.role_description);
-
     const [errorMessage, setErrorMessage] = useState('');
 
-    const tryUpdateRole = async() =>{
+    const tryUpdate = async(values) =>{
         try{
-            await updateRole(roleCode, roleName, roleDescription, props.route.params.id);
-            props.navigation.push("Roles");
+            await update(values, props.route.params.id);
+            props.navigation.push(constantes.mainList);
         } catch(erro) {
             setErrorMessage(erro.mensagem);
         }
     }
 
+    const initialValues = {
+        roleCode: props.route.params.role_code, 
+        roleName: props.route.params.role_name, 
+        roleDescription: props.route.params.role_description
+    }
+
     return(
         <Fragment>
-            <Cabecalho title={'Cadastrar Funções'} navigation={props.navigation} page={'Roles'}/>
-            <View style={estilo.container}>
-                <View style={estilo.input_container} >
-                    <Text style={{fontSize:15, fontWeight:"bold"}}>Código Função</Text>
-                    <TextInput
-                        onChangeText={text => setRoleCode(text)}
-                        placeholder="Digite o número da Função"
-                        defaultValue={roleCode}
-                        style={estilo.input_text}
-                    />
-                </View>
-                <View style={estilo.input_container} >
-                    <Text style={{fontSize:15, fontWeight:"bold"}}>Nome da Função</Text>
-                    <TextInput
-                        style={estilo.input_text} 
-                        placeholder="Digite o nome da Função"
-                        onChangeText={text => setRoleName(text)}
-                        defaultValue={roleName}
-                    />
-                  </View>
-                <View style={estilo.input_container} >
-                    <Text style={{fontSize:15, fontWeight:"bold"}}>Descrição da Função</Text>
-                    <TextInput
-                        multiline = {true}
-                        numberOfLines = {4}
-                        style={estilo.input_area} 
-                        placeholder="Digite a descrição da Função"
-                        onChangeText={text => setRoleDescription(text)}
-                        defaultValue={roleDescription}
-                    />
-                    <Text>{errorMessage}</Text>
-                </View>
-                <TouchableOpacity onPress={tryUpdateRole}>
-                    <Text style={estilo.submit}>Atualizar Função</Text>
-                </TouchableOpacity>
-               
-            </View>
-            
+            <Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList}/>
+            <Formik
+                validationSchema={fieldsValidation} 
+                initialValues={initialValues}
+                onSubmit={async (values, { resetForm }) => {
+                    await tryUpdate(values)
+                    resetForm()
+                  }}
+            >
+                {({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
+                    <View style={estilo.container}>
+                        <InputValues 
+                            title={constantes.code.title} 
+                            name={constantes.code.name} 
+                            placeholder={constantes.code.placeholder}
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            errors={errors[constantes.code.attribute]}
+                            touched={touched[constantes.code.attribute]}
+                            values={values[constantes.code.attribute]}
+                        />
+                        <InputValues 
+                            title={constantes.name.title} 
+                            name={constantes.name.name} 
+                            placeholder={constantes.name.placeholder}
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            errors={errors[constantes.name.attribute]}
+                            touched={touched[constantes.name.attribute]}
+                            values={values[constantes.name.attribute]}
+                        />
+                        <InputValues 
+                            title={constantes.description.title} 
+                            name={constantes.description.name} 
+                            placeholder={constantes.description.placeholder}
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            errors={errors[constantes.description.attribute]}
+                            touched={touched[constantes.description.attribute]}
+                            values={values[constantes.description.attribute]}
+                        />
+                        
+                        <TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
+                            <Text style={estilo.submit}>{constantes.buttomAtualizar}</Text>
+                        </TouchableOpacity>
+                    </View>
+                )}
+
+            </Formik>
         </Fragment>
     );
 

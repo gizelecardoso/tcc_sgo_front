@@ -9,8 +9,7 @@ const estilo = StyleSheet.create({
         flexGrow:2,
         justifyContent:"space-between",
         alignItems:"center",
-        width:largura,
-        alignItems:"center"
+        width:largura
     },
     header: {
         flexDirection: 'row',
@@ -99,6 +98,13 @@ const estilo = StyleSheet.create({
         flexDirection: 'row',
         justifyContent:'space-between',
         alignItems: 'center'
+    },
+    erros:{
+        fontSize: 15, 
+        color: 'red', 
+        fontWeight:'bold', 
+        textAlign: 'center',
+        marginBottom:20
     }
 });
 

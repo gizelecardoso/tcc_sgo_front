@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Platform } from "react-native";
+import { Alert, Platform } from "react-native";
+import { constantes } from "../../../Views/Role/constantes";
 
-const createRole = async (values) => {
+const createRole = async (values, callback) => {
     let url = "localhost";
     if(Platform.OS == 'android'){
         url = "10.0.2.2";
@@ -21,9 +22,14 @@ const createRole = async (values) => {
         })
     });
 
+    console.log("entrou aqui");
+    console.log(response)
+
     if(response.ok){
+        console.log("entrou aqui");
+        return response.json();
     }else{
-        throw new Error("Não foi possível cadastrar a Função");
+        throw new Error(responde.data.message);
     }
     
 }
