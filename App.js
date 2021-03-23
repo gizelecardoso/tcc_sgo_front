@@ -5,13 +5,30 @@ import RoutesRole from './src/Routes/RoutesRole';
 import BemVindo from './src/Views/BemVindo/BemVindo';
 import { DrawerNavigator } from './src/DrawerNavigator';
 import CreateOfficial from './src/Views/Official/CreateOfficial';
-import CreateTesteFormik from './src/Views/Role/CreateTesteFormik';
+import { Text, Linking, AppRegistry } from  'react-native';
 
 const App = () => {
-  return(
+  return (
     <NavigationContainer>
       <DrawerNavigator />
     </NavigationContainer>
+    // <Text
+    //   style={{ marginTop: 30 }}
+    //   onPress={() =>
+    //     Linking.canOpenURL("whatsapp://send?text=oi").then(supported => {
+    //       if (supported) {
+    //         return Linking.openURL(
+    //           "whatsapp://send?phone=5511981406232&text=Oi"
+    //         );
+    //       } else {
+    //         return Linking.openURL(
+    //           "https://api.whatsapp.com/send?phone=5511981406232&text=Oi"
+    //         );
+    //       }
+    //     })
+    //   }>
+    //   WhatsApp Mensagem
+    // </Text >
   );
 }
 
