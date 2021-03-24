@@ -8,8 +8,7 @@ import { useState } from "react/cjs/react.development";
 import loginApi from "../../services/api/Login/login_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { constantes } from "./constantes";
-import { Button, Dialog, Paragraph, Portal } from 'react-native-paper';
-import { Provider as PaperProvider } from 'react-native-paper';
+import Alert from "../../Components/Alert/MessageAlert";
 
 const Login = ({ navigation }) => {
 	const [loginName, setLoginName] = useState('');
@@ -76,24 +75,14 @@ const Login = ({ navigation }) => {
 				<TouchableOpacity onPress={tryValidateAccess}>
 					<Text style={estiloButton.submit}>{constantes.buttom}</Text>
 				</TouchableOpacity>
-
 			</View>
-
-			<PaperProvider>
-				<Portal>
-					<Dialog
-						visible={visible}>
-						<Dialog.Title>{constantes.messages.status}</Dialog.Title>
-						<Dialog.Content>
-							<Paragraph>{constantes.messages.messages}</Paragraph>
-						</Dialog.Content>
-						<Dialog.Actions>
-							<Button onPress={hideDialog}>{constantes.messages.confirm}</Button>
-						</Dialog.Actions>
-					</Dialog>
-				</Portal>
-			</PaperProvider>
-
+			<Alert 
+				visible={visible} 
+				function={hideDialog} 
+				dialogTitle={constantes.messages.status} 
+				dialogFrase={constantes.messages.messages} 
+				confirm={constantes.messages.confirm}
+			/>
 		</Fragment>
 	);
 

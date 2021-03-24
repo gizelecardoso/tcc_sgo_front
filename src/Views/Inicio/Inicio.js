@@ -2,9 +2,8 @@ import React, { Fragment, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import estilo from "../Inicio/estilo";
 import estiloButton from "../../estilo";
-import { Button, Dialog, Paragraph, Portal } from 'react-native-paper';
-import { Provider as PaperProvider } from 'react-native-paper';
 import { constantes } from './constantes';
+import Alert from "../../Components/Alert/ConfirmAlert";
 
 const Inicio = ({ navigation }) => {
 	const [visible, setVisible] = useState(false);
@@ -29,25 +28,13 @@ const Inicio = ({ navigation }) => {
 					<Text style={estiloButton.submit}>{constantes.buttom}</Text>
 				</TouchableOpacity>
 			</View>
-			
-			<PaperProvider>
-				<Portal>
-					<Dialog
-						visible={visible}>
-						<Dialog.Title>Alert</Dialog.Title>
-						<Dialog.Content>
-							<Paragraph>Gostaria de ir para a próxima página</Paragraph>
-						</Dialog.Content>
-						<Dialog.Actions>
-							<Button onPress={onNavigationLogin}>Sim</Button>
-						</Dialog.Actions>
-						<Dialog.Actions>
-							<Button onPress={onNavigation}>Não</Button>
-						</Dialog.Actions>
-					</Dialog>
-				</Portal>
-			</PaperProvider>
-			
+			<Alert 
+				visible={visible} 
+				yesFunction={onNavigationLogin} 
+				noFunction={onNavigation} 
+				dialogTitle={constantes.messages.status} 
+				dialogFrase={constantes.messages.messages} 
+			/>
 		</Fragment>
 	);
 

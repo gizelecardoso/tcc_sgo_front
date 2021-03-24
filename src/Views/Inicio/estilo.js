@@ -34,6 +34,17 @@ const estilo = StyleSheet.create({
     fontSize: 15,
     height: 35,
     width: largura * 0.5
+  },
+  buttom:{
+    borderRadius: 10, 
+    backgroundColor:"green", 
+    margin:10, 
+    width:100, 
+    height: 40,
+    padding:10, 
+    textAlign:'center', 
+    color: '#fff', 
+    fontWeight: 'bold'
   }
 });
 
