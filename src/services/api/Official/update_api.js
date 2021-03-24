@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
-const updateOfficial = async (officialCode, officialName, id) => {
+const updateOfficial = async (values, id) => {
     let url = 'localhost';
     if(Platform.OS == 'android'){
         url = '10.0.2.2';
@@ -15,9 +15,9 @@ const updateOfficial = async (officialCode, officialName, id) => {
             Authorization: `bearer ${await AsyncStorage.getItem('login_official_token')}`
         },
         body: JSON.stringify({
-            official_code: officialCode,
-            official_name: officialName,
-            role_id: id
+            official_code: values.officialCode,
+            official_name: values.officialName,
+            role_id: values.role
         })
     });
 

@@ -1,74 +1,96 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { TextInput, View, Text, TouchableOpacity } from "react-native";
-import estilo from "./estilo.js";
-import { Cabecalho } from "../../Components/Cabecalho";
+import { View, Text, TouchableOpacity } from "react-native";
+import { Formik } from "formik";
 import { Picker } from "@react-native-picker/picker";
+import { Cabecalho } from "../../Components/Cabecalho";
 import updateOfficial from "../../services/api/Official/update_api";
 import returnRoles from "../../services/api/Role/roles_api.js";
+import InputValues from "../../Components/Input/InputValues.js";
+import { constantes } from "./constantes";
+import fieldsValidation from './validation';
+import estilo from "../Role/estilo";
+import estiloButton from "../../estilo";
 
 const UpdateOfficial = (props) => {
-    const [officialCode, setOfficialCode] = useState(props.route.params.official_code);
-    const [officialName, setOfficialName] = useState(props.route.params.official_name);
-    const [role, setRole] = useState(props.route.params.role_id);
-    const [roles, setRoles] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
+	const [roles, setRoles] = useState([]);
+	const [errorMessage, setErrorMessage] = useState('');
 
-    const tryUpdateOfficial = async() =>{
-        try{
-            await updateOfficial(officialCode, officialName, props.official.params.id);
-            props.navigation.push('Officials');
-        } catch(erro) {
-            setErrorMessage(erro.mensagem);
-        }
-    }
+	const tryUpdate = async (values) => {
+		try {
+			console.log(values)
+			await updateOfficial(values, props.route.params.id);
+			props.navigation.push(constantes.mainList);
+		} catch (erro) {
+			setErrorMessage(erro.mensagem);
+		}
+	}
 
-    useEffect(() => {
-        returnRoles(setRoles);
-    }, []);
+	useEffect(() => {
+		returnRoles(setRoles);
+	}, []);
 
-    return(
-        <Fragment>
-            <View style={estilo.container}>
-                <Cabecalho title={'Atualizar Funcionários(as)'} navigation={props.navigation} page={'Officials'}/>
-                <View style={estilo.input_container} >
-                    <Text style={{fontSize:15, fontWeight:'bold'}}>Código Funcionário(a)</Text>
-                    <TextInput
-                        onChangeText={text => setOfficialCode(text)}
-                        placeholder='Digite o número do(a) Funcionário(a)'
-                        defaultValue={officialCode}
-                        style={estilo.input_text}
-                    />
-                </View>
-                <View style={estilo.input_container} >
-                    <Text style={{fontSize:15, fontWeight:'bold'}}>Nome do Funcionário(a)</Text>
-                    <TextInput
-                        style={estilo.input_text} 
-                        placeholder='Digite o nome da Funcionário(a)'
-                        onChangeText={text => setOfficialName(text)}
-                        defaultValue={officialName}
-                    />
-                </View>
-                <View style={estilo.input_container} >
-                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Função do Funcionário(a)</Text>
-                    <Picker
-                        selectedValue={role.role_name} 
-                        style={estilo.input_text}
-                        onValueChange={(itemValue) => setRole(itemValue)}
-                        >
-                        {
-                            roles.map(role => {
-                                return <Picker.Item label={role.role_name} value={role.id} key={role.id}/>
-                            })
-                        }
-                    </Picker>
-                    <Text>{errorMessage}</Text>
-                </View>
-                <TouchableOpacity onPress={tryUpdateOfficial}>
-                    <Text style={estilo.submit}>Atualizar Funcionário(a)</Text>
-                </TouchableOpacity>
-            </View>
-        </Fragment>
-    );
+	const initialValues = {
+		officialCode: props.route.params.official_code,
+		officialName: props.route.params.official_name,
+		role: props.route.params.role_id
+	}
+
+	return (
+		<Fragment>
+			<Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList} />
+			<Formik
+				validationSchema={fieldsValidation}
+				initialValues={initialValues}
+				onSubmit={async (values, { resetForm }) => {
+					await tryUpdate(values)
+					resetForm()
+				}}
+			>
+				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
+					<View style={estilo.container}>
+						<InputValues
+							title={constantes.code.title}
+							name={constantes.code.name}
+							placeholder={constantes.code.placeholder}
+							handleChange={handleChange}
+							handleBlur={handleBlur}
+							errors={errors[constantes.code.attribute]}
+							touched={touched[constantes.code.attribute]}
+							values={values[constantes.code.attribute]}
+						/>
+						<InputValues
+							title={constantes.name.title}
+							name={constantes.name.name}
+							placeholder={constantes.name.placeholder}
+							handleChange={handleChange}
+							handleBlur={handleBlur}
+							errors={errors[constantes.name.attribute]}
+							touched={touched[constantes.name.attribute]}
+							values={values[constantes.name.attribute]}
+						/>
+						<View style={estilo.input_container} >
+							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>{constantes.role.title}</Text>
+							<Picker
+								style={estilo.input_text}
+								onValueChange={handleChange(constantes.role.name)}
+							>
+								{
+									roles.map(role => {
+										return <Picker.Item label={role.role_name} value={role.id} key={role.id} />
+									})
+								}
+							</Picker>
+						</View>
+						<Text style={estilo.erros}>{errorMessage}</Text>
+						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
+							<Text style={estiloButton.submit}>{constantes.buttom}</Text>
+						</TouchableOpacity>
+					</View>
+				)}
+
+			</Formik>
+		</Fragment>
+	);
 
 }
 
