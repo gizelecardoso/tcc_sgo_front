@@ -6,6 +6,8 @@ export const constantes = {
   buttom: `Entrar`,
   page: 'BemVindo',
   tokenName: 'login_official_token',
+  tokenOfficialName: 'name_official',
+  tokenLoginName: 'login_name',
   loginName: {
     name: `loginName`,
     attribute: `loginName`,

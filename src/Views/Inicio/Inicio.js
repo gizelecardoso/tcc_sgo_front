@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import estilo from "../estilo";
+import estilo from "../Inicio/estilo";
+import estiloButton from "../../estilo";
 import { Button, Dialog, Paragraph, Portal } from 'react-native-paper';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { constantes } from './constantes';
@@ -25,7 +26,7 @@ const Inicio = ({ navigation }) => {
 					<Text style={estilo.subTitle}>{constantes.subTitle}</Text>
 				</View>
 				<TouchableOpacity onPress={showDialog}>
-					<Text style={estilo.submit}>{constantes.buttom}</Text>
+					<Text style={estiloButton.submit}>{constantes.buttom}</Text>
 				</TouchableOpacity>
 			</View>
 			

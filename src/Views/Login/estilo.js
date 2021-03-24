@@ -1,8 +1,8 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 const largura = Dimensions.get("screen").width;
-const estiloInicio = StyleSheet.create({
-   
+const estilo = StyleSheet.create({
+
 });
 
-export default estiloInicio;
+export default estilo;

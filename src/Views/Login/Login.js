@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
-import estilo from "../estilo";
+import estilo from "../Inicio/estilo";
+import estiloButton from "../../estilo";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Entypo } from '@expo/vector-icons';
 import { useState } from "react/cjs/react.development";
@@ -21,7 +22,9 @@ const Login = ({ navigation }) => {
 		setVisible(false);
 		setLoginName('');
 		setPassword('');
-		navigation.navigate(constantes.page, { name_official: token.official.official_name, login_name: token.official.login_name });
+		await AsyncStorage.setItem(constantes.tokenOfficialName, token.official.official_name);
+		await AsyncStorage.setItem(constantes.tokenLoginName, token.official.login_name);
+		navigation.navigate(constantes.page);
 	}
 
 	const tryValidateAccess = async () => {
@@ -71,7 +74,7 @@ const Login = ({ navigation }) => {
 				</View>
 				<Text style={estilo.erros}>{mensagemErro}</Text>
 				<TouchableOpacity onPress={tryValidateAccess}>
-					<Text style={estilo.submit}>{constantes.buttom}</Text>
+					<Text style={estiloButton.submit}>{constantes.buttom}</Text>
 				</TouchableOpacity>
 
 			</View>
