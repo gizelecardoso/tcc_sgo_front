@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert, Platform } from "react-native";
 import { constantes } from "../../../Views/Role/constantes";
 
-const createRole = async (values, callback) => {
+const createRole = async (values) => {
     let url = "localhost";
     if(Platform.OS == 'android'){
         url = "10.0.2.2";

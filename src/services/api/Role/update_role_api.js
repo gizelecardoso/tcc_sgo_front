@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
-const updateRole = async (roleCode, roleName, roleDescription, id) => {
+const updateRole = async (values, id) => {
     let url = "localhost";
     if(Platform.OS == 'android'){
         url = "10.0.2.2";
@@ -15,9 +15,9 @@ const updateRole = async (roleCode, roleName, roleDescription, id) => {
             Authorization: `bearer ${await AsyncStorage.getItem("login_official_token")}`
         },
         body: JSON.stringify({
-            role_code: roleCode,
-            role_name: roleName,
-            role_description: roleDescription
+            role_code: values.roleCode,
+            role_name: values.roleName,
+            role_description: values.roleDescription
         })
     });
 

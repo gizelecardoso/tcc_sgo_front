@@ -17,13 +17,8 @@ const estilo = StyleSheet.create({
         alignItems:"center"
     },
     title: {
-       fontSize: 30
-    },
-    subTitle:{
-        fontSize: 50,
-        color: "green",
-        width:largura*0.6,
-        textAlign:"center"
+       fontSize: 15, 
+       fontWeight: 'bold'
     },
     input_container:{
         width:largura*0.8,
@@ -76,16 +71,6 @@ const estilo = StyleSheet.create({
         alignSelf:'center'
 
     },
-    search_input:{
-        width:largura*0.5,
-        marginLeft:10
-    },
-    adicionar:{
-        width:largura*0.2,
-        width:20,
-        marginLeft:5
-
-    },
     lista_items:{
         backgroundColor:"lightgray",
         borderColor:'black',
@@ -94,11 +79,7 @@ const estilo = StyleSheet.create({
         marginTop:10,
         height:altura*0.6
     },
-    linha_lista:{
-        flexDirection: 'row',
-        justifyContent:'space-between',
-        alignItems: 'center'
-    },
+
     erros:{
         fontSize: 15, 
         color: 'red', 

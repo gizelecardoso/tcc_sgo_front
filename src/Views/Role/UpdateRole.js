@@ -6,7 +6,8 @@ import InputValues from "../../Components/Input/InputValues.js";
 import update from "../../services/api/Role/update_role_api";
 import { constantes } from "./constantes.js";
 import fieldsValidation from './validation';
-import estilo from "./estilo.js";
+import estilo from "./estilo";
+import estiloButton from "../../estilo";
 
 const UpdateRole = (props) => {
     const [errorMessage, setErrorMessage] = useState('');
@@ -71,7 +72,7 @@ const UpdateRole = (props) => {
                         />
                         
                         <TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
-                            <Text style={estilo.submit}>{constantes.buttomAtualizar}</Text>
+                            <Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
                         </TouchableOpacity>
                     </View>
                 )}

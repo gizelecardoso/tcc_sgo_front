@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { View } from "react-native";
-import estilo from "./estilo.js"
+import { Text, View } from "react-native";
+import estilo from "./estilo";
 import returnRoles from "../../services/api/Role/roles_api"
 import deleteRole from "../../services/api/Role/delete_role_api"
 import { Cabecalho } from "../../Components/Cabecalho";
@@ -11,9 +11,14 @@ import ButtomCreate from "../../Components/Buttons/ButtomCreate.js";
 
 const Roles = ({ navigation }) => {
     const [roles, setRoles] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
     
     useEffect(() => { 
-        returnRoles(setRoles);
+        try {
+            returnRoles(setRoles);
+		} catch (erro) {
+			setErrorMessage(erro.mensagem);
+		}
     }, []);
 
     return(
