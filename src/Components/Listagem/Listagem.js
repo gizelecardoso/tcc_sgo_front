@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import estilo from "../../Views/Role/estilo";
+import estilo from "./estilo";
+import estiloInput from "../../Views/Role/estilo";
 import { FontAwesome } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons';
 
@@ -17,7 +18,7 @@ const Listagem = (props) => {
                     <View style={estilo.linha_lista}>
                         <View style={estilo.linha_lista}>
                             <AntDesign name="checksquareo" size={24} color="black" />
-                            <Text style={estilo.input_text}>{item[name]}</Text>
+                            <Text style={estiloInput.input_text}>{item[name]}</Text>
                         </View>
                         <View style={estilo.linha_lista}>
                             <TouchableOpacity onPress={() => {

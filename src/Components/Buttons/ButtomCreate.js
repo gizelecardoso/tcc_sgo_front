@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
-import estilo from "../../Views/Role/estilo";
+import estilo from "./estilo";
 
 const ButtomCreate = (props) => {
   return (

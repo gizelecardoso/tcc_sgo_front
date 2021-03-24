@@ -4,11 +4,12 @@ const largura = Dimensions.get("screen").width;
 const altura = Dimensions.get("screen").height;
 
 const estilo = StyleSheet.create({
-    linha_lista: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
+  adicionar: {
+    width: largura * 0.2,
+    width: 20,
+    marginLeft: 5
+
+  },
 });
 
 export default estilo;
