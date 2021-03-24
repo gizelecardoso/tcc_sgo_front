@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch } from 'react-native-paper';
+import { Avatar, Title, Caption, Paragraph, Drawer } from 'react-native-paper';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import estilo from './Components/DrawerContent/estilo';
+import estilo from './Components/DrawerItem/estilo';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Item from './Components/DrawerItem/Item';
+import { constantes } from './constantes';
 
 export function DrawerContent(props) {
+  const [nameOfficial, setNameOfficial] = useState('');
+  const [loginOfficial, setLoginOfficial] = useState('');
+
+  const setInfos = async () => {
+      try{
+          const official = await AsyncStorage.getItem(constantes.tokenOfficialName);
+          const login = await AsyncStorage.getItem(constantes.tokenLoginName);
+          if (official !== null && login !== null) {
+              setNameOfficial(official);
+              setLoginOfficial(login);
+          }
+      } catch (e) {
+          alert('Failed');
+      }
+	}
+
+  useEffect(() => {
+    setInfos();
+  }, []);
+
   const onSignOut = async() =>  {
     try {
-      console.log(AsyncStorage.getItem("login_official_token"))
-      await AsyncStorage.removeItem("login_official_token");
-      console.log('Data removed')
-      console.log(AsyncStorage.getItem("login_official_token"))
+      await AsyncStorage.removeItem(constantes.tokenName);
     }
     catch(exception) {
         console.log(exception)
@@ -27,50 +46,20 @@ export function DrawerContent(props) {
             <View style={{flexDirection: 'row', marginTop: 15}}>
               <Avatar.Image 
                 source={{
-                  uri: 'https://media.gettyimages.com/vectors/bricklayer-vector-id1217941117?s=612x612'
+                  uri: constantes.avatar
                 }}
                 size={50}
               />
               <View style={{marginLeft: 15, flexDirection: 'column'}}>
-                <Title style={estilo.title}>José Silva</Title>
-                <Caption style={estilo.caption}>jose.silva</Caption>
+                <Title style={estilo.title}>{nameOfficial}</Title>
+                <Caption style={estilo.caption}>{loginOfficial}</Caption>
               </View>
             </View>
           </View>
           <Drawer.Section style={estilo.drawerSection}>
-            <DrawerItem 
-              icon={({color, size}) => (
-                <Icon 
-                  name="home-outline"
-                  color={color}
-                  size={size}
-                />
-              )}
-              label="Bem-Vindo"
-              onPress={() => {props.navigation.navigate('BemVindo')}}
-            />
-            <DrawerItem 
-              icon={({color, size}) => (
-                <Icon 
-                  name="account-outline"
-                  color={color}
-                  size={size}
-                />
-              )}
-              label="Funções"
-              onPress={() => {props.navigation.navigate('Roles')}}
-            />
-            <DrawerItem 
-              icon={({color, size}) => (
-                <Icon 
-                  name="account-outline"
-                  color={color}
-                  size={size}
-                />
-              )}
-              label="Funcionarios(as)"
-              onPress={() => {props.navigation.navigate('Officials')}}
-            />
+            <Item navigation={props.navigation}label={'Bem-Vindo'} page={'BemVindo'}/>
+            <Item navigation={props.navigation}label={'Funções'} page={'Roles'}/>
+            <Item navigation={props.navigation}label={'Funcionários(as)'} page={'Officials'}/>
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>
@@ -85,9 +74,6 @@ export function DrawerContent(props) {
           )}
           label="Sign Out"
           onPress={() => onSignOut().then(() => props.navigation.navigate("Inicio"))}
-          //onLoad = () => {
-        // this.props.navigation.addListener('didFocus', () => console.log('x'))
-        // }
         />
       </Drawer.Section>
     </View>
