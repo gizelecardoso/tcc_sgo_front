@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { View, FlatList, TouchableOpacity, Text } from "react-native";
-import estilo from "../../Views/Role/estilo"
+import estilo from "../../estilo"
 import getOfficial from "./teste_axios"
 import { Cabecalho } from "../../Components/Cabecalho";
 
