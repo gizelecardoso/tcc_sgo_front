@@ -8,78 +8,95 @@ import { constantes } from "./constantes.js";
 import fieldsValidation from './validation';
 import estilo from "./estilo";
 import estiloButton from "../../estilo";
+import Alert from "../../Components/Alert/MessageAlert";
 
 const UpdateRole = (props) => {
-    const [errorMessage, setErrorMessage] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
+	const [visible, setVisible] = useState(false);
 
-    const tryUpdate = async(values) =>{
-        try{
-            await update(values, props.route.params.id);
-            props.navigation.push(constantes.mainList);
-        } catch(erro) {
-            setErrorMessage(erro.mensagem);
-        }
-    }
+	const hideDialog = () => {
+		setVisible(false);
+		props.navigation.push(constantes.mainList);
+	}
 
-    
-    const initialValues = {
-        roleCode: props.route.params.role_code, 
-        roleName: props.route.params.role_name, 
-        roleDescription: props.route.params.role_description
-    }
+	const tryUpdate = async (values) => {
+		try {
+			await update(values, props.route.params.id);
+			sucessUpdate();
+		} catch (erro) {
+			setErrorMessage(erro.mensagem);
+		}
+	}
 
-    return(
-        <Fragment>
-            <Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList}/>
-            <Formik
-                validationSchema={fieldsValidation} 
-                initialValues={initialValues}
-                onSubmit={async (values, { resetForm }) => {
-                    await tryUpdate(values)
-                    resetForm()
-                  }}
-            >
-                {({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
-                    <View style={estilo.container}>
-                        <InputValues 
-                            title={constantes.code.title} 
-                            name={constantes.code.name} 
-                            placeholder={constantes.code.placeholder}
-                            handleChange={handleChange}
-                            handleBlur={handleBlur}
-                            errors={errors[constantes.code.attribute]}
-                            touched={touched[constantes.code.attribute]}
-                            values={values.roleCode}
-                        />
-                        <InputValues 
-                            title={constantes.name.title} 
-                            name={constantes.name.name} 
-                            placeholder={constantes.name.placeholder}
-                            handleChange={handleChange}
-                            handleBlur={handleBlur}
-                            errors={errors[constantes.name.attribute]}
-                            touched={touched[constantes.name.attribute]}
-                            values={values[constantes.name.attribute]}
-                        />
-                        <InputValues 
-                            title={constantes.description.title} 
-                            name={constantes.description.name} 
-                            placeholder={constantes.description.placeholder}
-                            handleChange={handleChange}
-                            handleBlur={handleBlur}
-                            errors={errors[constantes.description.attribute]}
-                            touched={touched[constantes.description.attribute]}
-                            values={values[constantes.description.attribute]}
-                        />                      
-                        <TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
-                            <Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
-                        </TouchableOpacity>
-                    </View>
-                )}
+	const sucessUpdate = () => {
+		setVisible(true);
+	}
 
-            </Formik>
-        </Fragment>
-    );
+	const initialValues = {
+		roleCode: props.route.params.role_code,
+		roleName: props.route.params.role_name,
+		roleDescription: props.route.params.role_description
+	}
+
+	return (
+		<Fragment>
+			<Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList} />
+			<Formik
+				validationSchema={fieldsValidation}
+				initialValues={initialValues}
+				onSubmit={async (values, { resetForm }) => {
+					await tryUpdate(values)
+					resetForm()
+				}}
+			>
+				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
+					<View style={estilo.container}>
+						<InputValues
+							title={constantes.code.title}
+							name={constantes.code.name}
+							placeholder={constantes.code.placeholder}
+							handleChange={handleChange}
+							handleBlur={handleBlur}
+							errors={errors[constantes.code.attribute]}
+							touched={touched[constantes.code.attribute]}
+							values={values.roleCode}
+						/>
+						<InputValues
+							title={constantes.name.title}
+							name={constantes.name.name}
+							placeholder={constantes.name.placeholder}
+							handleChange={handleChange}
+							handleBlur={handleBlur}
+							errors={errors[constantes.name.attribute]}
+							touched={touched[constantes.name.attribute]}
+							values={values[constantes.name.attribute]}
+						/>
+						<InputValues
+							title={constantes.description.title}
+							name={constantes.description.name}
+							placeholder={constantes.description.placeholder}
+							handleChange={handleChange}
+							handleBlur={handleBlur}
+							errors={errors[constantes.description.attribute]}
+							touched={touched[constantes.description.attribute]}
+							values={values[constantes.description.attribute]}
+						/>
+						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
+							<Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
+						</TouchableOpacity>
+					</View>
+				)}
+
+			</Formik>
+			<Alert
+				visible={visible}
+				function={hideDialog}
+				dialogTitle={constantes.messages.status}
+				dialogFrase={constantes.messages.updateMessage}
+				confirm={constantes.messages.confirm}
+			/>
+		</Fragment>
+	);
 
 }
 

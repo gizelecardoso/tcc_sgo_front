@@ -10,20 +10,29 @@ import { constantes } from "./constantes";
 import fieldsValidation from "./validation";
 import estilo from "../Role/estilo";
 import estiloButton from "../../estilo";
+import Alert from "../../Components/Alert/MessageAlert";
 
 const CreateOfficial = ({ navigation }) => {
 	const [roles, setRoles] = useState([]);
-
 	const [errorMessage, setErrorMessage] = useState('');
+	const [visible, setVisible] = useState(false);
+	
+	const hideDialog = () => {
+		setVisible(false);
+		navigation.push(constantes.mainList);
+	}
 
 	const tryCreate = async (values) => {
 		try {
-			console.log("chamou funcao")
 			await createOfficial(values);
-			navigation.push(constantes.mainList);
+			sucessCreate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
 		}
+	}
+
+	const sucessCreate = () => {
+		setVisible(true);
 	}
 
 	useEffect(() => {
@@ -85,6 +94,13 @@ const CreateOfficial = ({ navigation }) => {
 				)}
 
 			</Formik>
+			<Alert 
+				visible={visible} 
+				function={hideDialog} 
+				dialogTitle={constantes.messages.status} 
+				dialogFrase={constantes.messages.createMessage} 
+				confirm={constantes.messages.confirm}
+			/>
 		</Fragment>
 	);
 

@@ -39,6 +39,8 @@ export const constantes = {
   },
   messages: {
     sucess: 'Sucesso!',
-    create: `${title} cadastrada com sucesso`
+    createMessage: `${title} cadastrada com sucesso`,
+    updateMessage: `${title} atualizada com sucesso`,
+    confirm: 'CONTINUAR'
   }
 };

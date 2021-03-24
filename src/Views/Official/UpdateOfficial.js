@@ -10,19 +10,29 @@ import { constantes } from "./constantes";
 import fieldsValidation from './validation';
 import estilo from "../Role/estilo";
 import estiloButton from "../../estilo";
+import Alert from "../../Components/Alert/MessageAlert";
 
 const UpdateOfficial = (props) => {
 	const [roles, setRoles] = useState([]);
 	const [errorMessage, setErrorMessage] = useState('');
+	const [visible, setVisible] = useState(false);
+
+	const hideDialog = () => {
+		setVisible(false);
+		props.navigation.push(constantes.mainList);
+	}
 
 	const tryUpdate = async (values) => {
 		try {
-			console.log(values)
 			await updateOfficial(values, props.route.params.id);
-			props.navigation.push(constantes.mainList);
+			sucessUpdate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
 		}
+	}
+	
+	const sucessUpdate = () => {
+		setVisible(true);
 	}
 
 	useEffect(() => {
@@ -90,6 +100,13 @@ const UpdateOfficial = (props) => {
 				)}
 
 			</Formik>
+			<Alert
+				visible={visible}
+				function={hideDialog}
+				dialogTitle={constantes.messages.status}
+				dialogFrase={constantes.messages.updateMessage}
+				confirm={constantes.messages.confirm}
+			/>
 		</Fragment>
 	);
 

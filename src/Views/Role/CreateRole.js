@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
 import InputValues from "../../Components/Input/InputValues.js";
@@ -8,17 +8,28 @@ import { constantes } from "./constantes.js";
 import fieldsValidation from './validation';
 import estilo from "./estilo";
 import estiloButton from "../../estilo";
+import Alert from "../../Components/Alert/MessageAlert";
 
 const CreateRole = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
+	const [visible, setVisible] = useState(false);
+	
+	const hideDialog = () => {
+		setVisible(false);
+		props.navigation.push(constantes.mainList);
+	}
 
 	const tryCreate = async (values) => {
 		try {
 			await create(values);
-			props.navigation.push(constantes.mainList);
+			sucessCreate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
 		}
+	}
+
+	const sucessCreate = () => {
+		setVisible(true);
 	}
 
 	return (
@@ -72,6 +83,13 @@ const CreateRole = (props) => {
 				)}
 
 			</Formik>
+			<Alert 
+				visible={visible} 
+				function={hideDialog} 
+				dialogTitle={constantes.messages.status} 
+				dialogFrase={constantes.messages.createMessage} 
+				confirm={constantes.messages.confirm}
+			/>
 		</Fragment>
 	);
 
