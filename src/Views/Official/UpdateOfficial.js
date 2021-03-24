@@ -72,6 +72,7 @@ const UpdateOfficial = (props) => {
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>{constantes.role.title}</Text>
 							<Picker
 								style={estilo.input_text}
+								selectedValue={values[constantes.role.name]}
 								onValueChange={handleChange(constantes.role.name)}
 							>
 								{

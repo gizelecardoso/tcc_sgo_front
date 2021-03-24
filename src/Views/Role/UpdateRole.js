@@ -21,6 +21,7 @@ const UpdateRole = (props) => {
         }
     }
 
+    
     const initialValues = {
         roleCode: props.route.params.role_code, 
         roleName: props.route.params.role_name, 
@@ -48,7 +49,7 @@ const UpdateRole = (props) => {
                             handleBlur={handleBlur}
                             errors={errors[constantes.code.attribute]}
                             touched={touched[constantes.code.attribute]}
-                            values={values[constantes.code.attribute]}
+                            values={values.roleCode}
                         />
                         <InputValues 
                             title={constantes.name.title} 
@@ -69,8 +70,7 @@ const UpdateRole = (props) => {
                             errors={errors[constantes.description.attribute]}
                             touched={touched[constantes.description.attribute]}
                             values={values[constantes.description.attribute]}
-                        />
-                        
+                        />                      
                         <TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
                             <Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
                         </TouchableOpacity>

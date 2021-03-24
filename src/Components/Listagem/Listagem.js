@@ -22,7 +22,7 @@ const Listagem = (props) => {
                         </View>
                         <View style={estilo.linha_lista}>
                             <TouchableOpacity onPress={() => {
-                                props.navigation.navigate(props.update, item);
+                                props.navigation.push(props.update, item);
                                 }
                             }>
                                 <FontAwesome name="edit" size={24} color="black" />
