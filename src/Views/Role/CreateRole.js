@@ -6,7 +6,7 @@ import InputValues from "../../Components/Input/InputValues.js";
 import create from "../../services/api/Role/role_api";
 import { constantes } from "./constantes.js";
 import fieldsValidation from './validation';
-import estilo from "./estilo";
+import estilo from "../estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
 

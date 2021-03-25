@@ -8,7 +8,7 @@ import createOfficial from "../../services/api/Official/create_api";
 import returnRoles from "../../services/api/Role/roles_api";
 import { constantes } from "./constantes";
 import fieldsValidation from "./validation";
-import estilo from "../Role/estilo";
+import estilo from "../estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
 

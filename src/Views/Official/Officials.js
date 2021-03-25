@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { View, Text } from "react-native";
-import estilo from "../Role/estilo";
+import estilo from "../estilo";
 import returnOfficials from "../../services/api/Official/find_all_api";
 import deleteOfficial from "../../services/api/Official/delete_api";
 import { Cabecalho } from "../../Components/Cabecalho";

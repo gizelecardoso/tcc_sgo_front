@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import estilo from "./estilo";
-import estiloInput from "../../Views/Role/estilo";
+import estiloInput from "../../Views/estilo";
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import ConfirmAlert from "../../Components/Alert/ConfirmAlert"; // yes or no

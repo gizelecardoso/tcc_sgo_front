@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TextInput } from "react-native";
-import estilo from "../../Views/Role/estilo";
+import estilo from "../../Views/estilo";
 
 const InputValues = (props) => {
   return (
