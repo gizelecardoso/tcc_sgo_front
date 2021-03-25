@@ -60,6 +60,7 @@ export function DrawerContent(props) {
             <Item navigation={props.navigation}label={'Bem-Vindo'} page={'BemVindo'}/>
             <Item navigation={props.navigation}label={'Funções'} page={'Roles'}/>
             <Item navigation={props.navigation}label={'Funcionários(as)'} page={'Officials'}/>
+            <Item navigation={props.navigation}label={'Empresas'} page={'Companies'}/>
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>

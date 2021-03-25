@@ -1,15 +1,12 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContent } from './DrawerContent';
+import Inicio from './Views/Inicio/Inicio';
 import Login from './Views/Login/Login';
 import BemVindo from './Views/BemVindo/BemVindo';
-import Roles from './Views/Role/Roles';
-import UpdateRole from './Views/Role/UpdateRole';
-import CreateRole from './Views/Role/CreateRole';
 import RoutesRole from './Routes/RoutesRole';
 import RoutesOfficial from './Routes/RoutesOfficial';
-import Inicio from './Views/Inicio/Inicio';
-
+import RoutesCompany from './Routes/RoutesCompany';
 
 const Drawer = createDrawerNavigator();
 
@@ -22,6 +19,7 @@ export function DrawerNavigator({navigation, route}) {
         <Drawer.Screen name="BemVindo" component={BemVindo} />
         <Drawer.Screen name="Roles" component={RoutesRole} />
         <Drawer.Screen name="Officials" component={RoutesOfficial} />
+        <Drawer.Screen name="Companies" component={RoutesCompany} />
       </Drawer.Navigator>
     );
 }
