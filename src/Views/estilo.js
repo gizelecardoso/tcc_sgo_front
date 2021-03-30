@@ -22,7 +22,21 @@ const estilo = StyleSheet.create({
     },
     input_container:{
         width:largura*0.8,
-         
+    },
+    container_infos:{
+        width:largura*0.8,
+        flexDirection: 'row',
+    },
+    item_select: {
+        width:largura*0.8,
+        alignItems:"center",
+        marginTop: 10,
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: "lightgray",
+        textAlign:"center", 
+        fontWeight: "bold",
+        fontSize:15
     },
     input_text: {
         alignItems:"center",
@@ -32,7 +46,7 @@ const estilo = StyleSheet.create({
         backgroundColor: "lightgray",
         textAlign:"center", 
         fontWeight: "bold",
-        fontSize:15
+        fontSize:15,
     },
     input_area: {
         alignItems:"center",

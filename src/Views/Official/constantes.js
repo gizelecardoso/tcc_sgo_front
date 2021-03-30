@@ -33,7 +33,10 @@ export const constantes = {
   initialValues: {
     officialCode: '', 
     officialCode: '', 
-    role: 0
+    role: 0,
+    category: '',
+    companyId: 0,
+    clerkId: 0
   },
   messages: {
     sucess: 'Sucesso!',

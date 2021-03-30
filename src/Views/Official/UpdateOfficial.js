@@ -11,11 +11,16 @@ import fieldsValidation from './validation';
 import estilo from "../estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
+import ClerkAlert from "../../Components/Alert/ClerkAlert";
 
 const UpdateOfficial = (props) => {
 	const [roles, setRoles] = useState([]);
 	const [errorMessage, setErrorMessage] = useState('');
+	const access = [{id: 1, name: 'Administrador'}, {id: 2, name: 'Encarregado'}, {id: 3, name: 'Oficial'}]
+	const [selectedValue, setSelectedValue] = useState('Administrador');
+	
 	const [visible, setVisible] = useState(false);
+	const [clerkVisible, setClerkVisible] = useState(false);
 
 	const hideDialog = () => {
 		setVisible(false);
@@ -38,6 +43,10 @@ const UpdateOfficial = (props) => {
 	useEffect(() => {
 		returnRoles(setRoles);
 	}, []);
+
+	//return company
+
+	//return clerk
 
 	const initialValues = {
 		officialCode: props.route.params.official_code,
@@ -79,6 +88,22 @@ const UpdateOfficial = (props) => {
 							values={values[constantes.name.attribute]}
 						/>
 						<View style={estilo.input_container} >
+							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Níveis de Acesso</Text>
+							<Picker
+								selectedValue={selectedValue}
+								style={estilo.input_text}
+								onValueChange={
+									(itemValue) => {
+										setSelectedValue(itemValue);
+										setClerkVisible(true);
+									}}
+							>
+								{
+									access.map(ac => {
+										return <Picker.Item label={ac.name} value={ac.name} key={ac.id} />
+									})
+								}
+							</Picker>
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>{constantes.role.title}</Text>
 							<Picker
 								style={estilo.input_text}
@@ -106,6 +131,13 @@ const UpdateOfficial = (props) => {
 				dialogTitle={constantes.messages.status}
 				dialogFrase={constantes.messages.updateMessage}
 				confirm={constantes.messages.confirm}
+			/>
+			<ClerkAlert
+				visible={clerkVisible}
+				hide={(hideDialog)}
+				dialogTitle={selectedValue}
+				confirm={constantes.messages.confirm}
+				official_id={props.route.params.id}
 			/>
 		</Fragment>
 	);
