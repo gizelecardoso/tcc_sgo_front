@@ -17,7 +17,9 @@ const createOfficial = async (values) => {
         body: JSON.stringify({
             official_code: values.officialCode,
             official_name: values.officialName,
-            role_id: values.role
+            role_id: values.role,
+            company_id: values.companyId,
+            clerk_id: values.clerkId
         })
     });
 

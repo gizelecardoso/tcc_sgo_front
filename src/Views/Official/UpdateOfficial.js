@@ -11,31 +11,59 @@ import fieldsValidation from './validation';
 import estilo from "../estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
-import ClerkAlert from "../../Components/Alert/ClerkAlert";
+import returnCompanies from "../../services/api/Company/find_all_api";
+import returnClerk from "../../services/api/Clerk/find_all_api";
+import createClerk from "../../services/api/Clerk/create_api";
+import createAdmin from "../../services/api/Admin/create_api";
+import createWorker from "../../services/api/Worker/create_api";
 
 const UpdateOfficial = (props) => {
 	const [roles, setRoles] = useState([]);
 	const [errorMessage, setErrorMessage] = useState('');
-	const access = [{id: 1, name: 'Administrador'}, {id: 2, name: 'Encarregado'}, {id: 3, name: 'Oficial'}]
 	const [selectedValue, setSelectedValue] = useState('Administrador');
-	
+
 	const [visible, setVisible] = useState(false);
-	const [clerkVisible, setClerkVisible] = useState(false);
+	const [companyDisable, setCompanyDisable] = useState(false);
+	const [clerkDisable, setClerkDisable] = useState(false);
+	const [clerks, setClerk] = useState([]);
+	const [companies, setCompanies] = useState([]);
 
 	const hideDialog = () => {
 		setVisible(false);
 		props.navigation.push(constantes.mainList);
 	}
 
+	const tryCreateRelation = async (values, official) => {
+		if (values.category == 'Encarregado')
+			try {
+				createClerk(values.companyId, official.id);
+			} catch (erro) {
+				setErrorMessage(erro.mensagem);
+			}
+		else if (values.category == 'Administrador')
+			try {
+				createAdmin(official.id)
+			} catch (erro) {
+				setErrorMessage(erro.mensagem);
+			}
+		else if (values.category == 'Oficial')
+			try {
+				createWorker(official.id, values.clerkId);
+			} catch (erro) {
+				setErrorMessage(erro.mensagem);
+			}
+	}
+
 	const tryUpdate = async (values) => {
 		try {
 			await updateOfficial(values, props.route.params.id);
+			tryCreateRelation(values, official)
 			sucessUpdate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
 		}
 	}
-	
+
 	const sucessUpdate = () => {
 		setVisible(true);
 	}
@@ -44,9 +72,13 @@ const UpdateOfficial = (props) => {
 		returnRoles(setRoles);
 	}, []);
 
-	//return company
+	useEffect(() => {
+		returnCompanies(setCompanies);
+	}, []);
 
-	//return clerk
+	useEffect(() => {
+		returnClerk(setClerk);
+	}, []);
 
 	const initialValues = {
 		officialCode: props.route.params.official_code,
@@ -88,22 +120,32 @@ const UpdateOfficial = (props) => {
 							values={values[constantes.name.attribute]}
 						/>
 						<View style={estilo.input_container} >
-							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Níveis de Acesso</Text>
+							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Empresa</Text>
 							<Picker
-								selectedValue={selectedValue}
-								style={estilo.input_text}
-								onValueChange={
-									(itemValue) => {
-										setSelectedValue(itemValue);
-										setClerkVisible(true);
-									}}
+								style={estilo.item_select}
+								onValueChange={handleChange('companyId')}
+								disabled={companyDisable}
 							>
 								{
-									access.map(ac => {
-										return <Picker.Item label={ac.name} value={ac.name} key={ac.id} />
+									companies.map(company => {
+										return <Picker.Item label={company.company_name} value={company.id} key={company.id} />
 									})
 								}
 							</Picker>
+							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Encarregado</Text>
+							<Picker
+								style={estilo.item_select}
+								onValueChange={handleChange('clerkId')}
+								disabled={clerkDisable}
+							>
+								{
+									clerks.map(clerk => {
+										return <Picker.Item label={clerk.name} value={clerk.id} key={clerk.id} />
+									})
+								}
+							</Picker>
+						</View>
+						<View style={estilo.input_container} >
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>{constantes.role.title}</Text>
 							<Picker
 								style={estilo.input_text}
@@ -132,13 +174,7 @@ const UpdateOfficial = (props) => {
 				dialogFrase={constantes.messages.updateMessage}
 				confirm={constantes.messages.confirm}
 			/>
-			<ClerkAlert
-				visible={clerkVisible}
-				hide={(hideDialog)}
-				dialogTitle={selectedValue}
-				confirm={constantes.messages.confirm}
-				official_id={props.route.params.id}
-			/>
+
 		</Fragment>
 	);
 
