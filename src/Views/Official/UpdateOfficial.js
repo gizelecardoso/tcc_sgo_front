@@ -12,52 +12,23 @@ import estilo from "../estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
 import returnCompanies from "../../services/api/Company/find_all_api";
-import returnClerk from "../../services/api/Clerk/find_all_api";
-import createClerk from "../../services/api/Clerk/create_api";
-import createAdmin from "../../services/api/Admin/create_api";
-import createWorker from "../../services/api/Worker/create_api";
+import returnClerks from "../../services/api/Official/find_all_api";
 
 const UpdateOfficial = (props) => {
 	const [roles, setRoles] = useState([]);
 	const [errorMessage, setErrorMessage] = useState('');
-	const [selectedValue, setSelectedValue] = useState('Administrador');
-
-	const [visible, setVisible] = useState(false);
-	const [companyDisable, setCompanyDisable] = useState(false);
-	const [clerkDisable, setClerkDisable] = useState(false);
-	const [clerks, setClerk] = useState([]);
 	const [companies, setCompanies] = useState([]);
+	const [clerks, setClerk] = useState([]);
+	const [visible, setVisible] = useState(false);
 
 	const hideDialog = () => {
 		setVisible(false);
 		props.navigation.push(constantes.mainList);
 	}
 
-	const tryCreateRelation = async (values, official) => {
-		if (values.category == 'Encarregado')
-			try {
-				createClerk(values.companyId, official.id);
-			} catch (erro) {
-				setErrorMessage(erro.mensagem);
-			}
-		else if (values.category == 'Administrador')
-			try {
-				createAdmin(official.id)
-			} catch (erro) {
-				setErrorMessage(erro.mensagem);
-			}
-		else if (values.category == 'Oficial')
-			try {
-				createWorker(official.id, values.clerkId);
-			} catch (erro) {
-				setErrorMessage(erro.mensagem);
-			}
-	}
-
 	const tryUpdate = async (values) => {
 		try {
 			await updateOfficial(values, props.route.params.id);
-			tryCreateRelation(values, official)
 			sucessUpdate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
@@ -77,13 +48,15 @@ const UpdateOfficial = (props) => {
 	}, []);
 
 	useEffect(() => {
-		returnClerk(setClerk);
+		returnClerks(setClerk, 'encarregado');
 	}, []);
 
 	const initialValues = {
 		officialCode: props.route.params.official_code,
 		officialName: props.route.params.official_name,
-		role: props.route.params.role_id
+		role: props.route.params.role_id,
+    companyId: props.route.params.company_id,
+    clerkId: props.route.params.clerk_id
 	}
 
 	return (
@@ -123,8 +96,8 @@ const UpdateOfficial = (props) => {
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Empresa</Text>
 							<Picker
 								style={estilo.item_select}
+								selectedValue={values['companyId']}
 								onValueChange={handleChange('companyId')}
-								disabled={companyDisable}
 							>
 								{
 									companies.map(company => {
@@ -135,12 +108,12 @@ const UpdateOfficial = (props) => {
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Encarregado</Text>
 							<Picker
 								style={estilo.item_select}
+								selectedValue={values['clerkId']}
 								onValueChange={handleChange('clerkId')}
-								disabled={clerkDisable}
 							>
 								{
 									clerks.map(clerk => {
-										return <Picker.Item label={clerk.name} value={clerk.id} key={clerk.id} />
+										return <Picker.Item label={clerk.official_name} value={clerk.id} key={clerk.id} />
 									})
 								}
 							</Picker>

@@ -88,9 +88,9 @@ const CreateOfficial = ({ navigation }) => {
 								<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Empresa</Text>
 								<Picker
 									style={estilo.item_select}
-									selectedValue={'Selecione um valor'}
 									onValueChange={handleChange('companyId')}								
 								>
+									<Picker.Item label='Selecione uma empresa'/>
 									{
 										companies.map(company => {
 											return <Picker.Item label={company.company_name} value={company.id} key={company.id} />
@@ -100,9 +100,9 @@ const CreateOfficial = ({ navigation }) => {
 								<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Encarregado</Text>
 								<Picker
 									style={estilo.item_select}
-									selectedValue={'Selecione um valor'}
 									onValueChange={handleChange('clerkId')}
 								>
+									<Picker.Item label='Selecione um encarregado'/>
 									{
 										clerks.map(clerk => {
 											return <Picker.Item label={clerk.official_name} value={clerk.id} key={clerk.id} />
@@ -116,6 +116,7 @@ const CreateOfficial = ({ navigation }) => {
 								style={estilo.input_text}
 								onValueChange={handleChange(constantes.role.name)}
 							>
+								<Picker.Item label='Selecione uma função'/>
 								{
 									roles.map(role => {
 										return <Picker.Item label={role.role_name} value={role.id} key={role.id} />
