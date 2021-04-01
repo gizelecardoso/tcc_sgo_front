@@ -35,7 +35,8 @@ export const constantes = {
   initialValues: {
     roleCode: '', 
     roleName: '', 
-    roleDescription: ''
+    roleDescription: '',
+    roleCategory:''
   },
   messages: {
     sucess: 'Sucesso!',

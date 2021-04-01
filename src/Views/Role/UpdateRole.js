@@ -9,10 +9,12 @@ import fieldsValidation from './validation';
 import estilo from "../estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
+import { Picker } from "@react-native-picker/picker";
 
 const UpdateRole = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [visible, setVisible] = useState(false);
+	const access = [{ id: 1, name: 'administrador' }, { id: 2, name: 'encarregado' }, { id: 3, name: 'oficial' }]
 
 	const hideDialog = () => {
 		setVisible(false);
@@ -35,7 +37,8 @@ const UpdateRole = (props) => {
 	const initialValues = {
 		roleCode: props.route.params.role_code,
 		roleName: props.route.params.role_name,
-		roleDescription: props.route.params.role_description
+		roleDescription: props.route.params.role_description,
+		roleCategory: props.route.params.role_category
 	}
 
 	return (
@@ -81,6 +84,21 @@ const UpdateRole = (props) => {
 							touched={touched[constantes.description.attribute]}
 							values={values[constantes.description.attribute]}
 						/>
+						<View style={estilo.input_container} >
+							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Categorias</Text>
+							<Picker
+								style={estilo.input_text}
+								selectedValue={values.roleCategory}
+								onValueChange={handleChange('roleCategory')
+								}
+							>
+								{
+									access.map(ac => {
+										return <Picker.Item label={ac.name} value={ac.name} key={ac.id} />
+									})
+								}
+							</Picker>
+						</View>
 						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
 							<Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
 						</TouchableOpacity>

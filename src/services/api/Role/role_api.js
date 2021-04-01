@@ -18,7 +18,8 @@ const createRole = async (values) => {
         body: JSON.stringify({
             role_code: values.roleCode,
             role_name: values.roleName,
-            role_description: values.roleDescription
+            role_description: values.roleDescription,
+            role_category: values.roleCategory
         })
     });
 

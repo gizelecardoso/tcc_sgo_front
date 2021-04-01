@@ -9,10 +9,12 @@ import fieldsValidation from './validation';
 import estilo from "../estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
+import { Picker } from "@react-native-picker/picker";
 
 const CreateRole = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [visible, setVisible] = useState(false);
+	const access = [{ id: 1, name: 'administrador' }, { id: 2, name: 'encarregado' }, { id: 3, name: 'oficial' }]
 	
 	const hideDialog = () => {
 		setVisible(false);
@@ -75,6 +77,20 @@ const CreateRole = (props) => {
 							touched={touched[constantes.description.attribute]}
 							values={values[constantes.description.attribute]}
 						/>
+						<View style={estilo.input_container} >
+							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Categorias</Text>
+							<Picker
+								style={estilo.input_text}
+								onValueChange={handleChange('roleCategory')
+								}
+							>
+								{
+									access.map(ac => {
+										return <Picker.Item label={ac.name} value={ac.name} key={ac.id} />
+									})
+								}
+							</Picker>
+						</View>
 						<Text style={estilo.erros}>{errorMessage}</Text>
 						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
 							<Text style={estiloButton.submit}>{constantes.buttom}</Text>
