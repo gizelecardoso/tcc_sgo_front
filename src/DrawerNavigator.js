@@ -7,6 +7,7 @@ import BemVindo from './Views/BemVindo/BemVindo';
 import RoutesRole from './Routes/RoutesRole';
 import RoutesOfficial from './Routes/RoutesOfficial';
 import RoutesCompany from './Routes/RoutesCompany';
+import RoutesActivity from './Routes/RoutesActivity';
 
 const Drawer = createDrawerNavigator();
 
@@ -19,6 +20,7 @@ export function DrawerNavigator({navigation, route}) {
         <Drawer.Screen name="BemVindo" component={BemVindo} />
         <Drawer.Screen name="Roles" component={RoutesRole} />
         <Drawer.Screen name="Officials" component={RoutesOfficial} />
+        <Drawer.Screen name="Activities" component={RoutesActivity} />
         <Drawer.Screen name="Companies" component={RoutesCompany} />
       </Drawer.Navigator>
     );
