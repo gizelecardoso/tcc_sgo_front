@@ -6,6 +6,7 @@ import BemVindo from './src/Views/BemVindo/BemVindo';
 import { DrawerNavigator } from './src/DrawerNavigator';
 import CreateOfficial from './src/Views/Official/CreateOfficial';
 import { Text, Linking, AppRegistry } from  'react-native';
+import Date from './src/Components/Date';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
     //   }>
     //   WhatsApp Mensagem
     // </Text >
+    // <Date />
   );
 }
 

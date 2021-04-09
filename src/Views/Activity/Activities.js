@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Text, View } from "react-native";
 import estilo from "../estilo";
-import returnRoles from "../../services/api/Role/roles_api"
-import deleteRole from "../../services/api/Role/delete_role_api"
+import returnActivities from "../../services/api/Activity/find_all_api";
+import deleteActivity from "../../services/api/Activity/delete_api";
 import { Cabecalho } from "../../Components/Cabecalho";
 import { Listagem } from "../../Components/Listagem";
 import { Pesquisar } from "../../Components/Pesquisar";
@@ -10,12 +10,13 @@ import { constantes } from "./constantes";
 import ButtomCreate from "../../Components/Buttons/ButtomCreate.js";
 
 const Activities = ({ navigation }) => {
-    const [roles, setRoles] = useState([]);
+    const [activities, setActivities] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     
     useEffect(() => { 
         try {
-            returnRoles(setRoles);
+            returnActivities(setActivities);
+            console.log(activities);
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
 		}
@@ -32,7 +33,7 @@ const Activities = ({ navigation }) => {
                     <ButtomCreate navigation={navigation} create={constantes.buttomCreate}/>
                 </View>
                 <View style={estilo.lista_items}>
-                   < Listagem lista={roles} navigation={navigation} listName={'role_name'} update={constantes.buttomUpdate} delete={constantes.mainList} deleteFunction={deleteRole}/>
+                   < Listagem lista={activities} navigation={navigation} listName={'activity_name'} update={constantes.buttomUpdate} delete={constantes.mainList} deleteFunction={deleteActivity}/>
                 </View>
             </View>
         </Fragment>

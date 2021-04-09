@@ -1,20 +1,20 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
 import InputValues from "../../Components/Input/InputValues.js";
-import update from "../../services/api/Role/update_role_api";
+import update from "../../services/api/Activity/update_api";
 import { constantes } from "./constantes.js";
 import fieldsValidation from './validation';
 import estilo from "../estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
 import { Picker } from "@react-native-picker/picker";
+import moment from "moment";
 
 const UpdateActivity = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [visible, setVisible] = useState(false);
-	const access = [{ id: 1, name: 'administrador' }, { id: 2, name: 'encarregado' }, { id: 3, name: 'oficial' }]
 
 	const hideDialog = () => {
 		setVisible(false);
@@ -34,12 +34,21 @@ const UpdateActivity = (props) => {
 		setVisible(true);
 	}
 
-	const initialValues = {
-		roleCode: props.route.params.role_code,
-		roleName: props.route.params.role_name,
-		roleDescription: props.route.params.role_description,
-		roleCategory: props.route.params.role_category
+	const format_date_back_to_front = (date_api) => {
+		return moment(date_api).format('L');
 	}
+
+	const initialValues = {
+		activityCode: props.route.params.activity_code,
+    activityName: props.route.params.activity_name, 
+    activityDescription: props.route.params.activity_description,
+    expectedInitialDate: format_date_back_to_front(props.route.params.expected_initial_date),
+    expectedFinalDate: format_date_back_to_front(props.route.params.expected_final_date)
+	}
+
+	useEffect(() => {
+		console.log(props);
+	})
 
 	return (
 		<Fragment>
@@ -62,7 +71,7 @@ const UpdateActivity = (props) => {
 							handleBlur={handleBlur}
 							errors={errors[constantes.code.attribute]}
 							touched={touched[constantes.code.attribute]}
-							values={values.roleCode}
+							values={values[constantes.code.attribute]}
 						/>
 						<InputValues
 							title={constantes.name.title}
@@ -84,21 +93,26 @@ const UpdateActivity = (props) => {
 							touched={touched[constantes.description.attribute]}
 							values={values[constantes.description.attribute]}
 						/>
-						<View style={estilo.input_container} >
-							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Categorias</Text>
-							<Picker
-								style={estilo.input_text}
-								selectedValue={values.roleCategory}
-								onValueChange={handleChange('roleCategory')
-								}
-							>
-								{
-									access.map(ac => {
-										return <Picker.Item label={ac.name} value={ac.name} key={ac.id} />
-									})
-								}
-							</Picker>
-						</View>
+						<InputValues
+							title={constantes.expectedInitialDate.title}
+							name={constantes.expectedInitialDate.name}
+							placeholder={constantes.expectedInitialDate.placeholder}
+							handleChange={handleChange}
+							handleBlur={handleBlur}
+							errors={errors[constantes.expectedInitialDate.attribute]}
+							touched={touched[constantes.expectedInitialDate.attribute]}
+							values={values[constantes.expectedInitialDate.attribute]}
+						/>
+						<InputValues
+							title={constantes.expectedFinalDate.title}
+							name={constantes.expectedFinalDate.name}
+							placeholder={constantes.expectedFinalDate.placeholder}
+							handleChange={handleChange}
+							handleBlur={handleBlur}
+							errors={errors[constantes.expectedFinalDate.attribute]}
+							touched={touched[constantes.expectedFinalDate.attribute]}
+							values={values[constantes.expectedFinalDate.attribute]}
+						/>
 						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
 							<Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
 						</TouchableOpacity>
