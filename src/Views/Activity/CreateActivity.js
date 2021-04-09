@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
@@ -100,7 +100,6 @@ const CreateRole = (props) => {
 							touched={touched[constantes.expectedFinalDate.attribute]}
 							values={values[constantes.expectedFinalDate.attribute]}
 						/>
-
 						<Text style={estilo.erros}>{errorMessage}</Text>
 						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
 							<Text style={estiloButton.submit}>{constantes.buttom}</Text>
