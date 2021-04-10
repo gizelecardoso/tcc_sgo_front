@@ -6,18 +6,23 @@ import InputValues from "../../Components/Input/InputValues.js";
 import update from "../../services/api/Activity/update_api";
 import returnActivityItems from "../../services/api/ActivityItem/find_all_api";
 import deleteItem from "../../services/api/ActivityItem/delete_api";
+import createItem from "../../services/api/ActivityItem/create_api";
+import updateItem from "../../services/api/ActivityItem/update_api";
 import { constantes } from "./constantes.js";
 import fieldsValidation from './validation';
 import estilo from "../estilo";
+import estiloUnico from "./estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
 import { Picker } from "@react-native-picker/picker";
 import moment from "moment";
 import { Listagem } from "../../Components/Listagem";
+import { AntDesign } from '@expo/vector-icons';
 
 const UpdateActivity = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [visible, setVisible] = useState(false);
+	const [visibleMessage, setVisibleMessage] = useState(false);
 	const [activityItems, setActivityItems] = useState([]);
 
 	const hideDialog = () => {
@@ -117,11 +122,11 @@ const UpdateActivity = (props) => {
 							touched={touched[constantes.expectedFinalDate.attribute]}
 							values={values[constantes.expectedFinalDate.attribute]}
 						/>
-						<View style={estilo.lista_items}>
-							{/* <TouchableOpacity onPress={() => props.navigation.navigate(props.create)}>                
-								<AntDesign name="pluscircle" size={20} style={estilo.adicionar}/>
-							</TouchableOpacity> */}
-							< Listagem lista={activityItems} navigation={props.navigation} listName={'item_name'} update={'CreateItem'} delete={'Activities'} deleteFunction={deleteItem}/>
+						<TouchableOpacity onPress={() => console.log('Adicionar')}>
+							<Text style={estiloUnico.submit}>Adicionar Item</Text>
+            </TouchableOpacity>
+						<View style={estiloUnico.lista_items}>
+							< Listagem lista={activityItems} itemActivity={true} navigation={props.navigation} listName={'item_name'} updateData={updateItem} delete={'Activities'} deleteFunction={deleteItem}/>
 						</View>
 						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
 							<Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
