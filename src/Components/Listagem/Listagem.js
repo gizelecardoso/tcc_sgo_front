@@ -6,13 +6,16 @@ import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import ConfirmAlert from "../../Components/Alert/ConfirmAlert"; // yes or no
 import MessageAlert from "../../Components/Alert/MessageAlert"; // continue - sucesso
+import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
 
 const Listagem = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const name = props.listName;
 	const [visibleMessage, setVisibleMessage] = useState(false);
 	const [visibleConfirm, setVisibleConfirm] = useState(false);
+	const [visibleUpdate, setVisibleUpdate] = useState(false);
 	const [itemId, setItemId] = useState(0);
+	const [item, setItem] = useState({});
 
 	const showDialog = (item) => {
 		setVisibleConfirm(true);
@@ -21,6 +24,10 @@ const Listagem = (props) => {
 
 	const hideDialog = () => {
 		setVisibleConfirm(false);
+	}
+
+	const hideDialogUpdate = () => {
+		setVisibleUpdate(false);
 	}
 
 	const deleteData = () => {
@@ -54,9 +61,16 @@ const Listagem = (props) => {
 								<Text style={estiloInput.input_text}>{item[name]}</Text>
 							</View>
 							<View style={estilo.linha_lista}>
-								<TouchableOpacity onPress={() => {
-									props.navigation.push(props.update, item);
-								}
+								<TouchableOpacity 
+									onPress={() => {
+										if(props.itemActivity){
+											setItem(item);
+											setVisibleUpdate(true)
+										}
+										else{
+											props.navigation.push(props.update, item);
+										}
+									}
 								}>
 									<FontAwesome name="edit" size={24} color="black" />
 								</TouchableOpacity>
@@ -81,6 +95,13 @@ const Listagem = (props) => {
 				dialogTitle='Deletado'
 				dialogFrase='Dado deletado com Sucesso !'
 				confirm='Continue'
+			/>
+			<UpdateActivityItem
+				visible={visibleUpdate}
+				item={item}
+				yesFunction={props.updateData}
+				noFunction={hideDialogUpdate}
+				dialogTitle= 'Item da Atividade'
 			/>
 		</Fragment>
 
