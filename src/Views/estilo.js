@@ -91,7 +91,7 @@ const estilo = StyleSheet.create({
         borderWidth:1,
         width:largura*0.8,
         marginTop:10,
-        height:altura*0.6
+        height:altura*0.5
     },
 
     erros:{

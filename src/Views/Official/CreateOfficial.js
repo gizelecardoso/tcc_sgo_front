@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Formik } from "formik";
 import { Picker } from "@react-native-picker/picker";
 import { Cabecalho } from "../../Components/Cabecalho";
@@ -41,18 +41,12 @@ const CreateOfficial = ({ navigation }) => {
 
 	useEffect(() => {
 		returnRoles(setRoles);
-	}, []);
-
-	useEffect(() => {
 		returnCompanies(setCompanies);
-	}, []);
-
-	useEffect(() => {
 		returnClerks(setClerk, 'encarregado');
 	}, []);
 
 	return (
-		<Fragment>
+		<ScrollView>
 			<Cabecalho title={constantes.titleCreate} navigation={navigation} page={constantes.mainList} />
 			<Formik
 				validationSchema={fieldsValidation}
@@ -62,7 +56,7 @@ const CreateOfficial = ({ navigation }) => {
 					resetForm()
 				}}
 			>
-				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
+				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid, setFieldValue }) => (
 					<View style={estilo.container}>
 						<InputValues
 							title={constantes.code.title}
@@ -88,7 +82,10 @@ const CreateOfficial = ({ navigation }) => {
 								<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Empresa</Text>
 								<Picker
 									style={estilo.item_select}
-									onValueChange={handleChange('companyId')}								
+									selectedValue={values['companyId']}
+									onValueChange={(itemValue) => {
+										setFieldValue('companyId', itemValue)
+									}}								
 								>
 									<Picker.Item label='Selecione uma empresa'/>
 									{
@@ -100,7 +97,10 @@ const CreateOfficial = ({ navigation }) => {
 								<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Encarregado</Text>
 								<Picker
 									style={estilo.item_select}
-									onValueChange={handleChange('clerkId')}
+									selectedValue={values['clerkId']}
+									onValueChange={(itemValue) => {
+										setFieldValue('clerkId', itemValue)
+									}}	
 								>
 									<Picker.Item label='Selecione um encarregado'/>
 									{
@@ -114,7 +114,10 @@ const CreateOfficial = ({ navigation }) => {
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>{constantes.role.title}</Text>
 							<Picker
 								style={estilo.input_text}
-								onValueChange={handleChange(constantes.role.name)}
+								selectedValue={values[constantes.role.name]}
+								onValueChange={(itemValue) => {
+									setFieldValue(constantes.role.name, itemValue)
+								}}	
 							>
 								<Picker.Item label='Selecione uma função'/>
 								{
@@ -139,7 +142,7 @@ const CreateOfficial = ({ navigation }) => {
 				dialogFrase={constantes.messages.createMessage} 
 				confirm={constantes.messages.confirm}
 			/>
-		</Fragment>
+		</ScrollView>
 	);
 
 }

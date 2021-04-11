@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Formik } from "formik";
 import { Picker } from "@react-native-picker/picker";
 import { Cabecalho } from "../../Components/Cabecalho";
@@ -41,26 +41,21 @@ const UpdateOfficial = (props) => {
 
 	useEffect(() => {
 		returnRoles(setRoles);
-	}, []);
-
-	useEffect(() => {
 		returnCompanies(setCompanies);
-	}, []);
-
-	useEffect(() => {
 		returnClerks(setClerk, 'encarregado');
 	}, []);
+
 
 	const initialValues = {
 		officialCode: props.route.params.official_code,
 		officialName: props.route.params.official_name,
 		role: props.route.params.role_id,
-    companyId: props.route.params.company_id,
-    clerkId: props.route.params.clerk_id
+    	companyId: props.route.params.company_id,
+    	clerkId: props.route.params.clerk_id
 	}
 
 	return (
-		<Fragment>
+		<ScrollView>
 			<Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList} />
 			<Formik
 				validationSchema={fieldsValidation}
@@ -70,7 +65,7 @@ const UpdateOfficial = (props) => {
 					resetForm()
 				}}
 			>
-				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
+				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid, setFieldValue }) => (
 					<View style={estilo.container}>
 						<InputValues
 							title={constantes.code.title}
@@ -97,7 +92,10 @@ const UpdateOfficial = (props) => {
 							<Picker
 								style={estilo.item_select}
 								selectedValue={values['companyId']}
-								onValueChange={handleChange('companyId')}
+								onValueChange={(itemValue) => {
+									setFieldValue('companyId', itemValue)
+								}}
+								//onValueChange={handleChange('companyId')}
 							>
 								{
 									companies.map(company => {
@@ -109,7 +107,9 @@ const UpdateOfficial = (props) => {
 							<Picker
 								style={estilo.item_select}
 								selectedValue={values['clerkId']}
-								onValueChange={handleChange('clerkId')}
+								onValueChange={(itemValue) => {
+									setFieldValue('clerkId', itemValue)
+								}}
 							>
 								{
 									clerks.map(clerk => {
@@ -123,7 +123,10 @@ const UpdateOfficial = (props) => {
 							<Picker
 								style={estilo.input_text}
 								selectedValue={values[constantes.role.name]}
-								onValueChange={handleChange(constantes.role.name)}
+								onValueChange={(itemValue) => {
+									setFieldValue(constantes.role.name, itemValue)
+								}}
+								//onValueChange={handleChange(constantes.role.name)}
 							>
 								{
 									roles.map(role => {
@@ -148,7 +151,7 @@ const UpdateOfficial = (props) => {
 				confirm={constantes.messages.confirm}
 			/>
 
-		</Fragment>
+		</ScrollView>
 	);
 
 }

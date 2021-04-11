@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
 import InputValues from "../../Components/Input/InputValues.js";
@@ -15,7 +15,7 @@ const CreateRole = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [visible, setVisible] = useState(false);
 	const access = [{ id: 1, name: 'administrador' }, { id: 2, name: 'encarregado' }, { id: 3, name: 'oficial' }]
-	
+
 	const hideDialog = () => {
 		setVisible(false);
 		props.navigation.push(constantes.mainList);
@@ -35,7 +35,7 @@ const CreateRole = (props) => {
 	}
 
 	return (
-		<Fragment>
+		<ScrollView>
 			<Cabecalho title={constantes.titleCreate} navigation={props.navigation} page={constantes.mainList} />
 			<Formik
 				validationSchema={fieldsValidation}
@@ -45,7 +45,7 @@ const CreateRole = (props) => {
 					resetForm()
 				}}
 			>
-				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
+				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid, setFieldValue }) => (
 					<View style={estilo.container}>
 						<InputValues
 							title={constantes.code.title}
@@ -81,9 +81,12 @@ const CreateRole = (props) => {
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Categorias</Text>
 							<Picker
 								style={estilo.input_text}
-								onValueChange={handleChange('roleCategory')
-								}
+								selectedValue={values.roleCategory}
+								onValueChange={(itemValue) => {
+									setFieldValue('roleCategory', itemValue)
+								}}
 							>
+								<Picker.Item label='Selecione uma categoria'/>
 								{
 									access.map(ac => {
 										return <Picker.Item label={ac.name} value={ac.name} key={ac.id} />
@@ -106,7 +109,7 @@ const CreateRole = (props) => {
 				dialogFrase={constantes.messages.createMessage} 
 				confirm={constantes.messages.confirm}
 			/>
-		</Fragment>
+		</ScrollView>
 	);
 
 }

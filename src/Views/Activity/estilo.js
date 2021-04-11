@@ -22,6 +22,7 @@ const estilo = StyleSheet.create({
       color:"#fff",
       borderRadius: 5,
       backgroundColor:"green",
+      marginTop: 10
   },
 });
 

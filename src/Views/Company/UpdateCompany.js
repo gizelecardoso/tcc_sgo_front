@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
 import InputValues from "../../Components/Input/InputValues.js";
@@ -39,7 +39,7 @@ const UpdateCompany = (props) => {
 	}
 
 	return (
-		<Fragment>
+		<ScrollView>
 			<Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList} />
 			<Formik
 				validationSchema={fieldsValidation}
@@ -95,7 +95,7 @@ const UpdateCompany = (props) => {
 				dialogFrase={constantes.messages.updateMessage}
 				confirm={constantes.messages.confirm}
 			/>
-		</Fragment>
+		</ScrollView>
 	);
 
 }

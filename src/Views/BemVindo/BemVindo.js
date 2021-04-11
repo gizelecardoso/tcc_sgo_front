@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
+import { ScrollView } from 'react-native';
 import Cabecalho from "../../Components/Cabecalho/Cabecalho.js";
 
 const BemVindo = (props) => {
 	return (
-		<Fragment>
+		<ScrollView>
 			<Cabecalho navigation={props.navigation} />
-		</Fragment>
+		</ScrollView>
 	);
 }
 

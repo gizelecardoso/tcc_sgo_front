@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
 import InputValues from "../../Components/Input/InputValues.js";
@@ -68,7 +68,7 @@ const UpdateActivity = (props) => {
 	}, []);
 
 	return (
-		<Fragment>
+		<ScrollView>
 			<Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList} />
 			<Formik
 				validationSchema={fieldsValidation}
@@ -158,7 +158,7 @@ const UpdateActivity = (props) => {
 				noFunction={hideDialogUpdate}
 				dialogTitle= 'Item da Atividade'
 			/>
-		</Fragment>
+		</ScrollView>
 	);
 
 }

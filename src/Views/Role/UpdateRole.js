@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
 import InputValues from "../../Components/Input/InputValues.js";
@@ -42,7 +42,7 @@ const UpdateRole = (props) => {
 	}
 
 	return (
-		<Fragment>
+		<ScrollView>
 			<Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList} />
 			<Formik
 				validationSchema={fieldsValidation}
@@ -52,7 +52,7 @@ const UpdateRole = (props) => {
 					resetForm()
 				}}
 			>
-				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
+				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid, setFieldValue }) => (
 					<View style={estilo.container}>
 						<InputValues
 							title={constantes.code.title}
@@ -89,8 +89,9 @@ const UpdateRole = (props) => {
 							<Picker
 								style={estilo.input_text}
 								selectedValue={values.roleCategory}
-								onValueChange={handleChange('roleCategory')
-								}
+								onValueChange={(itemValue) => {
+									setFieldValue('roleCategory', itemValue)
+								}}
 							>
 								{
 									access.map(ac => {
@@ -113,7 +114,7 @@ const UpdateRole = (props) => {
 				dialogFrase={constantes.messages.updateMessage}
 				confirm={constantes.messages.confirm}
 			/>
-		</Fragment>
+		</ScrollView>
 	);
 
 }

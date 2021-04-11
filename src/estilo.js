@@ -11,6 +11,8 @@ const estilo = StyleSheet.create({
         color:"#fff",
         borderRadius: 10,
         backgroundColor:"green",
+        marginBottom: 10,
+        marginTop: 10
     },
 });
 
