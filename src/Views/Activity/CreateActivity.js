@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
 import InputValues from "../../Components/Input/InputValues.js";
@@ -38,7 +38,7 @@ const CreateRole = (props) => {
 	}
 
 	return (
-		<Fragment>
+		<ScrollView>
 			<Cabecalho title={constantes.titleCreate} navigation={props.navigation} page={constantes.mainList} />
 			<Formik
 				validationSchema={fieldsValidation}
@@ -115,7 +115,7 @@ const CreateRole = (props) => {
 				dialogFrase={constantes.messages.createMessage} 
 				confirm={constantes.messages.confirm}
 			/>
-		</Fragment>
+		</ScrollView>
 	);
 
 }
