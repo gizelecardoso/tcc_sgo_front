@@ -4,7 +4,7 @@ import { Platform } from "react-native";
 const returnActivity = async (callback, id) => {
     let url = 'localhost';
     
-    const response = await fetch(`http://${url}:3000/activities/${id}`, {
+    const response = await fetch(`http://${url}:3000/activity_items/${id}`, {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',

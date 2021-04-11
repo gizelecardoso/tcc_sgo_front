@@ -18,12 +18,16 @@ import { Picker } from "@react-native-picker/picker";
 import moment from "moment";
 import { Listagem } from "../../Components/Listagem";
 import { AntDesign } from '@expo/vector-icons';
+import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
 
 const UpdateActivity = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [visible, setVisible] = useState(false);
 	const [visibleMessage, setVisibleMessage] = useState(false);
+	const [visibleUpdate, setVisibleUpdate] = useState(false);
+
 	const [activityItems, setActivityItems] = useState([]);
+	// const [itemName, setItemName] = useState('');
 
 	const hideDialog = () => {
 		setVisible(false);
@@ -47,6 +51,10 @@ const UpdateActivity = (props) => {
 		return moment(date_api).format('L');
 	}
 
+	const hideDialogUpdate = () => {
+		setVisibleUpdate(false);
+	}
+
 	const initialValues = {
 		activityCode: props.route.params.activity_code,
     activityName: props.route.params.activity_name, 
@@ -57,7 +65,7 @@ const UpdateActivity = (props) => {
 
 	useEffect(() => {
 		returnActivityItems(setActivityItems, props.route.params.id);
-	})
+	}, []);
 
 	return (
 		<Fragment>
@@ -122,7 +130,7 @@ const UpdateActivity = (props) => {
 							touched={touched[constantes.expectedFinalDate.attribute]}
 							values={values[constantes.expectedFinalDate.attribute]}
 						/>
-						<TouchableOpacity onPress={() => console.log('Adicionar')}>
+						<TouchableOpacity onPress={() => setVisibleUpdate(true)}>
 							<Text style={estiloUnico.submit}>Adicionar Item</Text>
             </TouchableOpacity>
 						<View style={estiloUnico.lista_items}>
@@ -141,6 +149,14 @@ const UpdateActivity = (props) => {
 				dialogTitle={constantes.messages.status}
 				dialogFrase={constantes.messages.updateMessage}
 				confirm={constantes.messages.confirm}
+			/>
+			<UpdateActivityItem
+				visible={visibleUpdate}
+				activityId={props.route.params.id}
+				create={true}
+				navigation={props.navigation}
+				noFunction={hideDialogUpdate}
+				dialogTitle= 'Item da Atividade'
 			/>
 		</Fragment>
 	);

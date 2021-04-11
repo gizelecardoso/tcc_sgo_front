@@ -99,6 +99,7 @@ const Listagem = (props) => {
 			<UpdateActivityItem
 				visible={visibleUpdate}
 				item={item}
+				navigation={props.navigation}
 				yesFunction={props.updateData}
 				noFunction={hideDialogUpdate}
 				dialogTitle= 'Item da Atividade'

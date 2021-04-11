@@ -1,18 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
-import moment from "moment";
 
-const updateActivity = async (values, id) => {
+const updateActivityItem = async (itemName, activityId, id, status) => {
     let url = 'localhost';
     if(Platform.OS == 'android'){
         url = '10.0.2.2';
     }
 
-    const format_date_front_to_back = (date_api) => {
-		return moment(date_api).format();
-	}
-
-    const response = await fetch(`http://${url}:3000/activities/${id}`, {
+    const response = await fetch(`http://${url}:3000/activity_items/${id}`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',
@@ -20,12 +15,9 @@ const updateActivity = async (values, id) => {
             Authorization: `bearer ${await AsyncStorage.getItem('login_official_token')}`
         },
         body: JSON.stringify({
-            activity_code: values.activityCode,
-            activity_name: values.activityName,
-            activity_description: values.activityDescription,
-            expected_initial_date: format_date_front_to_back(values.expectedInitialDate),
-            expected_final_date: format_date_front_to_back(values.expectedFinalDate),
-            activity_status: values.activityStatus
+            item_name: itemName,
+            item_status: status,
+            activity_id: activityId
         })
     });
 
@@ -36,4 +28,4 @@ const updateActivity = async (values, id) => {
     
 }
     
-export default updateActivity;
+export default updateActivityItem;

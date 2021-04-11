@@ -1,13 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
-const deleteActivity = async (id) => {
+const deleteActivityItem = async (id) => {
     let url = 'localhost';
     if(Platform.OS == 'android'){
         url = '10.0.2.2';
     }
     
-    const response = await fetch(`http://${url}:3000/activities/${id}`, {
+    const response = await fetch(`http://${url}:3000/activity_items/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-type': 'application/json',
@@ -21,4 +21,4 @@ const deleteActivity = async (id) => {
     }
 }
     
-export default deleteActivity;
+export default deleteActivityItem;

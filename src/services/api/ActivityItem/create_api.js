@@ -2,17 +2,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import moment from "moment";
 
-const createActivity = async (values) => {
+const createActivityItem = async (itemName, activityId, status) => {
     let url = "localhost";
     if(Platform.OS == 'android'){
         url = '10.0.2.2';
     }
 
-    const format_date_front_to_back = (date_api) => {
-		return moment(date_api).format();
-	}
-
-    const response = await fetch(`http://${url}:3000/activities`, {
+    const response = await fetch(`http://${url}:3000/activity_items`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -20,26 +16,25 @@ const createActivity = async (values) => {
             Authorization: `bearer ${await AsyncStorage.getItem('login_official_token')}`
         },
         body: JSON.stringify({
-            activity_code: values.activityCode,
-            activity_name: values.activityName,
-            activity_description: values.activityDescription,
-            expected_initial_date: format_date_front_to_back(values.expectedInitialDate),
-            expected_final_date: format_date_front_to_back(values.expectedFinalDate),
-            activity_status: values.activityStatus
+            item_name: itemName,
+            item_status: status,
+            activity_id: activityId
         })
     });
 
-    console.log("entrou aqui");
     if(response.ok){
-        const responseJson = await response.json();
-        console.log(responseJson);
-        const responseOfficial = responseJson.official
-        console.log(responseOfficial);
-        return responseOfficial;
+        console.log('entrou aqui')
+        console.log(response)
+        console.log(itemName)
+        await response.json();
     }else{
-        throw new Error(responde.data.message);
+        console.log(response)
+        console.log(itemName)
+        console.log(status)
+        console.log(activityId)
+        throw new Error(response.data.message);
     }
     
 }
     
-export default createActivity;
+export default createActivityItem;
