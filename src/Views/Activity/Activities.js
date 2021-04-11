@@ -16,7 +16,6 @@ const Activities = ({ navigation }) => {
     useEffect(() => { 
         try {
             returnActivities(setActivities);
-            console.log(activities);
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
 		}

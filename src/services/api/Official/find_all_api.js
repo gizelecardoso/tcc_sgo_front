@@ -8,12 +8,7 @@ const returnOfficials = async (callback, filter) => {
     }
     let urlFinal = '';
 
-    console.log('chamou api');
-    console.log(filter);
-
     if (filter == 'encarregado'){
-        console.log('entrou no if');
-        console.log(filter);
         urlFinal = `http://${url}:3000/officials?only_clerks=true`
     } else {
         urlFinal = `http://${url}:3000/officials`
@@ -30,8 +25,6 @@ const returnOfficials = async (callback, filter) => {
     if(response.ok){
         const responseJson = await response.json();
         callback(responseJson);
-        console.log('response');
-        console.log(responseJson);
     }else{
         throw new Error('Não foi possível retornar os Funcionários(as)');
     }

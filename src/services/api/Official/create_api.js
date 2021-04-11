@@ -23,12 +23,9 @@ const createOfficial = async (values) => {
         })
     });
 
-    console.log("entrou aqui");
     if(response.ok){
         const responseJson = await response.json();
-        console.log(responseJson);
         const responseOfficial = responseJson.official
-        console.log(responseOfficial);
         return responseOfficial;
     }else{
         throw new Error(responde.data.message);

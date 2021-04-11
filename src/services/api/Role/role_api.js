@@ -23,11 +23,7 @@ const createRole = async (values) => {
         })
     });
 
-    console.log("entrou aqui");
-    console.log(response)
-
     if(response.ok){
-        console.log("entrou aqui");
         return response.json();
     }else{
         throw new Error(responde.data.message);

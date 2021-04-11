@@ -34,7 +34,7 @@ export function DrawerContent(props) {
       await AsyncStorage.removeItem(constantes.tokenName);
     }
     catch(exception) {
-        console.log(exception)
+        console.warn(exception)
     }
   }
 

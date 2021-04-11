@@ -23,15 +23,8 @@ const createActivityItem = async (itemName, activityId, status) => {
     });
 
     if(response.ok){
-        console.log('entrou aqui')
-        console.log(response)
-        console.log(itemName)
         await response.json();
     }else{
-        console.log(response)
-        console.log(itemName)
-        console.log(status)
-        console.log(activityId)
         throw new Error(response.data.message);
     }
     

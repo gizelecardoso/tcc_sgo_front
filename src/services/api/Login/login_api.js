@@ -18,8 +18,6 @@ const loginApi = async (loginName, loginPassword) => {
         })
     });
 
-    console.log("entrou aqui");
-    console.log(response)
     if(response.ok){
         return response.json();
     }else{

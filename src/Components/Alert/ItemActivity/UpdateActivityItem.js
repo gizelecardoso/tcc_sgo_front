@@ -19,7 +19,6 @@ const UpdateActivityItem = (props) => {
 
   const tryCreateActivityItems = async() => {
     if(props.create){
-      console.log(itemName);
       await createItem(itemName, props.activityId, 'pendente');
       <Text>Item criado com Sucesso</Text>
       props.navigation.push('UpdateActivity');

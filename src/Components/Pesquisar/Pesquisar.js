@@ -6,7 +6,7 @@ import { EvilIcons } from '@expo/vector-icons';
 
 const Pesquisar = (props) => {
     const tentar = (item)=> {
-        console.log("Pesquisar")
+        console.warn("Pesquisar")
     }
 
     return (
