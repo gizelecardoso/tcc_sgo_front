@@ -2,9 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
 const returnRoles = async (callback) => {
-    let url = "localhost:3000";
+    let url = "localhost";
+    if(Platform.OS == 'android'){
+        url = '10.0.2.2';
+    }
     
-    const response = await fetch(`http://${url}/roles`, {
+    const response = await fetch(`http://${url}:3000/roles`, {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',

@@ -2,7 +2,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
 const returnOfficials = async (callback, filter) => {
-    let url = 'localhost';
+    let url = "localhost";
+    if(Platform.OS == 'android'){
+        url = '10.0.2.2';
+    }
     let urlFinal = '';
 
     console.log('chamou api');
