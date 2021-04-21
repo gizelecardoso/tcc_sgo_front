@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
-const updateActivityItem = async (itemName, activityId, id, status) => {
+const updateActivityItem = async (itemName, activityId, status, id) => {
     let url = 'localhost';
     if(Platform.OS == 'android'){
         url = '10.0.2.2';

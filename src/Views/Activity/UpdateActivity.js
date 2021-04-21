@@ -51,8 +51,10 @@ const UpdateActivity = (props) => {
 		return moment(date_api).format('L');
 	}
 
-	const hideDialogUpdate = () => {
+	const hideDialogUpdate = (resultado) => {
+		alert(resultado);
 		setVisibleUpdate(false);
+		returnActivityItems(setActivityItems, props.route.params.id);
 	}
 
 	const initialValues = {

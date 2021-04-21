@@ -13,12 +13,12 @@ import Teste from './Teste';
 
 const App = () => {
   return (
-    <Provider store = {Store} >  
-      <Teste />
-    </Provider>
-     //<NavigationContainer>
-     //<DrawerNavigator />
-   //</NavigationContainer>
+    // <Provider store = {Store} >  
+    //   <Teste />
+    // </Provider>
+    <NavigationContainer>
+     <DrawerNavigator />
+    </NavigationContainer>
     // <Text
     //   style={{ marginTop: 30 }}
     //   onPress={() =>
