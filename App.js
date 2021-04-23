@@ -7,17 +7,11 @@ import { DrawerNavigator } from './src/DrawerNavigator';
 import CreateOfficial from './src/Views/Official/CreateOfficial';
 import { Text, Linking, AppRegistry } from  'react-native';
 import Date from './src/Components/Date';
-import { Provider } from 'react-redux';
-import { Store } from './src/store';
-import Teste from './Teste';
 
 const App = () => {
   return (
-    // <Provider store = {Store} >  
-    //   <Teste />
-    // </Provider>
     <NavigationContainer>
-     <DrawerNavigator />
+      <DrawerNavigator />
     </NavigationContainer>
     // <Text
     //   style={{ marginTop: 30 }}
