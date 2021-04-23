@@ -1,7 +1,7 @@
 import { CLICK_UPDATE_VALUE } from '../actions/actionType';
 
 const initialState = {
-    newValue: 'novo'
+    newValue: ''
 };
 
 export const clickReducer = (state = initialState, action) => {
