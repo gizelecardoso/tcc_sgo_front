@@ -15,19 +15,21 @@ const Listagem = (props) => {
 	const [visibleConfirm, setVisibleConfirm] = useState(false);
 	const [visibleUpdate, setVisibleUpdate] = useState(false);
 	const [itemId, setItemId] = useState(0);
-	const [item, setItem] = useState({});
+	const [itemUpdate, setItemUpdate] = useState('');
 
 	const showDialog = (item) => {
 		setVisibleConfirm(true);
 		setItemId(item);
 	}
 
-	const hideDialog = () => {
-		setVisibleConfirm(false);
+	const updateNameItem = (item, itemIdUpdate) =>{
+		setVisibleUpdate(true);
+		setItemUpdate(item);
+		setItemId(itemIdUpdate);
 	}
 
-	const hideDialogUpdate = () => {
-		setVisibleUpdate(false);
+	const hideDialog = () => {
+		setVisibleConfirm(false);
 	}
 
 	const deleteData = () => {
@@ -44,8 +46,19 @@ const Listagem = (props) => {
 	}
 	
 	const hideDialogContinue = () => {
-		setVisibleMessage(false);
-		props.navigation.push(props.delete);
+		if(props.itemActivity){
+			setVisibleMessage(false);
+			setVisibleConfirm(false);
+			props.activities();
+		} else {
+			setVisibleMessage(false);
+			props.navigation.push(props.delete);
+		}
+	}
+
+	const hideDialogUpdate = () => {
+		setVisibleUpdate(false);
+		props.activities();
 	}
 
 	return (
@@ -64,8 +77,7 @@ const Listagem = (props) => {
 								<TouchableOpacity 
 									onPress={() => {
 										if(props.itemActivity){
-											setItem(item);
-											setVisibleUpdate(true)
+											updateNameItem(item[name], item.id);
 										}
 										else{
 											props.navigation.push(props.update, item);
@@ -74,7 +86,7 @@ const Listagem = (props) => {
 								}>
 									<FontAwesome name="edit" size={24} color="black" />
 								</TouchableOpacity>
-								<TouchableOpacity onPress={() => {showDialog(item.id)}}>
+								<TouchableOpacity onPress={() => { showDialog(item.id) }}>
 									<FontAwesome name="trash" size={24} color="black" />
 								</TouchableOpacity>
 							</View>
@@ -98,7 +110,8 @@ const Listagem = (props) => {
 			/>
 			<UpdateActivityItem
 				visible={visibleUpdate}
-				item={item}
+				itemName={itemUpdate}
+				itemId={itemId}
 				navigation={props.navigation}
 				yesFunction={props.updateData}
 				noFunction={hideDialogUpdate}

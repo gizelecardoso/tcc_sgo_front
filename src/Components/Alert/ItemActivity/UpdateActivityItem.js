@@ -9,28 +9,19 @@ import updateItem from "../../../services/api/ActivityItem/update_api";
 const UpdateActivityItem = (props) => {
   const [itemName, setItemName] = useState('');
 
-  useEffect(() => {
-    if(props.item){
-      setItemName(props.item.item_name);
-    } else {
-      setItemName('');
-    }
-  }, []);
-
   const tryCreateActivityItems = async() => {
     if(props.create){
       await createItem(itemName, props.activityId, 'pendente');
-      <Text>Item criado com Sucesso</Text>
-      props.navigation.push('UpdateActivity');
+      // props.noFunction();
     }else{
-      await updateItem(itemName, props.activityId, 'pendente');
-      <Text>Item atualizado com Sucesso</Text>
-      props.navigation.push('UpdateActivity');
+      await updateItem(itemName, props.activityId, 'pendente', props.itemId);
+      // props.noFunction();
     }
-		try {
-		} catch (erro) {
-			setErrorMessage(erro.mensagem);
-		}
+    props.noFunction();
+		// try {
+		// } catch (erro) {
+		// 	setErrorMessage(erro.mensagem);
+		// }
 	}
 
   return (
@@ -43,7 +34,7 @@ const UpdateActivityItem = (props) => {
           <Dialog.Content>
             <Text style={{fontSize:15, fontWeight:'bold'}}>Nome do Item da Atividade</Text>
             <TextInput style={estilo.input_text, {borderWidth: 1}}
-              defaultValue={itemName}
+              defaultValue={props.itemName}
               onChangeText={(item) => setItemName(item)}
             />
           </Dialog.Content>

@@ -51,9 +51,12 @@ const UpdateActivity = (props) => {
 		return moment(date_api).format('L');
 	}
 
-	const hideDialogUpdate = (resultado) => {
-		alert(resultado);
+	const hideDialogUpdate = () => {
 		setVisibleUpdate(false);
+		returnActivities();
+	}
+
+	const returnActivities = () => {
 		returnActivityItems(setActivityItems, props.route.params.id);
 	}
 
@@ -136,7 +139,7 @@ const UpdateActivity = (props) => {
 							<Text style={estiloUnico.submit}>Adicionar Item</Text>
             </TouchableOpacity>
 						<View style={estiloUnico.lista_items}>
-							< Listagem lista={activityItems} itemActivity={true} navigation={props.navigation} listName={'item_name'} updateData={updateItem} delete={'Activities'} deleteFunction={deleteItem}/>
+							< Listagem lista={activityItems} itemActivity={true} navigation={props.navigation} listName={'item_name'} updateData={updateItem} delete={'Activities'} deleteFunction={deleteItem} hideDialogUpdate={hideDialogUpdate} activities={returnActivities}/>
 						</View>
 						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
 							<Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
