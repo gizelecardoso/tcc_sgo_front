@@ -32,7 +32,15 @@ const Activities = ({ navigation }) => {
                     <ButtomCreate navigation={navigation} create={constantes.buttomCreate}/>
                 </View>
                 <View style={estilo.lista_items}>
-                   < Listagem lista={activities} navigation={navigation} listName={'activity_name'} update={constantes.buttomUpdate} delete={constantes.mainList} deleteFunction={deleteActivity}/>
+                    < Listagem 
+                        lista={activities} 
+                        navigation={navigation} 
+                        listName={'activity_name'} 
+                        update={constantes.buttomUpdate} 
+                        delete={constantes.mainList} 
+                        deleteFunction={deleteActivity}
+                        delegateActivity={true}
+                    />
                 </View>
             </View>
         </Fragment>

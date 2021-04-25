@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import ConfirmAlert from "../../Components/Alert/ConfirmAlert"; // yes or no
 import MessageAlert from "../../Components/Alert/MessageAlert"; // continue - sucesso
 import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
+import Select from "./Select";
 
 const Listagem = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
@@ -22,7 +23,7 @@ const Listagem = (props) => {
 		setItemId(item);
 	}
 
-	const updateNameItem = (item, itemIdUpdate) =>{
+	const updateNameItem = (item, itemIdUpdate) => {
 		setVisibleUpdate(true);
 		setItemUpdate(item);
 		setItemId(itemIdUpdate);
@@ -40,13 +41,13 @@ const Listagem = (props) => {
 			setErrorMessage(erro.mensagem);
 		}
 	}
-	
+
 	const sucessDelete = () => {
 		setVisibleMessage(true);
 	}
-	
+
 	const hideDialogContinue = () => {
-		if(props.itemActivity){
+		if (props.itemActivity) {
 			setVisibleMessage(false);
 			setVisibleConfirm(false);
 			props.activities();
@@ -61,6 +62,23 @@ const Listagem = (props) => {
 		props.activities();
 	}
 
+	const delegate = (itemActivity) => {
+		console.log('adicionando official');
+		return <Select activity={ itemActivity }/>
+	}
+
+	const delegateActivity = (itemActivity) => {
+		if (props.delegateActivity) {
+			return(
+				<TouchableOpacity onPress={() => { delegate(itemActivity) }}>
+					<Text> Delegar Atividade </Text>
+				</TouchableOpacity>
+			)
+		} else {
+			return
+		}
+	}
+
 	return (
 		<Fragment>
 			<FlatList
@@ -72,18 +90,19 @@ const Listagem = (props) => {
 							<View style={estilo.linha_lista}>
 								<AntDesign name="checksquareo" size={24} color="black" />
 								<Text style={estiloInput.input_text}>{item[name]}</Text>
+								{ delegateActivity(item) }
 							</View>
 							<View style={estilo.linha_lista}>
-								<TouchableOpacity 
+								<TouchableOpacity
 									onPress={() => {
-										if(props.itemActivity){
+										if (props.itemActivity) {
 											updateNameItem(item[name], item.id);
 										}
-										else{
+										else {
 											props.navigation.push(props.update, item);
 										}
 									}
-								}>
+									}>
 									<FontAwesome name="edit" size={24} color="black" />
 								</TouchableOpacity>
 								<TouchableOpacity onPress={() => { showDialog(item.id) }}>
@@ -98,7 +117,7 @@ const Listagem = (props) => {
 				visible={visibleConfirm}
 				yesFunction={deleteData}
 				noFunction={hideDialog}
-				dialogTitle= 'Deletar!!!!!!'
+				dialogTitle='Deletar!!!!!!'
 				dialogFrase='Tem certeza que quer deletar esse dado ?'
 			/>
 			<MessageAlert
@@ -115,7 +134,7 @@ const Listagem = (props) => {
 				navigation={props.navigation}
 				yesFunction={props.updateData}
 				noFunction={hideDialogUpdate}
-				dialogTitle= 'Item da Atividade'
+				dialogTitle='Item da Atividade'
 			/>
 		</Fragment>
 
