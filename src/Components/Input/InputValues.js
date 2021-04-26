@@ -13,6 +13,7 @@ const InputValues = (props) => {
             onChangeText={props.handleChange(props.name)}
             onBlur={props.handleBlur(props.name)}
             defaultValue={props.values}
+            editable={props.editable}
         />
         {(props.errors && props.touched) &&
             <Text style={estilo.erros}>{props.errors}</Text>

@@ -24,6 +24,55 @@ const estilo = StyleSheet.create({
       backgroundColor:"green",
       marginTop: 10
   },
+  buttonStart: {
+    width:150,
+    height:35,
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign:"center",
+    padding: 7.5,
+    color:"#fff",
+    borderRadius: 5,
+    marginTop: 10,
+    backgroundColor:"blue",
+  },
+  buttonStop: {
+    width:150,
+    height:35,
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign:"center",
+    color:"#fff",
+    padding: 7.5,
+    borderRadius: 5,
+    marginTop: 10,
+    backgroundColor:"orange",
+  },
+  buttonFinish: {
+    width:150,
+    height:35,
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign:"center",
+    padding: 7.5,
+    color:"#fff",
+    borderRadius: 5,
+    marginTop: 10,
+    backgroundColor:"green",
+    marginRight: 10
+  },
+  disabled:{
+    width:150,
+    height:35,
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign:"center",
+    padding: 7.5,
+    color:"#fff",
+    borderRadius: 5,
+    marginTop: 10,
+    backgroundColor:"#ccc",
+  }
 });
 
 export default estilo;

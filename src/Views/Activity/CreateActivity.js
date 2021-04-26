@@ -26,7 +26,7 @@ const CreateRole = (props) => {
 
 	const tryCreate = async (values) => {
 		try {
-			await create(values);
+			await create(values, 'nova');
 			sucessCreate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);

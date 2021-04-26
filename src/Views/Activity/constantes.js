@@ -51,8 +51,7 @@ export const constantes = {
     activityName: '', 
     activityDescription: '',
     expectedInitialDate:'',
-    expectedFinalDate:'',
-    activityStatus:'pendente'
+    expectedFinalDate:''
   },
   messages: {
     sucess: 'Sucesso!',

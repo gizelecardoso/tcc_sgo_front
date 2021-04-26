@@ -40,6 +40,7 @@ const Activities = ({ navigation }) => {
                         delete={constantes.mainList} 
                         deleteFunction={deleteActivity}
                         delegateActivity={true}
+                        displayActivity={true}
                     />
                 </View>
             </View>

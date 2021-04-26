@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
+import moment from "moment";
 
-const updateActivity = async (values, id) => {
+const updateActivity = async (values, id, status) => {
     let url = 'localhost';
     if(Platform.OS == 'android'){
         url = '10.0.2.2';
@@ -24,7 +25,8 @@ const updateActivity = async (values, id) => {
             activity_description: values.activityDescription,
             expected_initial_date: format_date_front_to_back(values.expectedInitialDate),
             expected_final_date: format_date_front_to_back(values.expectedFinalDate),
-            activity_status: values.activityStatus
+            activity_status: status,
+            official_id: values.officialId
         })
     });
 

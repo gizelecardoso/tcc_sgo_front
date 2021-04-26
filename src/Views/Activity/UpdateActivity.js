@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
@@ -19,15 +19,118 @@ import moment from "moment";
 import { Listagem } from "../../Components/Listagem";
 import { AntDesign } from '@expo/vector-icons';
 import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
+import returnOfficials from "../../services/api/Official/find_all_api";
+
+function select(values, setFieldValue, officials) {
+	if (values.officialId == null) {
+		return (
+			<Picker
+				style={estilo.item_select}
+				onValueChange={(itemValue) => {
+					setFieldValue('officialId', itemValue)
+					setFieldValue('activityStatus', 'pendente')
+				}}
+			>
+				<Picker.Item label='Selecione' />
+				{
+					officials.map(
+						official => {
+							return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
+						})
+				}
+			</Picker>
+		)
+	} else {
+		return (
+			<Picker
+				style={estilo.item_select}
+				selectedValue={values.officialId}
+				onValueChange={(itemValue) => {
+					setFieldValue('officialId', itemValue)
+					setFieldValue('activityStatus', 'pendente')
+				}}
+			>
+				{
+					officials.map(
+						official => {
+							return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
+						})
+				}
+			</Picker>
+		)
+	}
+}
+
+function displayCreateItem(editable, values, setFieldValue, officials) {
+	if (editable) {
+		return (
+			<Fragment>
+				{ select(values, setFieldValue, officials)}
+				<TouchableOpacity onPress={() => setVisibleUpdate(true)}>
+					<Text style={estiloUnico.submit}>Adicionar Item</Text>
+				</TouchableOpacity>
+			</Fragment>
+		)
+	}
+}
+
+function setStatusUpdate(status, setStart, setStop, setFinish) {
+	if (status === 'pendente'){
+		setStart(true);
+	} else if(status === 'executando' || status === 'atrasada') {
+		setStart(false);
+		setStop(true);
+		setFinish(true);
+	} else if(status === 'pausada') {
+		setStart(true);
+		setStop(false);
+		setFinish(false);
+	} else {
+		setStart(false);
+		setStop(false);
+		setFinish(false);
+	}
+}
+
+function displayUpdateActivity(editable, handleSubmit, isValid, start, stop, finish, values, update) {
+
+	if (editable) {
+		return (
+			<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
+				<Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
+			</TouchableOpacity>
+		)
+	} else {
+		return (
+			<View style={{ flexDirection: 'column' , alignItems: 'center'}}>
+				<TouchableOpacity onPress={() => { update(values, values.valueId, 'executando') }} disabled={!start}>
+					<Text style={start === true ? estiloUnico.buttonStart: estiloUnico.disabled}>Iniciar</Text>
+				</TouchableOpacity>
+				<View style={{ flexDirection: 'row' }}>
+					<TouchableOpacity onPress={() => { update(values, values.valueId, 'finalizada') }} disabled={!finish}>
+						<Text style={finish === true ? estiloUnico.buttonFinish: estiloUnico.disabled}>Finalizar</Text>
+					</TouchableOpacity>
+					<TouchableOpacity onPress={() => { update(values, values.valueId, 'pausada') }} disabled={!stop}>
+						<Text style={stop === true ? estiloUnico.buttonStop: estiloUnico.disabled}>Parar</Text>
+					</TouchableOpacity>
+				</View>
+			</View>
+		)
+	}
+}
 
 const UpdateActivity = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [visible, setVisible] = useState(false);
 	const [visibleMessage, setVisibleMessage] = useState(false);
 	const [visibleUpdate, setVisibleUpdate] = useState(false);
-
 	const [activityItems, setActivityItems] = useState([]);
-	// const [itemName, setItemName] = useState('');
+	const [officials, setOfficials] = useState([]);
+	const [officialId, setOfficialId] = useState(0);
+	const [status, setStatus] = useState('');
+	const [start, setStart] = useState(false);
+	const [stop, setStop] = useState(false);
+	const [finish, setFinish] = useState(false);
 
 	const hideDialog = () => {
 		setVisible(false);
@@ -36,11 +139,19 @@ const UpdateActivity = (props) => {
 
 	const tryUpdate = async (values) => {
 		try {
-			await update(values, props.route.params.id);
+			if (values.activityStatus === 'pendente') {
+				setStatus(values.activityStatus)
+			}
+			await update(values, props.route.params.item.id, status);
 			sucessUpdate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
 		}
+	}
+
+	const updateStatus = async (values, id, status) => {
+		await update(values, id, status);
+		props.navigation.push('Activities');
 	}
 
 	const sucessUpdate = () => {
@@ -57,19 +168,24 @@ const UpdateActivity = (props) => {
 	}
 
 	const returnActivities = () => {
-		returnActivityItems(setActivityItems, props.route.params.id);
+		returnActivityItems(setActivityItems, props.route.params.item.id);
 	}
 
 	const initialValues = {
-		activityCode: props.route.params.activity_code,
-    activityName: props.route.params.activity_name, 
-    activityDescription: props.route.params.activity_description,
-    expectedInitialDate: format_date_back_to_front(props.route.params.expected_initial_date),
-    expectedFinalDate: format_date_back_to_front(props.route.params.expected_final_date)
+		valueId: props.route.params.item.id,
+		activityCode: props.route.params.item.activity_code,
+		activityName: props.route.params.item.activity_name,
+		activityDescription: props.route.params.item.activity_description,
+		expectedInitialDate: format_date_back_to_front(props.route.params.item.expected_initial_date),
+		expectedFinalDate: format_date_back_to_front(props.route.params.item.expected_final_date),
+		officialId: props.route.params.item.official_id,
+		activityStatus: props.route.params.item.activity_status,
+		editable: props.route.params.editable
 	}
 
 	useEffect(() => {
-		returnActivityItems(setActivityItems, props.route.params.id);
+		returnActivityItems(setActivityItems, props.route.params.item.id);
+		returnOfficials(setOfficials);
 	}, []);
 
 	return (
@@ -83,7 +199,7 @@ const UpdateActivity = (props) => {
 					resetForm()
 				}}
 			>
-				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
+				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid, setFieldValue }) => (
 					<View style={estilo.container}>
 						<InputValues
 							title={constantes.code.title}
@@ -94,6 +210,7 @@ const UpdateActivity = (props) => {
 							errors={errors[constantes.code.attribute]}
 							touched={touched[constantes.code.attribute]}
 							values={values[constantes.code.attribute]}
+							editable={values.editable}
 						/>
 						<InputValues
 							title={constantes.name.title}
@@ -104,6 +221,7 @@ const UpdateActivity = (props) => {
 							errors={errors[constantes.name.attribute]}
 							touched={touched[constantes.name.attribute]}
 							values={values[constantes.name.attribute]}
+							editable={values.editable}
 						/>
 						<InputValues
 							title={constantes.description.title}
@@ -114,6 +232,7 @@ const UpdateActivity = (props) => {
 							errors={errors[constantes.description.attribute]}
 							touched={touched[constantes.description.attribute]}
 							values={values[constantes.description.attribute]}
+							editable={values.editable}
 						/>
 						<InputValues
 							title={constantes.expectedInitialDate.title}
@@ -124,6 +243,7 @@ const UpdateActivity = (props) => {
 							errors={errors[constantes.expectedInitialDate.attribute]}
 							touched={touched[constantes.expectedInitialDate.attribute]}
 							values={values[constantes.expectedInitialDate.attribute]}
+							editable={values.editable}
 						/>
 						<InputValues
 							title={constantes.expectedFinalDate.title}
@@ -134,16 +254,36 @@ const UpdateActivity = (props) => {
 							errors={errors[constantes.expectedFinalDate.attribute]}
 							touched={touched[constantes.expectedFinalDate.attribute]}
 							values={values[constantes.expectedFinalDate.attribute]}
+							editable={values.editable}
 						/>
-						<TouchableOpacity onPress={() => setVisibleUpdate(true)}>
-							<Text style={estiloUnico.submit}>Adicionar Item</Text>
-            </TouchableOpacity>
+
+						{	displayCreateItem(props.route.params.editable, values, setFieldValue, officials)}
+
 						<View style={estiloUnico.lista_items}>
-							< Listagem lista={activityItems} itemActivity={true} navigation={props.navigation} listName={'item_name'} updateData={updateItem} delete={'Activities'} deleteFunction={deleteItem} hideDialogUpdate={hideDialogUpdate} activities={returnActivities}/>
+							< Listagem
+								lista={activityItems}
+								itemActivity={true}
+								navigation={props.navigation}
+								listName={'item_name'}
+								updateData={updateItem}
+								delete={'Activities'}
+								deleteFunction={deleteItem}
+								hideDialogUpdate={hideDialogUpdate}
+								activities={returnActivities}
+								displayEditItens={!(props.route.params.editable)}
+							/>
 						</View>
-						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
-							<Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
-						</TouchableOpacity>
+						{ setStatusUpdate(values.activityStatus, setStart, setStop, setFinish) }
+						{ displayUpdateActivity(
+								props.route.params.editable, 
+								handleSubmit, 
+								isValid,
+								start,
+								stop,
+								finish,
+								values,
+								updateStatus)}
+
 					</View>
 				)}
 
@@ -161,7 +301,7 @@ const UpdateActivity = (props) => {
 				create={true}
 				navigation={props.navigation}
 				noFunction={hideDialogUpdate}
-				dialogTitle= 'Item da Atividade'
+				dialogTitle='Item da Atividade'
 			/>
 		</ScrollView>
 	);

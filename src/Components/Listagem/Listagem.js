@@ -7,7 +7,40 @@ import { AntDesign } from '@expo/vector-icons';
 import ConfirmAlert from "../../Components/Alert/ConfirmAlert"; // yes or no
 import MessageAlert from "../../Components/Alert/MessageAlert"; // continue - sucesso
 import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
-import Select from "./Select";
+
+function displayActivity(display, navigation, update, item) {
+	if (display) {
+		return (
+			<TouchableOpacity onPress={() => { navigation.push(update, { item, editable: false }) }}>
+				<AntDesign name="eye" size={24} color="black" />
+			</TouchableOpacity>
+		)
+	}
+}
+
+function displayUpdateAndDelete(display, itemActivity, navigation, update, item, name, showDialog, updateNameItem) {
+	if (!display) {
+		return (
+			<Fragment>
+				<TouchableOpacity
+					onPress={() => {
+						if (itemActivity) {
+							updateNameItem(item[name], item.id);
+						}
+						else {
+							navigation.push(update, { item, editable: true });
+						}
+					}
+					}>
+					<FontAwesome name="edit" size={24} color="black" />
+				</TouchableOpacity>
+				<TouchableOpacity onPress={() => { showDialog(item.id) }}>
+					<FontAwesome name="trash" size={24} color="black" />
+				</TouchableOpacity>
+			</Fragment>
+		)
+	}
+}
 
 const Listagem = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
@@ -62,23 +95,6 @@ const Listagem = (props) => {
 		props.activities();
 	}
 
-	const delegate = (itemActivity) => {
-		console.log('adicionando official');
-		return <Select activity={ itemActivity }/>
-	}
-
-	const delegateActivity = (itemActivity) => {
-		if (props.delegateActivity) {
-			return(
-				<TouchableOpacity onPress={() => { delegate(itemActivity) }}>
-					<Text> Delegar Atividade </Text>
-				</TouchableOpacity>
-			)
-		} else {
-			return
-		}
-	}
-
 	return (
 		<Fragment>
 			<FlatList
@@ -90,24 +106,11 @@ const Listagem = (props) => {
 							<View style={estilo.linha_lista}>
 								<AntDesign name="checksquareo" size={24} color="black" />
 								<Text style={estiloInput.input_text}>{item[name]}</Text>
-								{ delegateActivity(item) }
 							</View>
 							<View style={estilo.linha_lista}>
-								<TouchableOpacity
-									onPress={() => {
-										if (props.itemActivity) {
-											updateNameItem(item[name], item.id);
-										}
-										else {
-											props.navigation.push(props.update, item);
-										}
-									}
-									}>
-									<FontAwesome name="edit" size={24} color="black" />
-								</TouchableOpacity>
-								<TouchableOpacity onPress={() => { showDialog(item.id) }}>
-									<FontAwesome name="trash" size={24} color="black" />
-								</TouchableOpacity>
+								{ displayActivity(props.displayActivity, props.navigation, props.update, item) }
+
+								{ displayUpdateAndDelete(props.displayEditItens, props.itemActivity, props.navigation, props.update, item, name, showDialog, updateNameItem) }
 							</View>
 						</View>
 					)
