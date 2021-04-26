@@ -100,7 +100,15 @@ const estilo = StyleSheet.create({
         fontWeight:'bold', 
         textAlign: 'center',
         marginBottom:20
-    }
+    },
+    activityWelcome:{
+        width:largura*0.8,
+        borderRadius: 10,
+        height: 200,
+        backgroundColor: 'rgba(255,255,255)',
+        borderColor:'black',
+        alignSelf:'center'
+    },
 });
 
 export default estilo;
