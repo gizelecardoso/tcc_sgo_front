@@ -48,6 +48,17 @@ const estilo = StyleSheet.create({
         fontWeight: "bold",
         fontSize:15,
     },
+    input_text_lista: {
+        alignItems:"flex-start",
+        marginTop: 10,
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: "lightgray",
+        textAlign:"center", 
+        fontWeight: "bold",
+        fontSize:15,
+        width: 200
+    },
     input_area: {
         alignItems:"center",
         marginTop: 10,
@@ -105,7 +116,7 @@ const estilo = StyleSheet.create({
         width:largura*0.8,
         borderRadius: 10,
         height: 200,
-        backgroundColor: 'rgba(255,255,255)',
+        backgroundColor: 'red',
         borderColor:'black',
         alignSelf:'center'
     },

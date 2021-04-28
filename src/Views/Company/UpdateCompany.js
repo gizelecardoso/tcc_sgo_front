@@ -21,7 +21,7 @@ const UpdateCompany = (props) => {
 
 	const tryUpdate = async (values) => {
 		try {
-			await update(values, props.route.params.id);
+			await update(values, props.route.params.item.id);
 			sucessUpdate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
@@ -33,9 +33,9 @@ const UpdateCompany = (props) => {
 	}
 
 	const initialValues = {
-		companyCode: props.route.params.company_code,
-		companyName: props.route.params.company_name,
-		companyBranch: props.route.params.company_branch
+		companyCode: props.route.params.item.company_code,
+		companyName: props.route.params.item.company_name,
+		companyBranch: props.route.params.item.company_branch
 	}
 
 	return (

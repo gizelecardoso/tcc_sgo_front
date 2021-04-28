@@ -107,6 +107,7 @@ const Listagem = (props) => {
 	return (
 		<Fragment>
 			<FlatList
+				nestedScrollEnabled 
 				data={props.lista}
 				keyExtractor={(item) => item.id.toString()}
 				renderItem={
@@ -114,7 +115,7 @@ const Listagem = (props) => {
 						<View style={estilo.linha_lista}>
 							<View style={estilo.linha_lista}>
 								<AntDesign name="checksquareo" size={24} color="black" />
-								<Text style={estiloInput.input_text}>{item[name]}</Text>
+								<Text style={estiloInput.input_text_lista}>{item[name]}</Text>
 								{ finishedOrDeletedActivity(item) }
 							</View>
 							<View style={estilo.linha_lista}>

@@ -23,7 +23,7 @@ const UpdateRole = (props) => {
 
 	const tryUpdate = async (values) => {
 		try {
-			await update(values, props.route.params.id);
+			await update(values, props.route.params.item.id);
 			sucessUpdate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
@@ -35,10 +35,10 @@ const UpdateRole = (props) => {
 	}
 
 	const initialValues = {
-		roleCode: props.route.params.role_code,
-		roleName: props.route.params.role_name,
-		roleDescription: props.route.params.role_description,
-		roleCategory: props.route.params.role_category
+		roleCode: props.route.params.item.role_code,
+		roleName: props.route.params.item.role_name,
+		roleDescription: props.route.params.item.role_description,
+		roleCategory: props.route.params.item.role_category
 	}
 
 	return (

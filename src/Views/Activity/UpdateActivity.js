@@ -24,39 +24,50 @@ import returnOfficials from "../../services/api/Official/find_all_api";
 function select(values, setFieldValue, officials) {
 	if (values.officialId == null) {
 		return (
-			<Picker
-				style={estilo.item_select}
-				onValueChange={(itemValue) => {
-					setFieldValue('officialId', itemValue)
-					setFieldValue('activityStatus', 'pendente')
-				}}
-			>
-				<Picker.Item label='Selecione' />
-				{
-					officials.map(
-						official => {
-							return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
-						})
-				}
-			</Picker>
-		)
+			<View style={estilo.input_container} >
+				<Text style={{ fontSize: 15, fontWeight: 'bold' , justifyContent: 'flex-start'}}>Funcionários</Text>
+				<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+					<Picker
+						itemStyle={estilo.item_select}
+						style={estilo.item_select}
+						onValueChange={(itemValue) => {
+							setFieldValue('officialId', itemValue)
+							setFieldValue('activityStatus', 'pendente')
+						}}
+					>
+						<Picker.Item label='Selecione' />
+						{
+							officials.map(
+								official => {
+									return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
+								})
+						}
+					</Picker>
+				</View>
+			</View>		)
 	} else {
 		return (
-			<Picker
-				style={estilo.item_select}
-				selectedValue={values.officialId}
-				onValueChange={(itemValue) => {
-					setFieldValue('officialId', itemValue)
-					setFieldValue('activityStatus', 'pendente')
-				}}
-			>
-				{
-					officials.map(
-						official => {
-							return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
-						})
-				}
-			</Picker>
+			<View style={estilo.input_container} >
+				<Text style={{ fontSize: 15, fontWeight: 'bold'  , justifyContent: 'flex-start'}}>Funcionários</Text>
+				<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+					<Picker
+						itemStyle={estilo.item_select}
+						style={estilo.item_select}
+						selectedValue={values.officialId}
+						onValueChange={(itemValue) => {
+							setFieldValue('officialId', itemValue)
+							setFieldValue('activityStatus', 'pendente')
+						}}
+					>
+						{
+							officials.map(
+								official => {
+									return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
+								})
+						}
+					</Picker>
+				</View>
+			</View>
 		)
 	}
 }
