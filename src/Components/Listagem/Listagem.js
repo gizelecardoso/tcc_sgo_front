@@ -18,6 +18,15 @@ function displayActivity(display, navigation, update, item) {
 	}
 }
 
+function finishedOrDeletedActivity(item){
+	if (item.activity_status == 'cancelada' || item.activity_status == 'finalizada'){
+		return (
+			<Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }}>{item.activity_status}</Text>
+		)
+	}
+	
+}
+
 function displayUpdateAndDelete(display, itemActivity, navigation, update, item, name, showDialog, updateNameItem) {
 	if (!display) {
 		return (
@@ -106,6 +115,7 @@ const Listagem = (props) => {
 							<View style={estilo.linha_lista}>
 								<AntDesign name="checksquareo" size={24} color="black" />
 								<Text style={estiloInput.input_text}>{item[name]}</Text>
+								{ finishedOrDeletedActivity(item) }
 							</View>
 							<View style={estilo.linha_lista}>
 								{ displayActivity(props.displayActivity, props.navigation, props.update, item) }
