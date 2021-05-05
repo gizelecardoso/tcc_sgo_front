@@ -5,7 +5,7 @@ import estilo from "./estilo";
 
 const ButtomCreate = (props) => {
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate(props.create)}>                
+    <TouchableOpacity onPress={() => props.navigation.push(props.create)}>                
       <AntDesign name="pluscircle" size={20} style={estilo.adicionar}/>
     </TouchableOpacity>
   )

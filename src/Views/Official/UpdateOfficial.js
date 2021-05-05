@@ -28,7 +28,7 @@ const UpdateOfficial = (props) => {
 
 	const tryUpdate = async (values) => {
 		try {
-			await updateOfficial(values, props.route.params.id);
+			await updateOfficial(values, props.route.params.item.id);
 			sucessUpdate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
@@ -40,6 +40,7 @@ const UpdateOfficial = (props) => {
 	}
 
 	useEffect(() => {
+		console.warn(props.route.params.item);
 		returnRoles(setRoles);
 		returnCompanies(setCompanies);
 		returnClerks(setClerk, 'encarregado');
@@ -47,11 +48,11 @@ const UpdateOfficial = (props) => {
 
 
 	const initialValues = {
-		officialCode: props.route.params.official_code,
-		officialName: props.route.params.official_name,
-		role: props.route.params.role_id,
-    	companyId: props.route.params.company_id,
-    	clerkId: props.route.params.clerk_id
+		officialCode: props.route.params.item.official_code,
+		officialName: props.route.params.item.official_name,
+		role: props.route.params.item.role_id,
+    	companyId: props.route.params.item.company_id,
+    	clerkId: props.route.params.item.clerk_id
 	}
 
 	return (
@@ -89,51 +90,57 @@ const UpdateOfficial = (props) => {
 						/>
 						<View style={estilo.input_container} >
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Empresa</Text>
-							<Picker
-								style={estilo.item_select}
-								selectedValue={values['companyId']}
-								onValueChange={(itemValue) => {
-									setFieldValue('companyId', itemValue)
-								}}
-								//onValueChange={handleChange('companyId')}
-							>
-								{
-									companies.map(company => {
-										return <Picker.Item label={company.company_name} value={company.id} key={company.id} />
-									})
-								}
-							</Picker>
+							<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+								<Picker
+									style={estilo.item_select}
+									selectedValue={values['companyId']}
+									onValueChange={(itemValue) => {
+										setFieldValue('companyId', itemValue)
+									}}
+									//onValueChange={handleChange('companyId')}
+								>
+									{
+										companies.map(company => {
+											return <Picker.Item label={company.company_name} value={company.id} key={company.id} />
+										})
+									}
+								</Picker>
+							</View>
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Encarregado</Text>
-							<Picker
-								style={estilo.item_select}
-								selectedValue={values['clerkId']}
-								onValueChange={(itemValue) => {
-									setFieldValue('clerkId', itemValue)
-								}}
-							>
-								{
-									clerks.map(clerk => {
-										return <Picker.Item label={clerk.official_name} value={clerk.id} key={clerk.id} />
-									})
-								}
-							</Picker>
+							<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>	
+								<Picker
+									style={estilo.item_select}
+									selectedValue={values['clerkId']}
+									onValueChange={(itemValue) => {
+										setFieldValue('clerkId', itemValue)
+									}}
+								>
+									{
+										clerks.map(clerk => {
+											return <Picker.Item label={clerk.official_name} value={clerk.id} key={clerk.id} />
+										})
+									}
+								</Picker>
+							</View>
 						</View>
 						<View style={estilo.input_container} >
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>{constantes.role.title}</Text>
-							<Picker
-								style={estilo.input_text}
-								selectedValue={values[constantes.role.name]}
-								onValueChange={(itemValue) => {
-									setFieldValue(constantes.role.name, itemValue)
-								}}
-								//onValueChange={handleChange(constantes.role.name)}
-							>
-								{
-									roles.map(role => {
-										return <Picker.Item label={role.role_name} value={role.id} key={role.id} />
-									})
-								}
-							</Picker>
+							<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+								<Picker
+									style={estilo.input_text}
+									selectedValue={values[constantes.role.name]}
+									onValueChange={(itemValue) => {
+										setFieldValue(constantes.role.name, itemValue)
+									}}
+									//onValueChange={handleChange(constantes.role.name)}
+								>
+									{
+										roles.map(role => {
+											return <Picker.Item label={role.role_name} value={role.id} key={role.id} />
+										})
+									}
+								</Picker>
+							</View>
 						</View>
 						<Text style={estilo.erros}>{errorMessage}</Text>
 						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
