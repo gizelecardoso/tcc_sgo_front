@@ -14,17 +14,14 @@ const updateActivity = async (values, id, status, date) => {
 	}
 
     if (status == 'executando'){
-        console.log('data inicial');
-        values.initialDate = format_date_front_to_back(date);
+        if (values.initialDate == ''){
+            values.initialDate = format_date_front_to_back(date);
+        }
         console.log(values.initialDate);
     } else if (status == 'finalizada') {
-        console.log('data final');
         values.finalDate = format_date_front_to_back(date);
-        console.log(values.finalDate);
     } else if (status == 'pausada') {
-        console.log('data parada');
         values.stoppedDate = format_date_front_to_back(date);
-        console.log(values.stoppedDate);
     }
 
 
