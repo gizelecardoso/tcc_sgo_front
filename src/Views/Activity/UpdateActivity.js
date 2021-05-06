@@ -20,6 +20,7 @@ import { Listagem } from "../../Components/Listagem";
 import { AntDesign } from '@expo/vector-icons';
 import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
 import returnOfficials from "../../services/api/Official/find_all_api";
+import returnOfficial from "../../services/api/Official/find_by_id";
 
 function select(values, setFieldValue, officials) {
 	console.log(officials)
@@ -106,7 +107,6 @@ function setStatusUpdate(status, setStart, setStop, setFinish) {
 
 function displayUpdateActivity(editable, handleSubmit, isValid, start, stop, finish, values, update) {
 	const date = new Date().getDate();
-	console.log(date);
 	if (editable) {
 		return (
 			<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
@@ -139,7 +139,7 @@ const UpdateActivity = (props) => {
 	const [visibleUpdate, setVisibleUpdate] = useState(false);
 	const [activityItems, setActivityItems] = useState([]);
 	const [officials, setOfficials] = useState([]);
-	const [officialId, setOfficialId] = useState(0);
+	const [official, setOfficial] = useState({});
 	const [status, setStatus] = useState('');
 	const [start, setStart] = useState(false);
 	const [stop, setStop] = useState(false);
@@ -199,6 +199,10 @@ const UpdateActivity = (props) => {
 	useEffect(() => {
 		returnActivityItems(setActivityItems, props.route.params.item.id);
 		returnOfficials(setOfficials, 'activity');
+		if(props.route.params.item.official_id){
+			returnOfficial(setOfficial, props.route.params.item.official_id);
+			officials.push(official);
+		}
 	}, []);
 
 	return (
