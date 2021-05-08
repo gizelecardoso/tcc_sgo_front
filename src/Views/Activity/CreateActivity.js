@@ -11,8 +11,8 @@ import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
 import { Picker } from "@react-native-picker/picker";
 import DatePicker from 'react-native-datepicker';
-import Date from '../../Components/Date';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from "moment";
 
 const CreateRole = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
@@ -29,6 +29,7 @@ const CreateRole = (props) => {
 			await create(values, 'nova');
 			sucessCreate();
 		} catch (erro) {
+			console.log(erro);
 			setErrorMessage(erro.mensagem);
 		}
 	}
@@ -44,8 +45,16 @@ const CreateRole = (props) => {
 				validationSchema={fieldsValidation}
 				initialValues={constantes.initialValues}
 				onSubmit={async (values, { resetForm }) => {
-					await tryCreate(values)
-					resetForm()
+					const dateNow = new Date();
+					const dateNowFormat = moment(dateNow).format();
+					if(values.expectedFinalDate < values.expectedInitialDate) {
+						setErrorMessage('Data Final não pode ser menor que Data Inicial');
+					} else if(values.expectedInitialDate < dateNowFormat) {
+						setErrorMessage('Data Inicial não pode ser menor que Data de Hoje');
+					} else {
+						await tryCreate(values)
+						resetForm()
+					}
 				}}
 			>
 				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (

@@ -37,7 +37,7 @@ import { View, Text, TextInput } from 'react-native';
 import { PropTypes } from 'prop-types';
 import DatePicker from 'react-native-datepicker';
 
-const Date = () => {
+const DateOutro = () => {
   const [date, setDate] = useState('');
   return (
     <View>
