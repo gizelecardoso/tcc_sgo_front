@@ -15,6 +15,9 @@ import estiloUnico from "./estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
 import { Picker } from "@react-native-picker/picker";
+import DatePicker from 'react-datepicker';
+import Date from '../../Components/Date';
+import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import { Listagem } from "../../Components/Listagem";
 import { AntDesign } from '@expo/vector-icons';
@@ -139,6 +142,8 @@ const UpdateActivity = (props) => {
 	const [officials, setOfficials] = useState([]);
 	const [officialId, setOfficialId] = useState(0);
 	const [status, setStatus] = useState('');
+	const [startDate, setStartDate] = useState(new Date());
+	const [endDate, setEndDate] = useState(new Date());
 	const [start, setStart] = useState(false);
 	const [stop, setStop] = useState(false);
 	const [finish, setFinish] = useState(false);
@@ -249,8 +254,8 @@ const UpdateActivity = (props) => {
 							handleChange={handleChange}
 							handleBlur={handleBlur}
 							errors={errors[constantes.expectedInitialDate.attribute]}
-							touched={touched[constantes.expectedInitialDate.attribute]}
-							values={values[constantes.expectedInitialDate.attribute]}
+							touched={<DatePicker selected={startDate} onChange={date => setStartDate(date)} showTimeSelect dateFormat="Pp" />}
+							values={values[setStartDate(date)]}
 							editable={values.editable}
 						/>
 						<InputValues
@@ -260,8 +265,8 @@ const UpdateActivity = (props) => {
 							handleChange={handleChange}
 							handleBlur={handleBlur}
 							errors={errors[constantes.expectedFinalDate.attribute]}
-							touched={touched[constantes.expectedFinalDate.attribute]}
-							values={values[constantes.expectedFinalDate.attribute]}
+							touched={<DatePicker selected={endDate} onChange={date => setEndDate(date)} showTimeSelect dateFormat="Pp" />}
+							values={values[setStartDate(date)]}
 							editable={values.editable}
 						/>
 
