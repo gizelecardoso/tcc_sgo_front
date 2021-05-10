@@ -1,14 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert, Platform } from "react-native";
-import { constantes } from "../../../Views/Role/constantes";
+import constante from "../../constante";
 
 const createRole = async (values) => {
-    let url = "localhost";
-    if(Platform.OS == 'android'){
-        url = "10.0.2.2";
-    }
-
-    const response = await fetch(`http://${url}:3000/roles`, {
+    const response = await fetch(`http://${constante.url}:3000/roles`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',

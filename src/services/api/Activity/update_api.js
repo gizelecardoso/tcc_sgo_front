@@ -1,14 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import moment from "moment";
+import constante from "../../constante";
 
 const updateActivity = async (values, id, status, date) => {
-    let url = 'localhost';
-
-    if(Platform.OS == 'android'){
-        url = '10.0.2.2';
-    }
-
     const format_date_front_to_back = (date_api) => {
 		return moment(date_api).format();
 	}
@@ -24,8 +19,7 @@ const updateActivity = async (values, id, status, date) => {
         values.stoppedDate = format_date_front_to_back(date);
     }
 
-
-    const response = await fetch(`http://${url}:3000/activities/${id}`, {
+    const response = await fetch(`http://${constante.url}:3000/activities/${id}`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',

@@ -1,22 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
+import constante from "../../constante";
 
 const returnOfficials = async (callback, filter, clerkId) => {
-    let url = "localhost";
-    if(Platform.OS == 'android'){
-        url = '10.0.2.2';
-    }
-    let urlFinal = '';
-
     if (filter == 'encarregado'){
-        urlFinal = `http://${url}:3000/officials?only_clerks=true`
+        urlFinal = `http://${constante.url}:3000/officials?only_clerks=true`
     } else if (filter == 'activity'){
-        urlFinal = `http://${url}:3000/officials?free=true&only_official=true`
+        urlFinal = `http://${constante.url}:3000/officials?free=true&only_official=true`
     } else if (filter == 'activityClerk'){
-        urlFinal = `http://${url}:3000/officials?clerk_id=${clerkId}&free=true&only_official=true`
+        urlFinal = `http://${constante.url}:3000/officials?clerk_id=${clerkId}&free=true&only_official=true`
     } else {
         console.log("Todos", urlFinal)
-        urlFinal = `http://${url}:3000/officials`
+        urlFinal = `http://${constante.url}:3000/officials`
     }
     
     const response = await fetch( urlFinal, {
