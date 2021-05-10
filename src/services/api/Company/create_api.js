@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
-import constante from "../../constante";
+import { constante } from "../../constante";
 
 const createCompany = async (values) => {
     const response = await fetch(`http://${constante.url}:3000/companies`, {

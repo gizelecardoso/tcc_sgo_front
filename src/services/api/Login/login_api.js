@@ -1,8 +1,7 @@
 import { Platform } from "react-native";
-import constante from "../../constante";
+import { constante } from "../../constante";
 
 const loginApi = async (loginName, loginPassword) => {
-
     const response = await fetch(`http://${constante.url}:3000/login`, {
         method: 'POST',
         headers: {
