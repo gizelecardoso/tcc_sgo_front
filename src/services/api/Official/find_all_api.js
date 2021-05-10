@@ -1,8 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
-import constante from "../../constante";
+import { constante } from "../../constante";
 
 const returnOfficials = async (callback, filter, clerkId) => {
+    let urlFinal = ''
     if (filter == 'encarregado'){
         urlFinal = `http://${constante.url}:3000/officials?only_clerks=true`
     } else if (filter == 'activity'){

@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
-import constante from "../../constante";
+import { constante } from "../../constante";
 
 const updateOfficial = async (values, id) => {
     const response = await fetch(`http://${constante.url}:3000/officials/${id}`, {

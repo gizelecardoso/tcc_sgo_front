@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import moment from "moment";
-import constante from "../../constante";
+import { constante } from "../../constante";
 
 const createActivityItem = async (itemName, activityId, status) => {
     const response = await fetch(`http://${constante.url}:3000/activity_items`, {

@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import moment from "moment";
-import constante from "../../constante";
+import { constante } from "../../constante";
 
 const createActivity = async (values, status) => {
     const format_date_front_to_back = (date_api) => {
