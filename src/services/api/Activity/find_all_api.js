@@ -2,8 +2,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import { constante } from "../../constante";
 
-const returnActivities = async (callback) => {
-    const response = await fetch(`http://${constante.url}:3000/activities`, {
+const returnActivities = async (callback, category, official_id) => {
+    let urlFinal = ''
+    if(category){
+        urlFinal = `http://${constante.url}:3000/officials?category=${category}&official_id=${official_id}`
+    } else{
+        urlFinal = `http://${constante.url}:3000/activities`
+    }
+    const response = await fetch(urlFinal , {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',

@@ -9,13 +9,21 @@ import { Pesquisar } from "../../Components/Pesquisar";
 import { constantes } from "./constantes";
 import ButtomCreate from "../../Components/Buttons/ButtomCreate.js";
 
-const Activities = ({ navigation }) => {
+function returnAllActivities(props) {
+    if(props.category == 'encarregado' || props.category == 'oficial'){
+        returnActivities(setActivities, props.category, props.id);
+    } else{
+        returnActivities(setActivities);
+    }
+}
+
+const Activities = ({ props }) => {
     const [activities, setActivities] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     
     useEffect(() => { 
         try {
-            returnActivities(setActivities);
+            returnAllActivities(props)
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
 		}
@@ -23,18 +31,18 @@ const Activities = ({ navigation }) => {
 
     return(
         <Fragment>
-            <Cabecalho title={constantes.title} navigation={navigation}/>
+            <Cabecalho title={constantes.title} navigation={props.navigation}/>
             <View style={estilo.roles_container}>
                 <View style={estilo.header}>
                     <View style={estilo.search}>
                         <Pesquisar />
                     </View>
-                    <ButtomCreate navigation={navigation} create={constantes.buttomCreate}/>
+                    <ButtomCreate navigation={props.navigation} create={constantes.buttomCreate}/>
                 </View>
                 <View style={estilo.lista_items}>
                     < Listagem 
                         lista={activities} 
-                        navigation={navigation} 
+                        navigation={props.navigation} 
                         listName={'activity_name'} 
                         update={constantes.buttomUpdate} 
                         delete={constantes.mainList} 

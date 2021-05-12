@@ -11,7 +11,6 @@ const returnOfficials = async (callback, filter, clerkId) => {
     } else if (filter == 'activityClerk'){
         urlFinal = `http://${constante.url}:3000/officials?clerk_id=${clerkId}&free=true&only_official=true`
     } else {
-        console.log("Todos", urlFinal)
         urlFinal = `http://${constante.url}:3000/officials`
     }
     

@@ -23,7 +23,8 @@ const Login = ({ navigation }) => {
 		setPassword('');
 		await AsyncStorage.setItem(constantes.tokenOfficialName, token.official.official_name);
 		await AsyncStorage.setItem(constantes.tokenLoginName, token.official.login_name);
-		navigation.navigate(constantes.page);
+		await AsyncStorage.setItem(constantes.tokenCategory, token.category);
+		navigation.navigate('drawerStack', {name: token.official.official_name, loginName: token.official.login_name, category: token.category, id: token.official.id});
 	}
 
 	const tryValidateAccess = async () => {
