@@ -1,18 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import moment from "moment";
+import { constante } from "../../constante";
 
 const createActivity = async (values, status) => {
-    let url = "localhost";
-    if(Platform.OS == 'android'){
-        url = '10.0.2.2';
-    }
-
     const format_date_front_to_back = (date_api) => {
 		return moment(date_api).format();
 	}
 
-    const response = await fetch(`http://${url}:3000/activities`, {
+    const response = await fetch(`http://${constante.url}:3000/activities`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -35,6 +31,7 @@ const createActivity = async (values, status) => {
         return responseOfficial;
     }else{
         throw new Error(response.data.message);
+        console.log(response.data.message);
     }
     
 }

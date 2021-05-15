@@ -20,8 +20,10 @@ import { Listagem } from "../../Components/Listagem";
 import { AntDesign } from '@expo/vector-icons';
 import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
 import returnOfficials from "../../services/api/Official/find_all_api";
+import returnOfficial from "../../services/api/Official/find_by_id";
 
 function select(values, setFieldValue, officials) {
+	console.log(officials)
 	if (values.officialId == null) {
 		return (
 			<View style={estilo.input_container} >
@@ -104,7 +106,7 @@ function setStatusUpdate(status, setStart, setStop, setFinish) {
 }
 
 function displayUpdateActivity(editable, handleSubmit, isValid, start, stop, finish, values, update) {
-
+	const date = new Date().getDate();
 	if (editable) {
 		return (
 			<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
@@ -114,14 +116,14 @@ function displayUpdateActivity(editable, handleSubmit, isValid, start, stop, fin
 	} else {
 		return (
 			<View style={{ flexDirection: 'column' , alignItems: 'center'}}>
-				<TouchableOpacity onPress={() => { update(values, values.valueId, 'executando') }} disabled={!start}>
+				<TouchableOpacity onPress={() => { update(values, values.valueId, 'executando', date) }} disabled={!start}>
 					<Text style={start === true ? estiloUnico.buttonStart: estiloUnico.disabled}>Iniciar</Text>
 				</TouchableOpacity>
 				<View style={{ flexDirection: 'row' }}>
-					<TouchableOpacity onPress={() => { update(values, values.valueId, 'finalizada') }} disabled={!finish}>
+					<TouchableOpacity onPress={() => { update(values, values.valueId, 'finalizada', date) }} disabled={!finish}>
 						<Text style={finish === true ? estiloUnico.buttonFinish: estiloUnico.disabled}>Finalizar</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={() => { update(values, values.valueId, 'pausada') }} disabled={!stop}>
+					<TouchableOpacity onPress={() => { update(values, values.valueId, 'pausada', date) }} disabled={!stop}>
 						<Text style={stop === true ? estiloUnico.buttonStop: estiloUnico.disabled}>Parar</Text>
 					</TouchableOpacity>
 				</View>
@@ -137,7 +139,7 @@ const UpdateActivity = (props) => {
 	const [visibleUpdate, setVisibleUpdate] = useState(false);
 	const [activityItems, setActivityItems] = useState([]);
 	const [officials, setOfficials] = useState([]);
-	const [officialId, setOfficialId] = useState(0);
+	const [official, setOfficial] = useState({});
 	const [status, setStatus] = useState('');
 	const [start, setStart] = useState(false);
 	const [stop, setStop] = useState(false);
@@ -188,12 +190,19 @@ const UpdateActivity = (props) => {
 		expectedFinalDate: format_date_back_to_front(props.route.params.item.expected_final_date),
 		officialId: props.route.params.item.official_id,
 		activityStatus: props.route.params.item.activity_status,
-		editable: props.route.params.editable
+		editable: props.route.params.editable,
+		initialDate: props.route.params.item.initial_date,
+		finalDate: props.route.params.item.final_date,
+		stoppedDate: props.route.params.item.stopped_date
 	}
 
 	useEffect(() => {
 		returnActivityItems(setActivityItems, props.route.params.item.id);
-		returnOfficials(setOfficials);
+		returnOfficials(setOfficials, 'activity');
+		if(props.route.params.item.official_id){
+			returnOfficial(setOfficial, props.route.params.item.official_id);
+			officials.push(official);
+		}
 	}, []);
 
 	return (

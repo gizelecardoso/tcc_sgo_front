@@ -1,14 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import moment from "moment";
+import { constante } from "../../constante";
 
 const createActivityItem = async (itemName, activityId, status) => {
-    let url = "localhost";
-    if(Platform.OS == 'android'){
-        url = '10.0.2.2';
-    }
-
-    const response = await fetch(`http://${url}:3000/activity_items`, {
+    const response = await fetch(`http://${constante.url}:3000/activity_items`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',

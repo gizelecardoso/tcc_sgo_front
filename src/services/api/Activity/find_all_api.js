@@ -1,13 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
+import { constante } from "../../constante";
 
 const returnActivities = async (callback) => {
-    let url = "localhost";
-    if(Platform.OS == 'android'){
-        url = '10.0.2.2';
-    }
-    
-    const response = await fetch(`http://${url}:3000/activities`, {
+    const response = await fetch(`http://${constante.url}:3000/activities`, {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',

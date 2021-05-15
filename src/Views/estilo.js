@@ -57,7 +57,7 @@ const estilo = StyleSheet.create({
         textAlign:"center", 
         fontWeight: "bold",
         fontSize:15,
-        width: 150
+        width: 120
     },
     input_area: {
         alignItems:"center",
