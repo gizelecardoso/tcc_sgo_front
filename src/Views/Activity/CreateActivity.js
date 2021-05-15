@@ -9,16 +9,15 @@ import fieldsValidation from './validation';
 import estilo from "../estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
-import DatePicker from 'react-datepicker';
+import { Picker } from "@react-native-picker/picker";
+import DatePicker from 'react-native-datepicker';
 import Date from '../../Components/Date';
-import "react-datepicker/dist/react-datepicker.css";
-import { date } from "yup/lib/locale";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const CreateRole = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [visible, setVisible] = useState(false);
-	const [startDate, setStartDate] = useState(new Date());
-	const [endDate, setEndDate] = useState(new Date());
+	const [date, setDate] = useState('');
 	
 	const hideDialog = () => {
 		setVisible(false);
@@ -78,8 +77,8 @@ const CreateRole = (props) => {
 							handleChange={handleChange}
 							handleBlur={handleBlur}
 							errors={errors[constantes.description.attribute]}
-							touched={<DatePicker selected={startDate} onChange={date => setStartDate(date)} showTimeSelect dateFormat="Pp" />}
-							values={values[setStartDate(date)]}
+							touched={touched[constantes.description.attribute]}
+							values={values[constantes.description.attribute]}
 						/>
 						<InputValues
 							title={constantes.expectedInitialDate.title}
@@ -88,8 +87,8 @@ const CreateRole = (props) => {
 							handleChange={handleChange}
 							handleBlur={handleBlur}
 							errors={errors[constantes.expectedInitialDate.attribute]}
-							touched={<DatePicker selected={endDate} onChange={date => setEndDate(date)} showTimeSelect dateFormat="Pp" />}
-							values={values[setStartDate(date)]}
+							touched={touched[constantes.expectedInitialDate.attribute]}
+							values={values[constantes.expectedInitialDate.attribute]}
 						/>
 						<InputValues
 							title={constantes.expectedFinalDate.title}
