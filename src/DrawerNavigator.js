@@ -13,10 +13,10 @@ const Drawer = createDrawerNavigator();
 
 export function DrawerNavigator({navigation, route}) {
     return (
-      <Drawer.Navigator
-        drawerContent={(props) => <DrawerContent {...props} />}>
-        <Drawer.Screen name="Inicio" component={Inicio} />
-        <Drawer.Screen name="Login" component={Login} />
+      <Drawer.Navigator 
+        initialRouteName = 'Inicio'
+        drawerContent={(props) => <DrawerContent {...props} />}
+      >
         <Drawer.Screen name="BemVindo" component={BemVindo} />
         <Drawer.Screen name="Roles" component={RoutesRole} />
         <Drawer.Screen name="Officials" component={RoutesOfficial} />

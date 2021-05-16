@@ -27,7 +27,19 @@ function finishedOrDeletedActivity(item){
 	
 }
 
-function displayUpdateAndDelete(display, itemActivity, navigation, update, item, name, showDialog, updateNameItem) {
+function displayUpdateAndDelete(display, itemActivity, navigation, update, item, name, showDialog, updateNameItem, delegate) {
+	if (display && delegate){
+		return(
+			<TouchableOpacity
+				onPress={() => {
+						navigation.push(update, { item, editable: false, delegate: delegate });
+					}
+				}
+			>
+				<FontAwesome name="edit" size={24} color="black" />
+			</TouchableOpacity>
+		)
+	}
 	if (!display) {
 		return (
 			<Fragment>
@@ -37,7 +49,7 @@ function displayUpdateAndDelete(display, itemActivity, navigation, update, item,
 							updateNameItem(item[name], item.id);
 						}
 						else {
-							navigation.push(update, { item, editable: true });
+							navigation.push(update, { item, editable: true, delegate: delegate });
 						}
 					}
 					}>
@@ -121,7 +133,7 @@ const Listagem = (props) => {
 							<View style={estilo.linha_lista}>
 								{ displayActivity(props.displayActivity, props.navigation, props.update, item) }
 
-								{ displayUpdateAndDelete(props.displayEditItens, props.itemActivity, props.navigation, props.update, item, name, showDialog, updateNameItem) }
+								{ displayUpdateAndDelete(props.displayEditItens, props.itemActivity, props.navigation, props.update, item, name, showDialog, updateNameItem, props.delegateActivity) }
 							</View>
 						</View>
 					)

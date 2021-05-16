@@ -14,6 +14,52 @@ import Alert from "../../Components/Alert/MessageAlert";
 import returnCompanies from "../../services/api/Company/find_all_api";
 import returnClerks from "../../services/api/Official/find_all_api";
 
+function select(values, setFieldValue, clerks) {
+	if (values.clerkId == null) {
+		return (
+			<>
+				<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Encarregado</Text>
+				<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50 }}>
+					<Picker
+						style={estilo.item_select}
+						onValueChange={(itemValue) => {
+							setFieldValue('clerkId', parseInt(itemValue, 10));
+						}}
+					>
+						<Picker.Item label='Selecione' />
+						{
+							clerks.map(clerk => {
+								return <Picker.Item label={clerk.official_name} value={clerk.id} key={clerk.id} />
+							})
+						}
+					</Picker>
+				</View>
+			</>
+		)
+	} else {
+		return (
+			<>
+				<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Encarregado</Text>
+				<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50 }}>
+					<Picker
+						style={estilo.item_select}
+						selectedValue={values.clerkId}
+						onValueChange={(itemValue) => {
+							setFieldValue('clerkId', parseInt(itemValue, 10))
+						}}
+					>
+						{
+							clerks.map(clerk => {
+								return <Picker.Item label={clerk.official_name} value={clerk.id} key={clerk.id} />
+							})
+						}
+					</Picker>
+				</View>
+			</>
+		)
+	}
+}
+
 const UpdateOfficial = (props) => {
 	const [roles, setRoles] = useState([]);
 	const [errorMessage, setErrorMessage] = useState('');
@@ -40,7 +86,6 @@ const UpdateOfficial = (props) => {
 	}
 
 	useEffect(() => {
-		console.warn(props.route.params.item);
 		returnRoles(setRoles);
 		returnCompanies(setCompanies);
 		returnClerks(setClerk, 'encarregado');
@@ -51,8 +96,8 @@ const UpdateOfficial = (props) => {
 		officialCode: props.route.params.item.official_code,
 		officialName: props.route.params.item.official_name,
 		role: props.route.params.item.role_id,
-    	companyId: props.route.params.item.company_id,
-    	clerkId: props.route.params.item.clerk_id
+		companyId: props.route.params.item.company_id,
+		clerkId: props.route.params.item.clerk_id
 	}
 
 	return (
@@ -90,14 +135,14 @@ const UpdateOfficial = (props) => {
 						/>
 						<View style={estilo.input_container} >
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Empresa</Text>
-							<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+							<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50 }}>
 								<Picker
 									style={estilo.item_select}
 									selectedValue={values['companyId']}
 									onValueChange={(itemValue) => {
 										setFieldValue('companyId', itemValue)
 									}}
-									//onValueChange={handleChange('companyId')}
+								//onValueChange={handleChange('companyId')}
 								>
 									{
 										companies.map(company => {
@@ -106,8 +151,9 @@ const UpdateOfficial = (props) => {
 									}
 								</Picker>
 							</View>
-							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>Encarregado</Text>
-							<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>	
+							{ select(values, setFieldValue, clerks) }
+							{/* <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Encarregado</Text>
+							<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50 }}>
 								<Picker
 									style={estilo.item_select}
 									selectedValue={values['clerkId']}
@@ -121,18 +167,18 @@ const UpdateOfficial = (props) => {
 										})
 									}
 								</Picker>
-							</View>
+							</View> */}
 						</View>
 						<View style={estilo.input_container} >
 							<Text style={{ fontSize: 15, fontWeight: 'bold' }}>{constantes.role.title}</Text>
-							<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+							<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50 }}>
 								<Picker
 									style={estilo.input_text}
 									selectedValue={values[constantes.role.name]}
 									onValueChange={(itemValue) => {
 										setFieldValue(constantes.role.name, itemValue)
 									}}
-									//onValueChange={handleChange(constantes.role.name)}
+								//onValueChange={handleChange(constantes.role.name)}
 								>
 									{
 										roles.map(role => {

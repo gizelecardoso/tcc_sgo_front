@@ -22,63 +22,65 @@ import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivi
 import returnOfficials from "../../services/api/Official/find_all_api";
 import returnOfficial from "../../services/api/Official/find_by_id";
 
-function select(values, setFieldValue, officials) {
-	console.log(officials)
-	if (values.officialId == null) {
-		return (
-			<View style={estilo.input_container} >
-				<Text style={{ fontSize: 15, fontWeight: 'bold' , justifyContent: 'flex-start'}}>Funcionários</Text>
-				<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
-					<Picker
-						itemStyle={estilo.item_select}
-						style={estilo.item_select}
-						onValueChange={(itemValue) => {
-							setFieldValue('officialId', itemValue)
-							setFieldValue('activityStatus', 'pendente')
-						}}
-					>
-						<Picker.Item label='Selecione' />
-						{
-							officials.map(
-								official => {
-									return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
-								})
-						}
-					</Picker>
+function select(values, setFieldValue, officials, editable) {
+	if (editable) {
+		if (values.officialId == null) {
+			return (
+				<View style={estilo.input_container} >
+					<Text style={{ fontSize: 15, fontWeight: 'bold' , justifyContent: 'flex-start'}}>Funcionários</Text>
+					<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+						<Picker
+							itemStyle={estilo.item_select}
+							style={estilo.item_select}
+							onValueChange={(itemValue) => {
+								setFieldValue('officialId', itemValue)
+								setFieldValue('activityStatus', 'pendente')
+							}}
+						>
+							<Picker.Item label='Selecione' />
+							{
+								officials.map(
+									official => {
+										return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
+									})
+							}
+						</Picker>
+					</View>
+				</View>		)
+		} else {
+			return (
+				<View style={estilo.input_container} >
+					<Text style={{ fontSize: 15, fontWeight: 'bold'  , justifyContent: 'flex-start'}}>Funcionários</Text>
+					<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+						<Picker
+							itemStyle={estilo.item_select}
+							style={estilo.item_select}
+							selectedValue={values.officialId}
+							onValueChange={(itemValue) => {
+								setFieldValue('officialId', itemValue)
+								setFieldValue('activityStatus', 'pendente')
+							}}
+						>
+							{
+								officials.map(
+									official => {
+										return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
+									})
+							}
+						</Picker>
+					</View>
 				</View>
-			</View>		)
-	} else {
-		return (
-			<View style={estilo.input_container} >
-				<Text style={{ fontSize: 15, fontWeight: 'bold'  , justifyContent: 'flex-start'}}>Funcionários</Text>
-				<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
-					<Picker
-						itemStyle={estilo.item_select}
-						style={estilo.item_select}
-						selectedValue={values.officialId}
-						onValueChange={(itemValue) => {
-							setFieldValue('officialId', itemValue)
-							setFieldValue('activityStatus', 'pendente')
-						}}
-					>
-						{
-							officials.map(
-								official => {
-									return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
-								})
-						}
-					</Picker>
-				</View>
-			</View>
-		)
+			)
+		}
 	}
 }
+
 
 function displayCreateItem(editable, values, setFieldValue, officials, setVisibleUpdate) {
 	if (editable) {
 		return (
 			<Fragment>
-				{ select(values, setFieldValue, officials)}
+				{/* { select(values, setFieldValue, officials, editable)} */}
 				<TouchableOpacity onPress={() => setVisibleUpdate(true)}>
 					<Text style={estiloUnico.submit}>Adicionar Item</Text>
 				</TouchableOpacity>
@@ -273,7 +275,7 @@ const UpdateActivity = (props) => {
 							values={values[constantes.expectedFinalDate.attribute]}
 							editable={values.editable}
 						/>
-
+						{ select(values, setFieldValue, officials, props.route.params.delegate)}
 						{	displayCreateItem(props.route.params.editable, values, setFieldValue, officials, setVisibleUpdate)}
 
 						<View style={estiloUnico.lista_items}>

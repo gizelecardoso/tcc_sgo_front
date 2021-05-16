@@ -31,7 +31,6 @@ const createActivity = async (values, status) => {
         return responseOfficial;
     }else{
         throw new Error(response.data.message);
-        console.log(response.data.message);
     }
     
 }
