@@ -24,6 +24,7 @@ const Login = ({ navigation }) => {
 		await AsyncStorage.setItem(constantes.tokenOfficialName, token.official.official_name);
 		await AsyncStorage.setItem(constantes.tokenLoginName, token.official.login_name);
 		await AsyncStorage.setItem(constantes.tokenCategory, token.category);
+		await AsyncStorage.setItem(constantes.tokenOfficialId, token.official.id);
 		navigation.navigate('drawerStack', {name: token.official.official_name, loginName: token.official.login_name, category: token.category, id: token.official.id});
 	}
 

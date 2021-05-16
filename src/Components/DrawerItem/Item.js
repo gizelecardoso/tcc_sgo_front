@@ -14,7 +14,7 @@ const Item = (props) => {
         />
       )}
       label={props.label}
-      onPress={() => {props.navigation.navigate(props.page, {category: props.category})}}
+      onPress={() => {props.navigation.navigate(props.page)}}
     />
   )
 }

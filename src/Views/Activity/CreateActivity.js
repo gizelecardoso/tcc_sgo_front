@@ -29,7 +29,6 @@ const CreateRole = (props) => {
 			await create(values, 'nova');
 			sucessCreate();
 		} catch (erro) {
-			console.log(erro);
 			setErrorMessage(erro.mensagem);
 		}
 	}

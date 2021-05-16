@@ -4,8 +4,8 @@ import { constante } from "../../constante";
 
 const returnActivities = async (callback, category, official_id) => {
     let urlFinal = ''
-    if(category){
-        urlFinal = `http://${constante.url}:3000/officials?category=${category}&official_id=${official_id}`
+    if(category == 'encarregado' || category == 'oficial'){
+        urlFinal = `http://${constante.url}:3000/activities?category=${category}&official_id=${official_id}`
     } else{
         urlFinal = `http://${constante.url}:3000/activities`
     }

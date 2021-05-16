@@ -9,28 +9,28 @@ import Item from './Components/DrawerItem/Item';
 import { constantes } from './constantes';
 
 function routes(props, category) {
-  if(category == 'admin'){
+  if(category == 'administrador'){
     return(
       <>
-        <Item navigation={props.navigation}label={'Bem-Vindo'} page={'BemVindo'}/>
-        <Item navigation={props.navigation}label={'Funções'} page={'Roles'}/>
-        <Item navigation={props.navigation}label={'Funcionários(as)'} page={'Officials'}/>
-        <Item navigation={props.navigation}label={'Empresas'} page={'Companies'}/>
-        <Item navigation={props.navigation}label={'Atividades'} page={'Activities'}/>
+        <Item navigation={props.navigation} label={'Bem-Vindo'} page={'BemVindo'}/>
+        <Item navigation={props.navigation} label={'Funções'} page={'Roles'}/>
+        <Item navigation={props.navigation} label={'Funcionários(as)'} page={'Officials'}/>
+        <Item navigation={props.navigation} label={'Empresas'} page={'Companies'}/>
+        <Item navigation={props.navigation} label={'Atividades'} page={'Activities'}/>
       </>
     )
   }else if (category == 'encarregado'){
     return(
       <>
-        <Item navigation={props.navigation}label={'Bem-Vindo'} page={'BemVindo'}/>
-        <Item navigation={props.navigation}label={'Atividades'} page={'Activities'} category={category}/>
+        <Item navigation={props.navigation} label={'Bem-Vindo'} page={'BemVindo'}/>
+        <Item navigation={props.navigation} label={'Atividades'} page={'Activities'} category={category}/>
       </>
     )
   }else if (category == 'oficial'){
     return(
       <>
-        <Item navigation={props.navigation}label={'Bem-Vindo'} page={'BemVindo'}/>
-        <Item navigation={props.navigation}label={'Atividades'} page={'Activities'} category={category}/>
+        <Item navigation={props.navigation} label={'Bem-Vindo'} page={'BemVindo'}/>
+        <Item navigation={props.navigation} label={'Atividades'} page={'Activities'} category={category}/>
       </>
     )
   }

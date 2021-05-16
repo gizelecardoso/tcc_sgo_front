@@ -12,7 +12,6 @@ const updateActivity = async (values, id, status, date) => {
         if (values.initialDate == ''){
             values.initialDate = format_date_front_to_back(date);
         }
-        console.log(values.initialDate);
     } else if (status == 'finalizada') {
         values.finalDate = format_date_front_to_back(date);
     } else if (status == 'pausada') {
