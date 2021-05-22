@@ -2,13 +2,30 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import { constante } from "../../constante";
 
-const returnActivities = async (callback, category, official_id) => {
+const returnActivities = async (callback, category, official_id, welcome) => {
     let urlFinal = ''
-    if(category == 'encarregado' || category == 'oficial'){
-        urlFinal = `http://${constante.url}:3000/activities?category=${category}&official_id=${official_id}`
-    } else{
-        urlFinal = `http://${constante.url}:3000/activities`
+    if(welcome){
+        console.log('welcome true')
+        console.log(category)
+        if(category == 'oficial'){
+            urlFinal = `http://${constante.url}:3000/activities?only_one=true&official_id=${official_id}`
+            
+        } else if(category == 'encarregado'){
+            urlFinal = `http://${constante.url}:3000/activities?category=${category}&late=true&official_id=${official_id}`
+        } else if(category == 'administrador'){
+            urlFinal = `http://${constante.url}:3000/activities?late=true`
+            console.log(urlFinal)
+        }
+    } else {
+        if(category == 'oficial'){
+            urlFinal = `http://${constante.url}:3000/activities?category=${category}&official_id=${official_id}`
+        } else if(category == 'encarregado'){
+            urlFinal = `http://${constante.url}:3000/activities?category=${category}&official_id=${official_id}`
+        }else{
+            urlFinal = `http://${constante.url}:3000/activities`
+        }
     }
+
     const response = await fetch(urlFinal , {
         headers: {
             Accept: 'application/json',
