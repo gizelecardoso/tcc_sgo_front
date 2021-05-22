@@ -4,7 +4,6 @@ import { DrawerNavigator } from './src/DrawerNavigator';
 import Inicio from './src/Views/Inicio/Inicio';
 import Login from './src/Views/Login/Login';
 import { createStackNavigator } from '@react-navigation/stack';
-import Teste from './src/Views/BemVindo/Teste';
 // import Date from './src/Components/Date';
 
 const Stack = createStackNavigator();
