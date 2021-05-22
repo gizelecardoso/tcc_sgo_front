@@ -9,12 +9,10 @@ const returnActivities = async (callback, category, official_id, welcome) => {
         console.log(category)
         if(category == 'oficial'){
             urlFinal = `http://${constante.url}:3000/activities?only_one=true&official_id=${official_id}`
-            
         } else if(category == 'encarregado'){
             urlFinal = `http://${constante.url}:3000/activities?category=${category}&late=true&official_id=${official_id}`
         } else if(category == 'administrador'){
-            urlFinal = `http://${constante.url}:3000/activities?late=true`
-            console.log(urlFinal)
+            urlFinal = `http://${constante.url}:3000/activities?category=${category}&late=true`
         }
     } else {
         if(category == 'oficial'){

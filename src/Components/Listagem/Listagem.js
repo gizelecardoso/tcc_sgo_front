@@ -121,7 +121,7 @@ const Listagem = (props) => {
 			<FlatList
 				nestedScrollEnabled 
 				data={props.lista}
-				keyExtractor={(item) => item.id.toString()}
+				keyExtractor={(item) => item.id}
 				renderItem={
 					({ item }) => (
 						<View style={estilo.linha_lista}>
