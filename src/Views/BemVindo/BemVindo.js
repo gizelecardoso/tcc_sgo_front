@@ -13,7 +13,10 @@ function welcome(category, props, item, activitiesAdmin, activitiesClerk){
 			<>
 				<Text style={estilo.mainText}>Sua tarefa de Hoje é: </Text>
 				<View style={estilo.middleBox}>
-					<Text style={estilo.activityWelcome}>{item.activity_name}</Text>
+					<View style={estilo.activityWelcome}>
+						<Text style={estilo.activityName}>{item.activity_name}</Text>
+						<Text style={estilo.activityStatus}>{item.activity_status}</Text>
+					</View>
 					<TouchableOpacity onPress={() => { props.navigation.navigate('UpdateActivity', { item, editable: false, delegate: false }); }} >
 						<Text style={estilo.activityLink}>Clique aqui para mais detalhes!</Text>
 					</TouchableOpacity>
