@@ -22,7 +22,7 @@ import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivi
 import returnOfficials from "../../services/api/Official/find_all_api";
 import returnOfficial from "../../services/api/Official/find_by_id";
 
-function select(values, setFieldValue, officials, editable) {
+function select(values, setFieldValue, officials, official, editable) {
 	if (editable) {
 		if (values.officialId == null) {
 			return (
@@ -39,15 +39,16 @@ function select(values, setFieldValue, officials, editable) {
 						>
 							<Picker.Item label='Selecione' />
 							{
-								officials.map(
-									official => {
-										return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
+								officials.map((
+									official, index) => {
+										return <Picker.Item label={official.official_name} value={official.id} key={index} />
 									})
 							}
 						</Picker>
 					</View>
 				</View>		)
 		} else {
+			officials.push(official);
 			return (
 				<View style={estilo.input_container} >
 					<Text style={{ fontSize: 15, fontWeight: 'bold'  , justifyContent: 'flex-start'}}>Funcionários</Text>
@@ -61,10 +62,10 @@ function select(values, setFieldValue, officials, editable) {
 								setFieldValue('activityStatus', 'pendente')
 							}}
 						>
-							{
-								officials.map(
-									official => {
-										return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
+						{
+								officials.map((
+									official, index) => {
+										return <Picker.Item label={official.official_name} value={official.id} key={index} />
 									})
 							}
 						</Picker>
@@ -203,7 +204,7 @@ const UpdateActivity = (props) => {
 		returnOfficials(setOfficials, 'activity');
 		if(props.route.params.item.official_id){
 			returnOfficial(setOfficial, props.route.params.item.official_id);
-			officials.push(official);
+			// officials.push(official);
 		}
 	}, []);
 
@@ -275,7 +276,7 @@ const UpdateActivity = (props) => {
 							values={values[constantes.expectedFinalDate.attribute]}
 							editable={values.editable}
 						/>
-						{ select(values, setFieldValue, officials, props.route.params.delegate)}
+						{ select(values, setFieldValue, officials, official, props.route.params.delegate)}
 						{	displayCreateItem(props.route.params.editable, values, setFieldValue, officials, setVisibleUpdate)}
 
 						<View style={estiloUnico.lista_items}>
