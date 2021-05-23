@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import ConfirmAlert from "../../Components/Alert/ConfirmAlert"; // yes or no
 import MessageAlert from "../../Components/Alert/MessageAlert"; // continue - sucesso
 import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
+import updateStatus from "../../services/api/ActivityItem/update_api";
 
 function displayActivity(display, navigation, update, item) {
 	if (display) {
@@ -18,11 +19,19 @@ function displayActivity(display, navigation, update, item) {
 	}
 }
 
-function finishedOrDeletedActivity(item){
-	if (item.activity_status == 'cancelada' || item.activity_status == 'finalizada'){
-		return (
-			<Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }}>{item.activity_status}</Text>
-		)
+function finishedOrDeletedActivity(item, props){
+	if(props.statusItem){
+		if (item.item_status == 'finalizado'){
+			return (
+				<Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }}>{item.item_status}</Text>
+			)
+		}
+	} else {
+		if (item.activity_status == 'cancelada' || item.activity_status == 'finalizada'){
+			return (
+				<Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }}>{item.activity_status}</Text>
+			)
+		}
 	}
 	
 }
@@ -60,6 +69,18 @@ function displayUpdateAndDelete(display, itemActivity, navigation, update, item,
 				</TouchableOpacity>
 			</Fragment>
 		)
+	}
+}
+
+function changeStatusItem(props, item){
+	if(item.item_status == 'finalizado'){
+		alert("Item já finalizado")
+	} else {
+		if(props.statusItem){
+			const finishedDate = new Date().getDate();
+			status = 'finalizado'
+			updateStatus(item, props.activityId, status, item.id, finishedDate)
+		}
 	}
 }
 
@@ -121,14 +142,16 @@ const Listagem = (props) => {
 			<FlatList
 				nestedScrollEnabled 
 				data={props.lista}
-				keyExtractor={(item) => item.id}
+				keyExtractor={(item) => item.id.toString()}
 				renderItem={
 					({ item }) => (
 						<View style={estilo.linha_lista}>
 							<View style={estilo.linha_lista}>
-								<AntDesign name="checksquareo" size={24} color="black" />
+								<TouchableOpacity onPress={() => changeStatusItem(props, item)}>
+									<AntDesign name="checksquareo" size={24} color="black" />
+								</TouchableOpacity>
 								<Text style={estiloInput.input_text_lista}>{item[name]}</Text>
-								{ finishedOrDeletedActivity(item) }
+								{ finishedOrDeletedActivity(item, props) }
 							</View>
 							<View style={estilo.linha_lista}>
 								{ displayActivity(props.displayActivity, props.navigation, props.update, item) }

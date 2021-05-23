@@ -76,7 +76,6 @@ function select(values, setFieldValue, officials, official, editable) {
 	}
 }
 
-
 function displayCreateItem(editable, values, setFieldValue, officials, setVisibleUpdate) {
 	if (editable) {
 		return (
@@ -133,6 +132,15 @@ function displayUpdateActivity(editable, handleSubmit, isValid, start, stop, fin
 			</View>
 		)
 	}
+}
+
+function displayEvolution(values){
+	return(
+		<View style={estiloUnico.mainEvolution}>
+			<Text style={estiloUnico.textEvolution}>Evolução:</Text>
+			<Text style={estiloUnico.percentEvolution}>{ values.evolution }%</Text>
+		</View>
+	)
 }
 
 const UpdateActivity = (props) => {
@@ -196,7 +204,8 @@ const UpdateActivity = (props) => {
 		editable: props.route.params.editable,
 		initialDate: props.route.params.item.initial_date,
 		finalDate: props.route.params.item.final_date,
-		stoppedDate: props.route.params.item.stopped_date
+		stoppedDate: props.route.params.item.stopped_date,
+		evolution: props.route.params.item.evolution
 	}
 
 	useEffect(() => {
@@ -282,6 +291,7 @@ const UpdateActivity = (props) => {
 						<View style={estiloUnico.lista_items}>
 							< Listagem
 								lista={activityItems}
+								activityId={values.valueId}
 								itemActivity={true}
 								navigation={props.navigation}
 								listName={'item_name'}
@@ -290,9 +300,11 @@ const UpdateActivity = (props) => {
 								deleteFunction={deleteItem}
 								hideDialogUpdate={hideDialogUpdate}
 								activities={returnActivities}
+								statusItem={true}
 								displayEditItens={!(props.route.params.editable)}
 							/>
 						</View>
+						{ displayEvolution(values)}
 						{ setStatusUpdate(values.activityStatus, setStart, setStop, setFinish) }
 						{ displayUpdateActivity(
 								props.route.params.editable, 
