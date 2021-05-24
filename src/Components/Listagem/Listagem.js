@@ -72,18 +72,6 @@ function displayUpdateAndDelete(display, itemActivity, navigation, update, item,
 	}
 }
 
-function changeStatusItem(props, item){
-	if(item.item_status == 'finalizado'){
-		alert("Item já finalizado")
-	} else {
-		if(props.statusItem){
-			const finishedDate = new Date().getDate();
-			status = 'finalizado'
-			updateStatus(item, props.activityId, status, item.id, finishedDate)
-		}
-	}
-}
-
 const Listagem = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const name = props.listName;
@@ -92,6 +80,8 @@ const Listagem = (props) => {
 	const [visibleUpdate, setVisibleUpdate] = useState(false);
 	const [itemId, setItemId] = useState(0);
 	const [itemUpdate, setItemUpdate] = useState('');
+	const [itemStatusUpdate, setItemStatusUpdate] = useState({})
+	const [propsStatus, setPropsStatus] = useState({})
 
 	const showDialog = (item) => {
 		setVisibleConfirm(true);
@@ -136,6 +126,31 @@ const Listagem = (props) => {
 		setVisibleUpdate(false);
 		props.activities();
 	}
+	
+	const showConfirm = (item) => {
+		console.log(item)
+		console.log(props)
+		setItemStatusUpdate(item)
+		setPropsStatus(props)
+		setVisibleConfirm(true)
+	}
+
+	const changeStatusItem = () => {
+		console.log(itemStatusUpdate)
+		console.log(propsStatus)
+		if(itemStatusUpdate.item_status == 'finalizado'){
+			alert("Item já finalizado")
+		} else {
+			if(propsStatus.statusItem){
+				console.log("atualiza")
+				const finishedDate = new Date().getDate();
+				status = 'finalizado'
+				updateStatus(itemStatusUpdate, propsStatus.activityId, status, itemStatusUpdate.id, finishedDate)
+			}
+		}
+		setVisibleConfirm(false)
+	}
+
 
 	return (
 		<Fragment>
@@ -147,7 +162,7 @@ const Listagem = (props) => {
 					({ item }) => (
 						<View style={estilo.linha_lista}>
 							<View style={estilo.linha_lista}>
-								<TouchableOpacity onPress={() => changeStatusItem(props, item)}>
+								<TouchableOpacity onPress={() => { showConfirm(item) } }>
 									<AntDesign name="checksquareo" size={24} color="black" />
 								</TouchableOpacity>
 								<Text style={estiloInput.input_text_lista}>{item[name]}</Text>
@@ -168,6 +183,13 @@ const Listagem = (props) => {
 				noFunction={hideDialog}
 				dialogTitle='Deletar!!!!!!'
 				dialogFrase='Tem certeza que quer deletar esse dado ?'
+			/>
+			<ConfirmAlert
+				visible={visibleConfirm}
+				yesFunction={changeStatusItem}
+				noFunction={hideDialog}
+				dialogTitle='Finalizar!!!!!!'
+				dialogFrase='Tem certeza que quer finalizar esse item ?'
 			/>
 			<MessageAlert
 				visible={visibleMessage}

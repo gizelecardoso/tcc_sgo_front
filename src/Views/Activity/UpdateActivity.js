@@ -21,6 +21,7 @@ import { AntDesign } from '@expo/vector-icons';
 import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
 import returnOfficials from "../../services/api/Official/find_all_api";
 import returnOfficial from "../../services/api/Official/find_by_id";
+import verifyItens from "../../services/api/ActivityItem/find_all_api";
 
 function select(values, setFieldValue, officials, official, editable) {
 	if (editable) {
@@ -89,14 +90,18 @@ function displayCreateItem(editable, values, setFieldValue, officials, setVisibl
 	}
 }
 
-function setStatusUpdate(status, setStart, setStop, setFinish) {
-	if (status === 'pendente'){
+function setStatusUpdate(values, setStart, setStop, setFinish, itens) {
+	if (values.activityStatus === 'pendente'){
 		setStart(true);
-	} else if(status === 'executando' || status === 'atrasada') {
+	} else if(values.activityStatus === 'executando' && values.evolution === 100 || values.activityStatus === 'atrasada' && values.evolution === 100) {
 		setStart(false);
 		setStop(true);
 		setFinish(true);
-	} else if(status === 'pausada') {
+	} else if(values.activityStatus === 'executando' || values.activityStatus === 'atrasada') {
+		setStart(false);
+		setStop(true);
+		setFinish(false);
+	} else if(values.activityStatus === 'pausada') {
 		setStart(true);
 		setStop(false);
 		setFinish(false);
@@ -155,6 +160,7 @@ const UpdateActivity = (props) => {
 	const [start, setStart] = useState(false);
 	const [stop, setStop] = useState(false);
 	const [finish, setFinish] = useState(false);
+	const [countActivityItems, setCountActivityItems] = useState([]);
 
 	const hideDialog = () => {
 		setVisible(false);
@@ -215,6 +221,7 @@ const UpdateActivity = (props) => {
 			returnOfficial(setOfficial, props.route.params.item.official_id);
 			// officials.push(official);
 		}
+		verifyItens(setCountActivityItems, props.route.params.item.id, true)
 	}, []);
 
 	return (
@@ -305,7 +312,7 @@ const UpdateActivity = (props) => {
 							/>
 						</View>
 						{ displayEvolution(values)}
-						{ setStatusUpdate(values.activityStatus, setStart, setStop, setFinish) }
+						{ setStatusUpdate(values, setStart, setStop, setFinish, countActivityItems) }
 						{ displayUpdateActivity(
 								props.route.params.editable, 
 								handleSubmit, 
