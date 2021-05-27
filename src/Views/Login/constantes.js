@@ -8,6 +8,8 @@ export const constantes = {
   tokenName: 'login_official_token',
   tokenOfficialName: 'name_official',
   tokenLoginName: 'login_name',
+  tokenCategory: 'category',
+  tokenOfficialId: 'id',
   loginName: {
     name: `loginName`,
     attribute: `loginName`,

@@ -15,71 +15,73 @@ import estiloUnico from "./estilo";
 import estiloButton from "../../estilo";
 import Alert from "../../Components/Alert/MessageAlert";
 import { Picker } from "@react-native-picker/picker";
-import DatePicker from 'react-datepicker';
-import Date from '../../Components/Date';
-import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import { Listagem } from "../../Components/Listagem";
 import { AntDesign } from '@expo/vector-icons';
 import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
 import returnOfficials from "../../services/api/Official/find_all_api";
+import returnOfficial from "../../services/api/Official/find_by_id";
 
-function select(values, setFieldValue, officials) {
-	if (values.officialId == null) {
-		return (
-			<View style={estilo.input_container} >
-				<Text style={{ fontSize: 15, fontWeight: 'bold' , justifyContent: 'flex-start'}}>Funcionários</Text>
-				<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
-					<Picker
-						itemStyle={estilo.item_select}
-						style={estilo.item_select}
-						onValueChange={(itemValue) => {
-							setFieldValue('officialId', itemValue)
-							setFieldValue('activityStatus', 'pendente')
-						}}
-					>
-						<Picker.Item label='Selecione' />
+function select(values, setFieldValue, officials, official, editable) {
+	if (editable) {
+		if (values.officialId == null) {
+			return (
+				<View style={estilo.input_container} >
+					<Text style={{ fontSize: 15, fontWeight: 'bold' , justifyContent: 'flex-start'}}>Funcionários</Text>
+					<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+						<Picker
+							itemStyle={estilo.item_select}
+							style={estilo.item_select}
+							onValueChange={(itemValue) => {
+								setFieldValue('officialId', itemValue)
+								setFieldValue('activityStatus', 'pendente')
+							}}
+						>
+							<Picker.Item label='Selecione' />
+							{
+								officials.map((
+									official, index) => {
+										return <Picker.Item label={official.official_name} value={official.id} key={index} />
+									})
+							}
+						</Picker>
+					</View>
+				</View>		)
+		} else {
+			officials.push(official);
+			return (
+				<View style={estilo.input_container} >
+					<Text style={{ fontSize: 15, fontWeight: 'bold'  , justifyContent: 'flex-start'}}>Funcionários</Text>
+					<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+						<Picker
+							itemStyle={estilo.item_select}
+							style={estilo.item_select}
+							selectedValue={values.officialId}
+							onValueChange={(itemValue) => {
+								setFieldValue('officialId', itemValue)
+								setFieldValue('activityStatus', 'pendente')
+							}}
+						>
 						{
-							officials.map(
-								official => {
-									return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
-								})
-						}
-					</Picker>
+								officials.map((
+									official, index) => {
+										return <Picker.Item label={official.official_name} value={official.id} key={index} />
+									})
+							}
+						</Picker>
+					</View>
 				</View>
-			</View>		)
-	} else {
-		return (
-			<View style={estilo.input_container} >
-				<Text style={{ fontSize: 15, fontWeight: 'bold'  , justifyContent: 'flex-start'}}>Funcionários</Text>
-				<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
-					<Picker
-						itemStyle={estilo.item_select}
-						style={estilo.item_select}
-						selectedValue={values.officialId}
-						onValueChange={(itemValue) => {
-							setFieldValue('officialId', itemValue)
-							setFieldValue('activityStatus', 'pendente')
-						}}
-					>
-						{
-							officials.map(
-								official => {
-									return <Picker.Item label={official.official_name} value={official.id} key={official.id} />
-								})
-						}
-					</Picker>
-				</View>
-			</View>
-		)
+			)
+		}
 	}
 }
+
 
 function displayCreateItem(editable, values, setFieldValue, officials, setVisibleUpdate) {
 	if (editable) {
 		return (
 			<Fragment>
-				{ select(values, setFieldValue, officials)}
+				{/* { select(values, setFieldValue, officials, editable)} */}
 				<TouchableOpacity onPress={() => setVisibleUpdate(true)}>
 					<Text style={estiloUnico.submit}>Adicionar Item</Text>
 				</TouchableOpacity>
@@ -107,7 +109,7 @@ function setStatusUpdate(status, setStart, setStop, setFinish) {
 }
 
 function displayUpdateActivity(editable, handleSubmit, isValid, start, stop, finish, values, update) {
-
+	const date = new Date().getDate();
 	if (editable) {
 		return (
 			<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
@@ -117,14 +119,14 @@ function displayUpdateActivity(editable, handleSubmit, isValid, start, stop, fin
 	} else {
 		return (
 			<View style={{ flexDirection: 'column' , alignItems: 'center'}}>
-				<TouchableOpacity onPress={() => { update(values, values.valueId, 'executando') }} disabled={!start}>
+				<TouchableOpacity onPress={() => { update(values, values.valueId, 'executando', date) }} disabled={!start}>
 					<Text style={start === true ? estiloUnico.buttonStart: estiloUnico.disabled}>Iniciar</Text>
 				</TouchableOpacity>
 				<View style={{ flexDirection: 'row' }}>
-					<TouchableOpacity onPress={() => { update(values, values.valueId, 'finalizada') }} disabled={!finish}>
+					<TouchableOpacity onPress={() => { update(values, values.valueId, 'finalizada', date) }} disabled={!finish}>
 						<Text style={finish === true ? estiloUnico.buttonFinish: estiloUnico.disabled}>Finalizar</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={() => { update(values, values.valueId, 'pausada') }} disabled={!stop}>
+					<TouchableOpacity onPress={() => { update(values, values.valueId, 'pausada', date) }} disabled={!stop}>
 						<Text style={stop === true ? estiloUnico.buttonStop: estiloUnico.disabled}>Parar</Text>
 					</TouchableOpacity>
 				</View>
@@ -140,10 +142,8 @@ const UpdateActivity = (props) => {
 	const [visibleUpdate, setVisibleUpdate] = useState(false);
 	const [activityItems, setActivityItems] = useState([]);
 	const [officials, setOfficials] = useState([]);
-	const [officialId, setOfficialId] = useState(0);
+	const [official, setOfficial] = useState({});
 	const [status, setStatus] = useState('');
-	const [startDate, setStartDate] = useState(new Date());
-	const [endDate, setEndDate] = useState(new Date());
 	const [start, setStart] = useState(false);
 	const [stop, setStop] = useState(false);
 	const [finish, setFinish] = useState(false);
@@ -193,12 +193,19 @@ const UpdateActivity = (props) => {
 		expectedFinalDate: format_date_back_to_front(props.route.params.item.expected_final_date),
 		officialId: props.route.params.item.official_id,
 		activityStatus: props.route.params.item.activity_status,
-		editable: props.route.params.editable
+		editable: props.route.params.editable,
+		initialDate: props.route.params.item.initial_date,
+		finalDate: props.route.params.item.final_date,
+		stoppedDate: props.route.params.item.stopped_date
 	}
 
 	useEffect(() => {
 		returnActivityItems(setActivityItems, props.route.params.item.id);
-		returnOfficials(setOfficials);
+		returnOfficials(setOfficials, 'activity');
+		if(props.route.params.item.official_id){
+			returnOfficial(setOfficial, props.route.params.item.official_id);
+			// officials.push(official);
+		}
 	}, []);
 
 	return (
@@ -254,8 +261,8 @@ const UpdateActivity = (props) => {
 							handleChange={handleChange}
 							handleBlur={handleBlur}
 							errors={errors[constantes.expectedInitialDate.attribute]}
-							touched={<DatePicker selected={startDate} onChange={date => setStartDate(date)} showTimeSelect dateFormat="Pp" />}
-							values={values[setStartDate(date)]}
+							touched={touched[constantes.expectedInitialDate.attribute]}
+							values={values[constantes.expectedInitialDate.attribute]}
 							editable={values.editable}
 						/>
 						<InputValues
@@ -265,11 +272,11 @@ const UpdateActivity = (props) => {
 							handleChange={handleChange}
 							handleBlur={handleBlur}
 							errors={errors[constantes.expectedFinalDate.attribute]}
-							touched={<DatePicker selected={endDate} onChange={date => setEndDate(date)} showTimeSelect dateFormat="Pp" />}
-							values={values[setStartDate(date)]}
+							touched={touched[constantes.expectedFinalDate.attribute]}
+							values={values[constantes.expectedFinalDate.attribute]}
 							editable={values.editable}
 						/>
-
+						{ select(values, setFieldValue, officials, official, props.route.params.delegate)}
 						{	displayCreateItem(props.route.params.editable, values, setFieldValue, officials, setVisibleUpdate)}
 
 						<View style={estiloUnico.lista_items}>

@@ -1,17 +1,21 @@
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import RoutesRole from './src/Routes/RoutesRole';
-import BemVindo from './src/Views/BemVindo/BemVindo';
 import { DrawerNavigator } from './src/DrawerNavigator';
-import CreateOfficial from './src/Views/Official/CreateOfficial';
-import { Text, Linking, AppRegistry } from  'react-native';
-import Date from './src/Components/Date';
+import Inicio from './src/Views/Inicio/Inicio';
+import Login from './src/Views/Login/Login';
+import { createStackNavigator } from '@react-navigation/stack';
+// import Date from './src/Components/Date';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <DrawerNavigator />
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Inicio" component={Inicio}/>
+        <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="drawerStack" component={DrawerNavigator}/>
+      </Stack.Navigator>
     </NavigationContainer>
     // <Text
     //   style={{ marginTop: 30 }}

@@ -11,3 +11,5 @@ web-build/
 
 # macOS
 .DS_Store
+/src/services/constante.js
+/.vs/slnx.sqlite

@@ -1,18 +1,24 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import moment from "moment";
+import { constante } from "../../constante";
 
-const updateActivity = async (values, id, status) => {
-    let url = 'localhost';
-    if(Platform.OS == 'android'){
-        url = '10.0.2.2';
-    }
-
+const updateActivity = async (values, id, status, date) => {
     const format_date_front_to_back = (date_api) => {
 		return moment(date_api).format();
 	}
 
-    const response = await fetch(`http://${url}:3000/activities/${id}`, {
+    if (status == 'executando'){
+        if (values.initialDate == ''){
+            values.initialDate = format_date_front_to_back(date);
+        }
+    } else if (status == 'finalizada') {
+        values.finalDate = format_date_front_to_back(date);
+    } else if (status == 'pausada') {
+        values.stoppedDate = format_date_front_to_back(date);
+    }
+
+    const response = await fetch(`http://${constante.url}:3000/activities/${id}`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',
@@ -26,7 +32,10 @@ const updateActivity = async (values, id, status) => {
             expected_initial_date: format_date_front_to_back(values.expectedInitialDate),
             expected_final_date: format_date_front_to_back(values.expectedFinalDate),
             activity_status: status,
-            official_id: values.officialId
+            official_id: values.officialId,
+            initial_date: values.initialDate,
+            final_date: values.finalDate,
+            stopped_date: values.stoppedDate,
         })
     });
 

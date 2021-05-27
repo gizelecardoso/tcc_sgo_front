@@ -1,13 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
+import { constante } from "../../constante";
 
 const updateOfficial = async (values, id) => {
-    let url = 'localhost';
-    if(Platform.OS == 'android'){
-        url = '10.0.2.2';
-    }
-
-    const response = await fetch(`http://${url}:3000/officials/${id}`, {
+    const response = await fetch(`http://${constante.url}:3000/officials/${id}`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',
@@ -17,7 +13,9 @@ const updateOfficial = async (values, id) => {
         body: JSON.stringify({
             official_code: values.officialCode,
             official_name: values.officialName,
-            role_id: values.role
+            role_id: values.role,
+            company_id: values.companyId,
+            clerk_id: values.clerkId
         })
     });
 

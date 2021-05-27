@@ -8,21 +8,52 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Item from './Components/DrawerItem/Item';
 import { constantes } from './constantes';
 
+function routes(props, category) {
+  if(category == 'administrador'){
+    return(
+      <>
+        <Item navigation={props.navigation} label={'Bem-Vindo'} page={'BemVindo'}/>
+        <Item navigation={props.navigation} label={'Funções'} page={'Roles'}/>
+        <Item navigation={props.navigation} label={'Funcionários(as)'} page={'Officials'}/>
+        <Item navigation={props.navigation} label={'Empresas'} page={'Companies'}/>
+        <Item navigation={props.navigation} label={'Atividades'} page={'Activities'}/>
+      </>
+    )
+  }else if (category == 'encarregado'){
+    return(
+      <>
+        <Item navigation={props.navigation} label={'Bem-Vindo'} page={'BemVindo'}/>
+        <Item navigation={props.navigation} label={'Atividades'} page={'Activities'} category={category}/>
+      </>
+    )
+  }else if (category == 'oficial'){
+    return(
+      <>
+        <Item navigation={props.navigation} label={'Bem-Vindo'} page={'BemVindo'}/>
+        <Item navigation={props.navigation} label={'Atividades'} page={'Activities'} category={category}/>
+      </>
+    )
+  }
+}
+
 export function DrawerContent(props) {
   const [nameOfficial, setNameOfficial] = useState('');
   const [loginOfficial, setLoginOfficial] = useState('');
+  const [category, setCategory] = useState('');
 
   const setInfos = async () => {
-      try{
-          const official = await AsyncStorage.getItem(constantes.tokenOfficialName);
-          const login = await AsyncStorage.getItem(constantes.tokenLoginName);
-          if (official !== null && login !== null) {
-              setNameOfficial(official);
-              setLoginOfficial(login);
-          }
-      } catch (e) {
-          alert('Failed');
-      }
+    try{
+        const official = await AsyncStorage.getItem(constantes.tokenOfficialName);
+        const login = await AsyncStorage.getItem(constantes.tokenLoginName);
+        const category = await AsyncStorage.getItem(constantes.tokenCategory);
+        if (official !== null && login !== null) {
+            setNameOfficial(official);
+            setLoginOfficial(login);
+            setCategory(category);
+        }
+    } catch (e) {
+        alert('Failed');
+    }
 	}
 
   useEffect(() => {
@@ -57,11 +88,7 @@ export function DrawerContent(props) {
             </View>
           </View>
           <Drawer.Section style={estilo.drawerSection}>
-            <Item navigation={props.navigation}label={'Bem-Vindo'} page={'BemVindo'}/>
-            <Item navigation={props.navigation}label={'Funções'} page={'Roles'}/>
-            <Item navigation={props.navigation}label={'Funcionários(as)'} page={'Officials'}/>
-            <Item navigation={props.navigation}label={'Empresas'} page={'Companies'}/>
-            <Item navigation={props.navigation}label={'Atividades'} page={'Activities'}/>
+            {routes(props, category)}
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>
