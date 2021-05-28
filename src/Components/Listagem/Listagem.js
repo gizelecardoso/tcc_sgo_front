@@ -77,6 +77,7 @@ const Listagem = (props) => {
 	const name = props.listName;
 	const [visibleMessage, setVisibleMessage] = useState(false);
 	const [visibleConfirm, setVisibleConfirm] = useState(false);
+	const [visibleConfirmUpdate, setVisibleConfirmUpdate] = useState(false);
 	const [visibleUpdate, setVisibleUpdate] = useState(false);
 	const [itemId, setItemId] = useState(0);
 	const [itemUpdate, setItemUpdate] = useState('');
@@ -96,6 +97,11 @@ const Listagem = (props) => {
 
 	const hideDialog = () => {
 		setVisibleConfirm(false);
+	}
+
+	const hideDialogFinishedIten = () => {
+		setVisibleConfirmUpdate(false);
+		props.activities();
 	}
 
 	const deleteData = () => {
@@ -128,34 +134,30 @@ const Listagem = (props) => {
 	}
 	
 	const showConfirm = (item) => {
-		console.log(item)
-		console.log(props)
 		setItemStatusUpdate(item)
 		setPropsStatus(props)
-		setVisibleConfirm(true)
+		setVisibleConfirmUpdate(true)
 	}
 
 	const changeStatusItem = () => {
-		console.log(itemStatusUpdate)
-		console.log(propsStatus)
 		if(itemStatusUpdate.item_status == 'finalizado'){
 			alert("Item já finalizado")
 		} else {
 			if(propsStatus.statusItem){
-				console.log("atualiza")
 				const finishedDate = new Date().getDate();
 				status = 'finalizado'
 				updateStatus(itemStatusUpdate, propsStatus.activityId, status, itemStatusUpdate.id, finishedDate)
+				setVisibleConfirmUpdate(false)
+				propsStatus.activities();
 			}
 		}
-		setVisibleConfirm(false)
 	}
 
 
 	return (
 		<Fragment>
 			<FlatList
-				nestedScrollEnabled 
+				nestedScrollEnabled={true}
 				data={props.lista}
 				keyExtractor={(item) => item.id.toString()}
 				renderItem={
@@ -185,9 +187,9 @@ const Listagem = (props) => {
 				dialogFrase='Tem certeza que quer deletar esse dado ?'
 			/>
 			<ConfirmAlert
-				visible={visibleConfirm}
+				visible={visibleConfirmUpdate}
 				yesFunction={changeStatusItem}
-				noFunction={hideDialog}
+				noFunction={hideDialogFinishedIten}
 				dialogTitle='Finalizar!!!!!!'
 				dialogFrase='Tem certeza que quer finalizar esse item ?'
 			/>
