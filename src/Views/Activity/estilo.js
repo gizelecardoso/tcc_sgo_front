@@ -72,6 +72,29 @@ const estilo = StyleSheet.create({
     borderRadius: 5,
     marginTop: 10,
     backgroundColor:"#ccc",
+  },
+  mainEvolution: {
+    flexDirection: 'row',
+    // justifyContent: 'center', 
+    marginTop: 50, 
+    // alignContent: 'center'
+  },
+  textEvolution: {
+    color: 'black', 
+    fontSize: 20, 
+    fontWeight: 'bold',
+    marginTop: 10, 
+    marginRight: 10,
+    justifyContent: 'center'
+  },
+  percentEvolution: {
+    color: 'green', 
+    fontSize: 20, 
+    fontWeight: 'bold',
+    borderWidth:1,
+    borderColor: 'black',
+    padding: 10,
+    justifyContent: 'center'
   }
 });
 

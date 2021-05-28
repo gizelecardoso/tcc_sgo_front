@@ -21,6 +21,8 @@ import { AntDesign } from '@expo/vector-icons';
 import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
 import returnOfficials from "../../services/api/Official/find_all_api";
 import returnOfficial from "../../services/api/Official/find_by_id";
+import verifyItens from "../../services/api/ActivityItem/find_all_api";
+import ButtonsUpdateActivity from "./ButtonsUpdateActivity";
 
 function select(values, setFieldValue, officials, official, editable) {
 	if (editable) {
@@ -76,7 +78,6 @@ function select(values, setFieldValue, officials, official, editable) {
 	}
 }
 
-
 function displayCreateItem(editable, values, setFieldValue, officials, setVisibleUpdate) {
 	if (editable) {
 		return (
@@ -90,49 +91,13 @@ function displayCreateItem(editable, values, setFieldValue, officials, setVisibl
 	}
 }
 
-function setStatusUpdate(status, setStart, setStop, setFinish) {
-	if (status === 'pendente'){
-		setStart(true);
-	} else if(status === 'executando' || status === 'atrasada') {
-		setStart(false);
-		setStop(true);
-		setFinish(true);
-	} else if(status === 'pausada') {
-		setStart(true);
-		setStop(false);
-		setFinish(false);
-	} else {
-		setStart(false);
-		setStop(false);
-		setFinish(false);
-	}
-}
-
-function displayUpdateActivity(editable, handleSubmit, isValid, start, stop, finish, values, update) {
-	const date = new Date().getDate();
-	if (editable) {
-		return (
-			<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
-				<Text style={estiloButton.submit}>{constantes.buttomAtualizar}</Text>
-			</TouchableOpacity>
-		)
-	} else {
-		return (
-			<View style={{ flexDirection: 'column' , alignItems: 'center'}}>
-				<TouchableOpacity onPress={() => { update(values, values.valueId, 'executando', date) }} disabled={!start}>
-					<Text style={start === true ? estiloUnico.buttonStart: estiloUnico.disabled}>Iniciar</Text>
-				</TouchableOpacity>
-				<View style={{ flexDirection: 'row' }}>
-					<TouchableOpacity onPress={() => { update(values, values.valueId, 'finalizada', date) }} disabled={!finish}>
-						<Text style={finish === true ? estiloUnico.buttonFinish: estiloUnico.disabled}>Finalizar</Text>
-					</TouchableOpacity>
-					<TouchableOpacity onPress={() => { update(values, values.valueId, 'pausada', date) }} disabled={!stop}>
-						<Text style={stop === true ? estiloUnico.buttonStop: estiloUnico.disabled}>Parar</Text>
-					</TouchableOpacity>
-				</View>
-			</View>
-		)
-	}
+function displayEvolution(values){
+	return(
+		<View style={estiloUnico.mainEvolution}>
+			<Text style={estiloUnico.textEvolution}>Evolução:</Text>
+			<Text style={estiloUnico.percentEvolution}>{ values.evolution }%</Text>
+		</View>
+	)
 }
 
 const UpdateActivity = (props) => {
@@ -144,9 +109,7 @@ const UpdateActivity = (props) => {
 	const [officials, setOfficials] = useState([]);
 	const [official, setOfficial] = useState({});
 	const [status, setStatus] = useState('');
-	const [start, setStart] = useState(false);
-	const [stop, setStop] = useState(false);
-	const [finish, setFinish] = useState(false);
+	const [countActivityItems, setCountActivityItems] = useState([]);
 
 	const hideDialog = () => {
 		setVisible(false);
@@ -155,7 +118,7 @@ const UpdateActivity = (props) => {
 
 	const tryUpdate = async (values) => {
 		try {
-			await update(values, props.route.params.item.id, values.activityStatus);
+			await update(values, props.route.params.item.id, values.activityStatus, props.route.params.item.official_id);
 			sucessUpdate();
 		} catch (erro) {
 			setErrorMessage(erro.mensagem);
@@ -164,7 +127,7 @@ const UpdateActivity = (props) => {
 
 	const updateStatus = async (values, id, status) => {
 		await update(values, id, status);
-		props.navigation.push('Activities');
+		props.navigation.navigate('Activities');
 	}
 
 	const sucessUpdate = () => {
@@ -196,7 +159,8 @@ const UpdateActivity = (props) => {
 		editable: props.route.params.editable,
 		initialDate: props.route.params.item.initial_date,
 		finalDate: props.route.params.item.final_date,
-		stoppedDate: props.route.params.item.stopped_date
+		stoppedDate: props.route.params.item.stopped_date,
+		evolution: props.route.params.item.evolution
 	}
 
 	useEffect(() => {
@@ -206,6 +170,7 @@ const UpdateActivity = (props) => {
 			returnOfficial(setOfficial, props.route.params.item.official_id);
 			// officials.push(official);
 		}
+		verifyItens(setCountActivityItems, props.route.params.item.id, true)
 	}, []);
 
 	return (
@@ -282,6 +247,7 @@ const UpdateActivity = (props) => {
 						<View style={estiloUnico.lista_items}>
 							< Listagem
 								lista={activityItems}
+								activityId={values.valueId}
 								itemActivity={true}
 								navigation={props.navigation}
 								listName={'item_name'}
@@ -290,20 +256,21 @@ const UpdateActivity = (props) => {
 								deleteFunction={deleteItem}
 								hideDialogUpdate={hideDialogUpdate}
 								activities={returnActivities}
+								statusItem={true}
 								displayEditItens={!(props.route.params.editable)}
 							/>
 						</View>
-						{ setStatusUpdate(values.activityStatus, setStart, setStop, setFinish) }
-						{ displayUpdateActivity(
-								props.route.params.editable, 
-								handleSubmit, 
-								isValid,
-								start,
-								stop,
-								finish,
-								values,
-								updateStatus)}
-
+						{ displayEvolution(values)}
+							<ButtonsUpdateActivity
+								editable={props.route.params.editable}
+								handleSubmit={handleSubmit} 
+								isValid={isValid}
+								values={values}
+								updateStatus={updateStatus}
+								delegate={props.route.params.delegate}
+								activityStatus={values.activityStatus}
+								evolution={values.evolution}
+							/>
 					</View>
 				)}
 

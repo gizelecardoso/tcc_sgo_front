@@ -24,7 +24,7 @@ const Activities = ( props ) => {
             setEditItens(true);
             setDelegate(false);
         } else if(category == 'encarregado'){
-            returnActivities(setActivities, category, id);
+            returnActivities(setActivities);
             setEditItens(true);
             setDelegate(true);
         } else{

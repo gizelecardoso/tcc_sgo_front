@@ -8,7 +8,7 @@ import returnActivitiesAdmin from '../../services/api/Activity/find_all_api';
 import returnActivitiesClerk from '../../services/api/Activity/find_all_api';
 
 function welcome(category, props, item, activitiesAdmin, activitiesClerk){
-	if(category == 'oficial'){
+	if(category == 'oficial' && item != null){
 		return(
 			<>
 				<Text style={estilo.mainText}>Sua tarefa de Hoje é: </Text>
@@ -28,7 +28,7 @@ function welcome(category, props, item, activitiesAdmin, activitiesClerk){
 			<View style={estilo.mainBox}>
 				<Text style={estilo.mainText}>Tarefas Atrasadas e Paradas </Text>
 				<FlatList
-					nestedScrollEnabled 
+					nestedScrollEnabled={true}
 					data={activitiesClerk}
 					keyExtractor={(item) => item.id.toString()}
 					renderItem={
@@ -38,22 +38,21 @@ function welcome(category, props, item, activitiesAdmin, activitiesClerk){
 									<Text style={estilo.activityName}>{item.activity_name}</Text>
 									<Text style={estilo.activityStatus}>{item.activity_status}</Text>
 								</View>
-								<TouchableOpacity onPress={() => { props.navigation.navigate('UpdateActivity', { item, editable: false, delegate: true }); }} >
+								{/* <TouchableOpacity onPress={() => { props.navigation.navigate('UpdateActivity', { item, editable: false, delegate: true }); }} >
 									<Text style={estilo.activityLink}>Clique aqui para mais detalhes!</Text>
-								</TouchableOpacity>
+								</TouchableOpacity> */}
 							</View>
 						)
 					}
 				/>
 			</View>
 		)
-	} else {
-		console.log(activitiesAdmin)		
+	} else if(category == 'administrador') {
 		return(
 			<View style={estilo.mainBox}>
 				<Text style={estilo.mainText}>Tarefas Atrasadas e Paradas </Text>
 				<FlatList
-					nestedScrollEnabled 
+					nestedScrollEnabled={true} 
 					data={activitiesAdmin}
 					keyExtractor={(item) => item.id.toString()}
 					renderItem={
@@ -63,14 +62,24 @@ function welcome(category, props, item, activitiesAdmin, activitiesClerk){
 									<Text style={estilo.activityName}>{item.activity_name}</Text>
 									<Text style={estilo.activityStatus}>{item.activity_status}</Text>
 								</View>
-								<TouchableOpacity onPress={() => { props.navigation.navigate('UpdateActivity', { item, editable: true, delegate: true }); }} >
+								{/* <TouchableOpacity onPress={() => { props.navigation.navigate('UpdateActivity', { item, editable: true, delegate: true }); }} >
 									<Text style={estilo.activityLink}>Clique aqui para mais detalhes!</Text>
-								</TouchableOpacity>
+								</TouchableOpacity> */}
 							</View>
 						)
 					}
 				/>
 			</View>
+		)
+	} else {
+		return(
+			<>
+				<Text style={estilo.mainText}>Sua tarefa de Hoje é: </Text>
+				<View style={estilo.middleBox}>
+					<View style={estilo.activityWelcome}>
+					</View>
+				</View>
+			</>
 		)
 	}
 }
@@ -91,7 +100,6 @@ const BemVindo = (props) => {
 				}else if(category == 'encarregado') {
 					returnActivitiesClerk(setActivitiesClerk, category, official, true);
 				} else {
-					console.log('admin aqui')
 					returnActivitiesAdmin(setActivitiesAdmin, category, null, true);
 				}
     } catch (e) {

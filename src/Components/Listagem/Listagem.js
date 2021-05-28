@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import ConfirmAlert from "../../Components/Alert/ConfirmAlert"; // yes or no
 import MessageAlert from "../../Components/Alert/MessageAlert"; // continue - sucesso
 import UpdateActivityItem from "../../Components/Alert/ItemActivity/UpdateActivityItem"; // continue - sucesso
+import updateStatus from "../../services/api/ActivityItem/update_api";
 
 function displayActivity(display, navigation, update, item) {
 	if (display) {
@@ -18,11 +19,19 @@ function displayActivity(display, navigation, update, item) {
 	}
 }
 
-function finishedOrDeletedActivity(item){
-	if (item.activity_status == 'cancelada' || item.activity_status == 'finalizada'){
-		return (
-			<Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }}>{item.activity_status}</Text>
-		)
+function finishedOrDeletedActivity(item, props){
+	if(props.statusItem){
+		if (item.item_status == 'finalizado'){
+			return (
+				<Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }}>{item.item_status}</Text>
+			)
+		}
+	} else {
+		if (item.activity_status == 'cancelada' || item.activity_status == 'finalizada'){
+			return (
+				<Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }}>{item.activity_status}</Text>
+			)
+		}
 	}
 	
 }
@@ -68,9 +77,12 @@ const Listagem = (props) => {
 	const name = props.listName;
 	const [visibleMessage, setVisibleMessage] = useState(false);
 	const [visibleConfirm, setVisibleConfirm] = useState(false);
+	const [visibleConfirmUpdate, setVisibleConfirmUpdate] = useState(false);
 	const [visibleUpdate, setVisibleUpdate] = useState(false);
 	const [itemId, setItemId] = useState(0);
 	const [itemUpdate, setItemUpdate] = useState('');
+	const [itemStatusUpdate, setItemStatusUpdate] = useState({})
+	const [propsStatus, setPropsStatus] = useState({})
 
 	const showDialog = (item) => {
 		setVisibleConfirm(true);
@@ -85,6 +97,11 @@ const Listagem = (props) => {
 
 	const hideDialog = () => {
 		setVisibleConfirm(false);
+	}
+
+	const hideDialogFinishedIten = () => {
+		setVisibleConfirmUpdate(false);
+		props.activities();
 	}
 
 	const deleteData = () => {
@@ -115,20 +132,43 @@ const Listagem = (props) => {
 		setVisibleUpdate(false);
 		props.activities();
 	}
+	
+	const showConfirm = (item) => {
+		setItemStatusUpdate(item)
+		setPropsStatus(props)
+		setVisibleConfirmUpdate(true)
+	}
+
+	const changeStatusItem = () => {
+		if(itemStatusUpdate.item_status == 'finalizado'){
+			alert("Item já finalizado")
+		} else {
+			if(propsStatus.statusItem){
+				const finishedDate = new Date().getDate();
+				status = 'finalizado'
+				updateStatus(itemStatusUpdate, propsStatus.activityId, status, itemStatusUpdate.id, finishedDate)
+				setVisibleConfirmUpdate(false)
+				propsStatus.activities();
+			}
+		}
+	}
+
 
 	return (
 		<Fragment>
 			<FlatList
-				nestedScrollEnabled 
+				nestedScrollEnabled={true}
 				data={props.lista}
-				keyExtractor={(item) => item.id}
+				keyExtractor={(item) => item.id.toString()}
 				renderItem={
 					({ item }) => (
 						<View style={estilo.linha_lista}>
 							<View style={estilo.linha_lista}>
-								<AntDesign name="checksquareo" size={24} color="black" />
+								<TouchableOpacity onPress={() => { showConfirm(item) } }>
+									<AntDesign name="checksquareo" size={24} color="black" />
+								</TouchableOpacity>
 								<Text style={estiloInput.input_text_lista}>{item[name]}</Text>
-								{ finishedOrDeletedActivity(item) }
+								{ finishedOrDeletedActivity(item, props) }
 							</View>
 							<View style={estilo.linha_lista}>
 								{ displayActivity(props.displayActivity, props.navigation, props.update, item) }
@@ -145,6 +185,13 @@ const Listagem = (props) => {
 				noFunction={hideDialog}
 				dialogTitle='Deletar!!!!!!'
 				dialogFrase='Tem certeza que quer deletar esse dado ?'
+			/>
+			<ConfirmAlert
+				visible={visibleConfirmUpdate}
+				yesFunction={changeStatusItem}
+				noFunction={hideDialogFinishedIten}
+				dialogTitle='Finalizar!!!!!!'
+				dialogFrase='Tem certeza que quer finalizar esse item ?'
 			/>
 			<MessageAlert
 				visible={visibleMessage}

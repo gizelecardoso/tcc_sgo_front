@@ -5,8 +5,6 @@ import { constante } from "../../constante";
 const returnActivities = async (callback, category, official_id, welcome) => {
     let urlFinal = ''
     if(welcome){
-        console.log('welcome true')
-        console.log(category)
         if(category == 'oficial'){
             urlFinal = `http://${constante.url}:3000/activities?only_one=true&official_id=${official_id}`
         } else if(category == 'encarregado'){
