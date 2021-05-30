@@ -10,6 +10,8 @@ const returnOfficials = async (callback, filter, clerkId) => {
         urlFinal = `http://${constante.url}:3000/officials?free=true&only_official=true`
     } else if (filter == 'activityClerk'){
         urlFinal = `http://${constante.url}:3000/officials?clerk_id=${clerkId}&free=true&only_official=true`
+    } else if (filter == 'delegate') {
+        urlFinal = `http://${constante.url}:3000/officials?free=true&only_official=true&delegate=true&id=${clerkId}`
     } else {
         urlFinal = `http://${constante.url}:3000/officials`
     }

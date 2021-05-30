@@ -23,6 +23,7 @@ import returnOfficials from "../../services/api/Official/find_all_api";
 import returnOfficial from "../../services/api/Official/find_by_id";
 import verifyItens from "../../services/api/ActivityItem/find_all_api";
 import ButtonsUpdateActivity from "./ButtonsUpdateActivity";
+import DelegateActivity from "./DelegateActivity";
 
 function select(values, setFieldValue, officials, official, editable) {
 	if (editable) {
@@ -82,7 +83,6 @@ function displayCreateItem(editable, values, setFieldValue, officials, setVisibl
 	if (editable) {
 		return (
 			<Fragment>
-				{/* { select(values, setFieldValue, officials, editable)} */}
 				<TouchableOpacity onPress={() => setVisibleUpdate(true)}>
 					<Text style={estiloUnico.submit}>Adicionar Item</Text>
 				</TouchableOpacity>
@@ -241,7 +241,13 @@ const UpdateActivity = (props) => {
 							values={values[constantes.expectedFinalDate.attribute]}
 							editable={values.editable}
 						/>
-						{ select(values, setFieldValue, officials, official, props.route.params.delegate)}
+						{/* { select(values, setFieldValue, officials, official, props.route.params.delegate)} */}
+						<DelegateActivity
+							values={values}
+							setFieldValue={setFieldValue}
+							officialId={props.route.params.item.official_id}
+							navigation={props.navigation}
+						/>
 						{	displayCreateItem(props.route.params.editable, values, setFieldValue, officials, setVisibleUpdate)}
 
 						<View style={estiloUnico.lista_items}>
