@@ -120,6 +120,11 @@ const estilo = StyleSheet.create({
         borderColor:'black',
         alignSelf:'center'
     },
+    linha_lista: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    }
 });
 
 export default estilo;

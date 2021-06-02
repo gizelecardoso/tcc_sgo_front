@@ -25,7 +25,6 @@ import verifyItens from "../../services/api/ActivityItem/find_all_api";
 import ButtonsUpdateActivity from "./ButtonsUpdateActivity";
 
 function select(values, setFieldValue, officials, editable) {
-  console.warn(officials)
   if (editable) {
     if (values.officialId == null) {
       return (
@@ -51,7 +50,6 @@ function select(values, setFieldValue, officials, editable) {
           </View>
         </View>)
     } else {
-      console.warn('tem oficial')
       return (
         <View style={estilo.input_container} >
           <Text style={{ fontSize: 15, fontWeight: 'bold', justifyContent: 'flex-start' }}>Funcionários</Text>
@@ -80,45 +78,14 @@ function select(values, setFieldValue, officials, editable) {
 }
 
 const DelegateActivity = (props) => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [visible, setVisible] = useState(false);
-  const [visibleMessage, setVisibleMessage] = useState(false);
-  const [visibleUpdate, setVisibleUpdate] = useState(false);
-  const [activityItems, setActivityItems] = useState([]);
   const [officials, setOfficials] = useState([]);
-  const [official, setOfficial] = useState({});
-  const [listOfficial, setListOfficial] = useState([]);
-  const [status, setStatus] = useState('');
-  const [countActivityItems, setCountActivityItems] = useState([]);
-
-  // const listOfficialFunc = () => {
-  //   console.warn('officials')
-  //   console.warn(officials)
-  //   setListOfficial(officials);
-  // }
-
-  // const pushList = () => {
-  //   console.warn('list')
-  //   console.warn(listOfficial)
-  //   console.warn('official')
-  //   console.warn(official)
-  //   listOfficial.push(official);
-  //   console.warn(listOfficial)
-
-  //   setListOfficial(prevState => ({
-  //     officials: []
-  //   }))
-  // }
 
   useEffect(() => {
-    returnOfficials(setOfficials, 'delegate', props.officialId);
-    // if (props.officialId) {
-    //   returnOfficial(setOfficial, props.officialId);
-    // }
-    // listOfficialFunc();
-    // pushList();
-    // console.warn('useEffect')
-    // console.warn(listOfficial)
+    if (props.officialId){
+      returnOfficials(setOfficials, 'delegate', props.officialId);
+    } else {
+      returnOfficials(setOfficials, 'activity');
+    }
   }, []);
 
   return (

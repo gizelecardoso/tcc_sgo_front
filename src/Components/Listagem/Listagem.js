@@ -81,8 +81,9 @@ const Listagem = (props) => {
 	const [visibleUpdate, setVisibleUpdate] = useState(false);
 	const [itemId, setItemId] = useState(0);
 	const [itemUpdate, setItemUpdate] = useState('');
-	const [itemStatusUpdate, setItemStatusUpdate] = useState({})
-	const [propsStatus, setPropsStatus] = useState({})
+	const [itemStatusUpdate, setItemStatusUpdate] = useState({});
+	const [propsStatus, setPropsStatus] = useState({});
+	const [activityId, setActivityId] = useState(0);
 
 	const showDialog = (item) => {
 		setVisibleConfirm(true);
@@ -99,11 +100,7 @@ const Listagem = (props) => {
 		setVisibleConfirm(false);
 	}
 
-	const hideDialogFinishedIten = () => {
-		setVisibleConfirmUpdate(false);
-		props.activities();
-	}
-
+	
 	const deleteData = () => {
 		try {
 			props.deleteFunction(itemId);
@@ -112,11 +109,11 @@ const Listagem = (props) => {
 			setErrorMessage(erro.mensagem);
 		}
 	}
-
+	
 	const sucessDelete = () => {
 		setVisibleMessage(true);
 	}
-
+	
 	const hideDialogContinue = () => {
 		if (props.itemActivity) {
 			setVisibleMessage(false);
@@ -127,7 +124,7 @@ const Listagem = (props) => {
 			props.navigation.push(props.delete);
 		}
 	}
-
+	
 	const hideDialogUpdate = () => {
 		setVisibleUpdate(false);
 		props.activities();
@@ -136,23 +133,28 @@ const Listagem = (props) => {
 	const showConfirm = (item) => {
 		setItemStatusUpdate(item)
 		setPropsStatus(props)
+		setActivityId(props.activityId)
 		setVisibleConfirmUpdate(true)
 	}
-
+	
 	const changeStatusItem = () => {
 		if(itemStatusUpdate.item_status == 'finalizado'){
 			alert("Item já finalizado")
 		} else {
 			if(propsStatus.statusItem){
 				const finishedDate = new Date().getDate();
-				status = 'finalizado'
-				updateStatus(itemStatusUpdate, propsStatus.activityId, status, itemStatusUpdate.id, finishedDate)
-				setVisibleConfirmUpdate(false)
-				propsStatus.activities();
+				let status = 'finalizado'
+				updateStatus(itemStatusUpdate, activityId, status, itemStatusUpdate.id, finishedDate)
+				setVisibleConfirmUpdate(false);
+				propsStatus.navigation.push('Activities');
 			}
 		}
 	}
-
+	
+	const hideDialogFinishedIten = () => {
+		setVisibleConfirmUpdate(false);
+		props.activities();
+	}
 
 	return (
 		<Fragment>

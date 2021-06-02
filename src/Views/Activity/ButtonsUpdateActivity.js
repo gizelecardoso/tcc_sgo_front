@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { constantes } from "./constantes.js";
 import estiloUnico from "./estilo";
 import estiloButton from "../../estilo";
+import updateNovo from "../../services/api/Activity/update_api";
 
 function displayUpdateActivity(editable, handleSubmit, isValid, start, stop, finish, values, update, delegate) {
 	const date = new Date().getDate();
@@ -35,6 +36,11 @@ const ButtonsUpdateActivity = (props) => {
 	const [start, setStart] = useState(false);
 	const [stop, setStop] = useState(false);
 	const [finish, setFinish] = useState(false);
+
+	const updateStatus = async (values, id, status) => {
+		await updateNovo(values, id, status);
+		props.navigation.navigate('Activities');
+	}
 
   const setStatusUpdate = () => {
     if (props.activityStatus === 'pendente'){
@@ -72,7 +78,7 @@ const ButtonsUpdateActivity = (props) => {
           stop,
           finish,
           props.values,
-          props.updateStatus,
+					updateStatus,
           props.delegate)}
 			</View>
 	)
