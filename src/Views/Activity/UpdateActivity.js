@@ -23,14 +23,16 @@ import returnOfficials from "../../services/api/Official/find_all_api";
 import returnOfficial from "../../services/api/Official/find_by_id";
 import verifyItens from "../../services/api/ActivityItem/find_all_api";
 import ButtonsUpdateActivity from "./ButtonsUpdateActivity";
+import DelegateActivity from "./DelegateActivity";
+import { AuthContext } from "../../providers/Auth";
 
 function select(values, setFieldValue, officials, official, editable) {
 	if (editable) {
 		if (values.officialId == null) {
 			return (
 				<View style={estilo.input_container} >
-					<Text style={{ fontSize: 15, fontWeight: 'bold' , justifyContent: 'flex-start'}}>Funcionários</Text>
-					<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+					<Text style={{ fontSize: 15, fontWeight: 'bold', justifyContent: 'flex-start' }}>Funcionários</Text>
+					<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50 }}>
 						<Picker
 							itemStyle={estilo.item_select}
 							style={estilo.item_select}
@@ -43,18 +45,18 @@ function select(values, setFieldValue, officials, official, editable) {
 							{
 								officials.map((
 									official, index) => {
-										return <Picker.Item label={official.official_name} value={official.id} key={index} />
-									})
+									return <Picker.Item label={official.official_name} value={official.id} key={index} />
+								})
 							}
 						</Picker>
 					</View>
-				</View>		)
+				</View>)
 		} else {
 			officials.push(official);
 			return (
 				<View style={estilo.input_container} >
-					<Text style={{ fontSize: 15, fontWeight: 'bold'  , justifyContent: 'flex-start'}}>Funcionários</Text>
-					<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50  }}>
+					<Text style={{ fontSize: 15, fontWeight: 'bold', justifyContent: 'flex-start' }}>Funcionários</Text>
+					<View style={{ borderRadius: 10, backgroundColor: "lightgray", height: 50 }}>
 						<Picker
 							itemStyle={estilo.item_select}
 							style={estilo.item_select}
@@ -64,11 +66,11 @@ function select(values, setFieldValue, officials, official, editable) {
 								setFieldValue('activityStatus', 'pendente')
 							}}
 						>
-						{
+							{
 								officials.map((
 									official, index) => {
-										return <Picker.Item label={official.official_name} value={official.id} key={index} />
-									})
+									return <Picker.Item label={official.official_name} value={official.id} key={index} />
+								})
 							}
 						</Picker>
 					</View>
@@ -82,7 +84,6 @@ function displayCreateItem(editable, values, setFieldValue, officials, setVisibl
 	if (editable) {
 		return (
 			<Fragment>
-				{/* { select(values, setFieldValue, officials, editable)} */}
 				<TouchableOpacity onPress={() => setVisibleUpdate(true)}>
 					<Text style={estiloUnico.submit}>Adicionar Item</Text>
 				</TouchableOpacity>
@@ -91,13 +92,26 @@ function displayCreateItem(editable, values, setFieldValue, officials, setVisibl
 	}
 }
 
-function displayEvolution(values){
-	return(
+function displayEvolution(values) {
+	return (
 		<View style={estiloUnico.mainEvolution}>
 			<Text style={estiloUnico.textEvolution}>Evolução:</Text>
-			<Text style={estiloUnico.percentEvolution}>{ values.evolution }%</Text>
+			<Text style={estiloUnico.percentEvolution}>{Math.round(values.evolution)}%</Text>
 		</View>
 	)
+}
+
+function delegateActivity(values, setFieldValue, officialId, navigation, delegate) {
+	if (delegate) {
+		return (
+			<DelegateActivity
+				values={values}
+				setFieldValue={setFieldValue}
+				officialId={officialId}
+				navigation={navigation}
+			/>
+		)
+	}
 }
 
 const UpdateActivity = (props) => {
@@ -166,16 +180,15 @@ const UpdateActivity = (props) => {
 	useEffect(() => {
 		returnActivityItems(setActivityItems, props.route.params.item.id);
 		returnOfficials(setOfficials, 'activity');
-		if(props.route.params.item.official_id){
+		if (props.route.params.item.official_id) {
 			returnOfficial(setOfficial, props.route.params.item.official_id);
-			// officials.push(official);
 		}
 		verifyItens(setCountActivityItems, props.route.params.item.id, true)
 	}, []);
 
 	return (
 		<ScrollView>
-			<Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList} />
+			<Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList}/>
 			<Formik
 				validationSchema={fieldsValidation}
 				initialValues={initialValues}
@@ -241,7 +254,7 @@ const UpdateActivity = (props) => {
 							values={values[constantes.expectedFinalDate.attribute]}
 							editable={values.editable}
 						/>
-						{ select(values, setFieldValue, officials, official, props.route.params.delegate)}
+						{ delegateActivity(values, setFieldValue, props.route.params.item.official_id, props.navigation, props.route.params.delegate) }
 						{	displayCreateItem(props.route.params.editable, values, setFieldValue, officials, setVisibleUpdate)}
 
 						<View style={estiloUnico.lista_items}>
@@ -261,16 +274,17 @@ const UpdateActivity = (props) => {
 							/>
 						</View>
 						{ displayEvolution(values)}
-							<ButtonsUpdateActivity
-								editable={props.route.params.editable}
-								handleSubmit={handleSubmit} 
-								isValid={isValid}
-								values={values}
-								updateStatus={updateStatus}
-								delegate={props.route.params.delegate}
-								activityStatus={values.activityStatus}
-								evolution={values.evolution}
-							/>
+						<ButtonsUpdateActivity
+							editable={props.route.params.editable}
+							handleSubmit={handleSubmit}
+							isValid={isValid}
+							values={values}
+							updateStatus={updateStatus}
+							delegate={props.route.params.delegate}
+							activityStatus={values.activityStatus}
+							evolution={values.evolution}
+							navigation={props.navigation}
+						/>
 					</View>
 				)}
 
