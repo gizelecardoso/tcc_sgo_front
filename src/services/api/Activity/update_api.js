@@ -7,28 +7,37 @@ function format_date_front_to_back (date_api) {
     return moment(date_api).format();
 }
 
-function validateDate (status, values, date){
-    if (status == 'executando'){
-        if (values.initialDate == ''){
-            values.initialDate = format_date_front_to_back(date);
-        }
-    } else if (status == 'finalizada') {
-        values.finalDate = format_date_front_to_back(date);
-    } else if (status == 'pausada') {
-        values.stoppedDate = format_date_front_to_back(date);
-    }
-}
-
-function validateBody (status, values, officialId) {
+function validateBody (status, values, officialId, reason, date) {
     let body = {}
-    if(values.activityStatus != status) {
+    if(values.activityStatus != status && reason) {
         body = {
-            activity_status: status, 
+            activity_status: status,
+            reason_to_stop: reason,
+            stopped_date: format_date_front_to_back(date)
         }
-    } else if(values.officialId != officialId) {
+    }else if(values.activityStatus != status) {
+        if (status == 'executando'){
+            if (values.initialDate == null){
+                body = {
+                    activity_status: status, 
+                    initial_date: format_date_front_to_back(date)
+                }
+            } else {
+                body = {
+                    activity_status: status,
+                }
+            }
+        } else if (status == 'finalizada') {
+            console.log('finalizada')
+            values.finalDate = format_date_front_to_back(date)
+            body = {
+                activity_status: status, 
+                final_date: format_date_front_to_back(date)
+            }
+        }
+    }else if(values.officialId != officialId) {
         body = {
             official_id: values.officialId,
-            activity_status: status
         }
     }else {
         body = {
@@ -48,11 +57,8 @@ function validateBody (status, values, officialId) {
 }
 
 
-const updateActivity = async (values, id, status, officialId, date) => {
-    validateDate (status, values, date)
-
-    let body = validateBody (status, values, id, officialId)
-
+const updateActivity = async (values, id, status, officialId, date, reason) => {
+    let body = validateBody (status, values, officialId, reason, date)
     const response = await fetch(`http://${constante.url}:3000/activities/${id}`, {
         method: 'PUT',
         headers: {
