@@ -33,14 +33,14 @@ export const constantes = {
     error: `A descrição da ${title} não pode ser vazio` 
   },
   expectedInitialDate: {
-    title: `Data Inicial ${title}`,
+    title: `Data Esperada Inicial`,
     name: `expectedInitialDate`,
     attribute: `expectedInitialDate`,
     placeholder: `Selecione a data inicial`,
     error: `A data inicial da ${title} não pode ser vazia` 
   },
   expectedFinalDate: {
-    title: `Data Final ${title}`,
+    title: `Data Esperada Final`,
     name: `expectedFinalDate`,
     attribute: `expectedFinalDate`,
     placeholder: `Selecione a data final`,
@@ -50,8 +50,8 @@ export const constantes = {
     activityCode: '', 
     activityName: '', 
     activityDescription: '',
-    expectedInitialDate:'',
-    expectedFinalDate:''
+    expectedInitialDate: new Date(),
+    expectedFinalDate: new Date()
   },
   messages: {
     sucess: 'Sucesso!',

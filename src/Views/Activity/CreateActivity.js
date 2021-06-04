@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Button } from "react-native";
 import { Formik } from "formik";
 import { Cabecalho } from "../../Components/Cabecalho";
-import InputValues from "../../Components/Input/InputValues.js";
+import InputValues from "../../Components/Input/InputValues";
 import create from "../../services/api/Activity/create_api";
 import { constantes } from "./constantes.js";
 import fieldsValidation from './validation';
@@ -13,12 +13,18 @@ import { Picker } from "@react-native-picker/picker";
 import DatePicker from 'react-native-datepicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from "moment";
+import InputDate from "../../Components/Input/InputDate";
 
 const CreateRole = (props) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [visible, setVisible] = useState(false);
 	const [date, setDate] = useState('');
-	
+	const [show, setShow] = useState(false);
+
+	const showDatepicker = () => {
+		setShow(true);
+	};
+
 	const hideDialog = () => {
 		setVisible(false);
 		props.navigation.push(constantes.mainList);
@@ -37,6 +43,11 @@ const CreateRole = (props) => {
 		setVisible(true);
 	}
 
+	const formatDate = (date) => {
+    return `${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()}`;
+  };
+
 	return (
 		<ScrollView>
 			<Cabecalho title={constantes.titleCreate} navigation={props.navigation} page={constantes.mainList} />
@@ -44,11 +55,12 @@ const CreateRole = (props) => {
 				validationSchema={fieldsValidation}
 				initialValues={constantes.initialValues}
 				onSubmit={async (values, { resetForm }) => {
+					console.log(values);
 					const dateNow = new Date();
 					const dateNowFormat = moment(dateNow).format();
-					if(values.expectedFinalDate < values.expectedInitialDate) {
+					if (values.expectedFinalDate < values.expectedInitialDate) {
 						setErrorMessage('Data Final não pode ser menor que Data Inicial');
-					} else if(values.expectedInitialDate < dateNowFormat) {
+					} else if (values.expectedInitialDate < dateNowFormat) {
 						setErrorMessage('Data Inicial não pode ser menor que Data de Hoje');
 					} else {
 						await tryCreate(values)
@@ -56,7 +68,7 @@ const CreateRole = (props) => {
 					}
 				}}
 			>
-				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
+				{({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid, setFieldValue }) => (
 					<View style={estilo.container}>
 						<InputValues
 							title={constantes.code.title}
@@ -88,25 +100,19 @@ const CreateRole = (props) => {
 							touched={touched[constantes.description.attribute]}
 							values={values[constantes.description.attribute]}
 						/>
-						<InputValues
+						<InputDate
 							title={constantes.expectedInitialDate.title}
 							name={constantes.expectedInitialDate.name}
-							placeholder={constantes.expectedInitialDate.placeholder}
-							handleChange={handleChange}
-							handleBlur={handleBlur}
-							errors={errors[constantes.expectedInitialDate.attribute]}
-							touched={touched[constantes.expectedInitialDate.attribute]}
 							values={values[constantes.expectedInitialDate.attribute]}
+							handleChange={handleChange}
+							setFieldValue={setFieldValue}
 						/>
-						<InputValues
+						<InputDate
 							title={constantes.expectedFinalDate.title}
 							name={constantes.expectedFinalDate.name}
-							placeholder={constantes.expectedFinalDate.placeholder}
-							handleChange={handleChange}
-							handleBlur={handleBlur}
-							errors={errors[constantes.expectedFinalDate.attribute]}
-							touched={touched[constantes.expectedFinalDate.attribute]}
 							values={values[constantes.expectedFinalDate.attribute]}
+							handleChange={handleChange}
+							setFieldValue={setFieldValue}
 						/>
 						<Text style={estilo.erros}>{errorMessage}</Text>
 						<TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
@@ -114,13 +120,12 @@ const CreateRole = (props) => {
 						</TouchableOpacity>
 					</View>
 				)}
-
 			</Formik>
-			<Alert 
-				visible={visible} 
-				function={hideDialog} 
-				dialogTitle={constantes.messages.status} 
-				dialogFrase={constantes.messages.createMessage} 
+			<Alert
+				visible={visible}
+				function={hideDialog}
+				dialogTitle={constantes.messages.status}
+				dialogFrase={constantes.messages.createMessage}
 				confirm={constantes.messages.confirm}
 			/>
 		</ScrollView>

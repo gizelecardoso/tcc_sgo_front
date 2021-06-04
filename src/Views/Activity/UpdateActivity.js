@@ -20,6 +20,7 @@ import returnOfficial from "../../services/api/Official/find_by_id";
 import verifyItens from "../../services/api/ActivityItem/find_all_api";
 import ButtonsUpdateActivity from "./ButtonsUpdateActivity";
 import DelegateActivity from "./DelegateActivity";
+import InputDate from "../../Components/Input/InputDate";
 
 function displayCreateItem(editable, setVisibleUpdate) {
 	if (editable) {
@@ -173,27 +174,19 @@ const UpdateActivity = (props) => {
 							values={values[constantes.description.attribute]}
 							editable={values.editable}
 						/>
-						<InputValues
+						<InputDate
 							title={constantes.expectedInitialDate.title}
 							name={constantes.expectedInitialDate.name}
-							placeholder={constantes.expectedInitialDate.placeholder}
-							handleChange={handleChange}
-							handleBlur={handleBlur}
-							errors={errors[constantes.expectedInitialDate.attribute]}
-							touched={touched[constantes.expectedInitialDate.attribute]}
 							values={values[constantes.expectedInitialDate.attribute]}
-							editable={values.editable}
+							handleChange={handleChange}
+							setFieldValue={setFieldValue}
 						/>
-						<InputValues
+						<InputDate
 							title={constantes.expectedFinalDate.title}
 							name={constantes.expectedFinalDate.name}
-							placeholder={constantes.expectedFinalDate.placeholder}
-							handleChange={handleChange}
-							handleBlur={handleBlur}
-							errors={errors[constantes.expectedFinalDate.attribute]}
-							touched={touched[constantes.expectedFinalDate.attribute]}
 							values={values[constantes.expectedFinalDate.attribute]}
-							editable={values.editable}
+							handleChange={handleChange}
+							setFieldValue={setFieldValue}
 						/>
 						{ delegateActivity(values, setFieldValue, props.route.params.item.official_id, props.navigation, props.route.params.delegate) }
 						{	displayCreateItem(props.route.params.editable, setVisibleUpdate)}
