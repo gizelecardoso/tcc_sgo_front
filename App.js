@@ -5,14 +5,11 @@ import { DrawerNavigator } from './src/DrawerNavigator';
 import Inicio from './src/Views/Inicio/Inicio';
 import Login from './src/Views/Login/Login';
 import { createStackNavigator } from '@react-navigation/stack';
-// import Date from './src/Components/Date';
-import TesteGrafico from './src/TesteGrafico';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    // <TesteGrafico></TesteGrafico>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Inicio" component={Inicio}/>

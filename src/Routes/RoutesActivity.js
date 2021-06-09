@@ -4,6 +4,7 @@ import Activities from '../Views/Activity/Activities'
 import UpdateActivity from '../Views/Activity/UpdateActivity';
 import CreateActivity from '../Views/Activity/CreateActivity';
 import ButtonsUpdateActivity from '../Views/Activity/ButtonsUpdateActivity';
+import TesteGrafico from '../Components/TesteGrafico';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ const RoutesActivity = () => {
       <Stack.Screen name="CreateActivity" component={CreateActivity} options={{ headerShown: false }} />
       <Stack.Screen name="UpdateActivity" component={UpdateActivity} options={{ headerShown: false }} />
       <Stack.Screen name="ButtonsUpdateActivity" component={ButtonsUpdateActivity} options={{ headerShown: false }} />
+      <Stack.Screen name="TesteGrafico" component={TesteGrafico} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }

@@ -38,6 +38,7 @@ function validateBody (status, values, officialId, reason, date) {
     }else if(values.officialId != officialId) {
         body = {
             official_id: values.officialId,
+            activity_status: status
         }
     }else {
         body = {

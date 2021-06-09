@@ -91,6 +91,7 @@ const UpdateActivity = (props) => {
 	}
 
 	const format_date_back_to_front = (date_api) => {
+		console.warn(date_api)
 		return moment(date_api).format('L');
 	}
 
@@ -130,7 +131,7 @@ const UpdateActivity = (props) => {
 
 	return (
 		<ScrollView>
-			<Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList}/>
+			<Cabecalho title={constantes.titleUpdate} navigation={props.navigation} page={constantes.mainList} />
 			<Formik
 				validationSchema={fieldsValidation}
 				initialValues={initialValues}
@@ -188,7 +189,7 @@ const UpdateActivity = (props) => {
 							handleChange={handleChange}
 							setFieldValue={setFieldValue}
 						/>
-						{ delegateActivity(values, setFieldValue, props.route.params.item.official_id, props.navigation, props.route.params.delegate) }
+						{ delegateActivity(values, setFieldValue, props.route.params.item.official_id, props.navigation, props.route.params.delegate)}
 						{	displayCreateItem(props.route.params.editable, setVisibleUpdate)}
 
 						<View style={estiloUnico.lista_items}>
@@ -208,6 +209,9 @@ const UpdateActivity = (props) => {
 							/>
 						</View>
 						{ displayEvolution(values)}
+						<TouchableOpacity onPress={() => { props.navigation.navigate('TesteGrafico' , { lista_item: activityItems })} } >
+							<Text style={estilo.activityLink}>Clique aqui para ver gráfico de desempenho!</Text>
+						</TouchableOpacity>
 						<ButtonsUpdateActivity
 							editable={props.route.params.editable}
 							handleSubmit={handleSubmit}
