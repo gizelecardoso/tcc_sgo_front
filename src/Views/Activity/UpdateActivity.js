@@ -91,7 +91,6 @@ const UpdateActivity = (props) => {
 	}
 
 	const format_date_back_to_front = (date_api) => {
-		console.warn(date_api)
 		return moment(date_api).format('L');
 	}
 
