@@ -2,16 +2,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import { constante } from "../../constante";
 
-const returnOfficials = async (callback, filter, clerkId) => {
+const returnOfficials = async (callback, filter, clerkId, id) => {
     let urlFinal = ''
     if (filter == 'encarregado'){
         urlFinal = `http://${constante.url}:3000/officials?only_clerks=true`
     } else if (filter == 'activity'){
-        urlFinal = `http://${constante.url}:3000/officials?free=true&only_official=true`
+        urlFinal = `http://${constante.url}:3000/officials?only_official=true&free=true`
     } else if (filter == 'activityClerk'){
-        urlFinal = `http://${constante.url}:3000/officials?clerk_id=${clerkId}&free=true&only_official=true`
+        console.warn(clerkId)
+        urlFinal = `http://${constante.url}:3000/officials?only_official=true&free=true&clerk_id=${clerkId}`
     } else if (filter == 'delegate') {
-        urlFinal = `http://${constante.url}:3000/officials?free=true&only_official=true&delegate=true&id=${clerkId}`
+        if(clerkId){
+            urlFinal = `http://${constante.url}:3000/officials?only_official=true&free=true&clerk_id=${clerkId}&delegate=true&id=${id}`
+        }else {
+            urlFinal = `http://${constante.url}:3000/officials?only_official=true&free=true&delegate=true&id=${id}`
+        }
     } else {
         urlFinal = `http://${constante.url}:3000/officials`
     }

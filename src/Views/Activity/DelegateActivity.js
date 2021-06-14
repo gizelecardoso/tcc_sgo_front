@@ -81,10 +81,18 @@ const DelegateActivity = (props) => {
   const [officials, setOfficials] = useState([]);
 
   useEffect(() => {
-    if (props.officialId){
-      returnOfficials(setOfficials, 'delegate', props.officialId);
+    if (props.category == 'encarregado'){
+      if (props.values.officialId){
+        returnOfficials(setOfficials, 'delegate', props.officialId, props.values.officialId);
+      } else {
+        returnOfficials(setOfficials, 'activityClerk', props.officialId);
+      }
     } else {
-      returnOfficials(setOfficials, 'activity');
+      if (props.values.officialId){
+        returnOfficials(setOfficials, 'delegate', null, props.values.officialId);
+      } else {
+        returnOfficials(setOfficials, 'activity');
+      }
     }
   }, []);
 

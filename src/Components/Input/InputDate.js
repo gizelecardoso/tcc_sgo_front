@@ -24,7 +24,7 @@ const InputDate = (props) => {
   return (
     <View style={estilo.input_container}>
       <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{props.title}</Text>
-      <TouchableOpacity onPress={showDatePicker}>
+      <TouchableOpacity onPress={showDatePicker} disabled={!props.editable}>
         <Text style={estilo.input_text} >{moment(props.values).format('DD-MM-YYYY')}</Text>
       </TouchableOpacity>
       <DateTimePickerModal

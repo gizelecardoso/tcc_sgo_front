@@ -21,6 +21,7 @@ import verifyItens from "../../services/api/ActivityItem/find_all_api";
 import ButtonsUpdateActivity from "./ButtonsUpdateActivity";
 import DelegateActivity from "./DelegateActivity";
 import InputDate from "../../Components/Input/InputDate";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function displayCreateItem(editable, setVisibleUpdate) {
 	if (editable) {
@@ -43,7 +44,7 @@ function displayEvolution(values) {
 	)
 }
 
-function delegateActivity(values, setFieldValue, officialId, navigation, delegate) {
+function delegateActivity(values, setFieldValue, officialId, navigation, delegate, category) {
 	if (delegate) {
 		return (
 			<DelegateActivity
@@ -51,6 +52,7 @@ function delegateActivity(values, setFieldValue, officialId, navigation, delegat
 				setFieldValue={setFieldValue}
 				officialId={officialId}
 				navigation={navigation}
+				category={category}
 			/>
 		)
 	}
@@ -62,8 +64,8 @@ const UpdateActivity = (props) => {
 	const [visibleMessage, setVisibleMessage] = useState(false);
 	const [visibleUpdate, setVisibleUpdate] = useState(false);
 	const [activityItems, setActivityItems] = useState([]);
-	const [officials, setOfficials] = useState([]);
-	const [official, setOfficial] = useState({});
+	const [category, setCategory] = useState('');
+	const [official, setOfficial] = useState(0);
 	const [status, setStatus] = useState('');
 	const [countActivityItems, setCountActivityItems] = useState([]);
 
@@ -119,12 +121,24 @@ const UpdateActivity = (props) => {
 		evolution: props.route.params.item.evolution
 	}
 
+	const setInfos = async () => {
+		try{
+			const official = await AsyncStorage.getItem('id');
+			const category = await AsyncStorage.getItem('category');
+			setCategory(category);
+			setOfficial(official);
+		} catch (e) {
+			alert(e);
+		}
+	}
+
 	useEffect(() => {
 		returnActivityItems(setActivityItems, props.route.params.item.id);
-		returnOfficials(setOfficials, 'activity');
-		if (props.route.params.item.official_id) {
-			returnOfficial(setOfficial, props.route.params.item.official_id);
-		}
+		// returnOfficials(setOfficials, 'activity');
+		// if (props.route.params.item.official_id) {
+		// 	returnOfficial(setOfficial, props.route.params.item.official_id);
+		// }
+		setInfos()
 		verifyItens(setCountActivityItems, props.route.params.item.id, true)
 	}, []);
 
@@ -187,8 +201,9 @@ const UpdateActivity = (props) => {
 							values={values[constantes.expectedFinalDate.attribute]}
 							handleChange={handleChange}
 							setFieldValue={setFieldValue}
+							editable={values.editable}
 						/>
-						{ delegateActivity(values, setFieldValue, props.route.params.item.official_id, props.navigation, props.route.params.delegate) }
+						{ delegateActivity(values, setFieldValue, official, props.navigation, props.route.params.delegate, category) }
 						{	displayCreateItem(props.route.params.editable, setVisibleUpdate)}
 
 						<View style={estiloUnico.lista_items}>

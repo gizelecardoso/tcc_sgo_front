@@ -7,6 +7,14 @@ import returnCurrentActivity from '../../services/api/Activity/find_all_api';
 import returnActivitiesAdmin from '../../services/api/Activity/find_all_api';
 import returnActivitiesClerk from '../../services/api/Activity/find_all_api';
 
+function stoppedActivity(item){
+	if(item.reason_to_stop){
+		return(
+			<Text style={estilo.activityStatus}>{item.reason_to_stop}</Text>
+		)
+	}
+}
+
 function welcome(category, props, item, activitiesAdmin, activitiesClerk){
 	if(category == 'oficial' && item != null){
 		return(
@@ -37,6 +45,7 @@ function welcome(category, props, item, activitiesAdmin, activitiesClerk){
 								<View style={estilo.activityWelcome}>
 									<Text style={estilo.activityName}>{item.activity_name}</Text>
 									<Text style={estilo.activityStatus}>{item.activity_status}</Text>
+									{stoppedActivity(item)}
 								</View>
 								{/* <TouchableOpacity onPress={() => { props.navigation.navigate('UpdateActivity', { item, editable: false, delegate: true }); }} >
 									<Text style={estilo.activityLink}>Clique aqui para mais detalhes!</Text>
@@ -61,6 +70,7 @@ function welcome(category, props, item, activitiesAdmin, activitiesClerk){
 								<View style={estilo.activityWelcome}>
 									<Text style={estilo.activityName}>{item.activity_name}</Text>
 									<Text style={estilo.activityStatus}>{item.activity_status}</Text>
+									{stoppedActivity(item)}
 								</View>
 								{/* <TouchableOpacity onPress={() => { props.navigation.navigate('UpdateActivity', { item, editable: true, delegate: true }); }} >
 									<Text style={estilo.activityLink}>Clique aqui para mais detalhes!</Text>
